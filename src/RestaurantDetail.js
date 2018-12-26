@@ -132,7 +132,7 @@ class RestaurantDetail extends Component{
                             {this.generateStar(info['rating']-2)}
                             {this.generateStar(info['rating']-3)}
                             {this.generateStar(info['rating']-4)}
-                    {" "+info['reviews'].length + "個評語"}</Typography>
+                    {" "+info['reviewCount'] + "個評語"}</Typography>
                   <Typography align="left">{'$ '+info['priceLevel']}</Typography>
                   <div style={{justifyContent:"flex-start", 'text-align': 'left'}}>
                     {this.maptags(this.props.tags,info['tags']).map(tag =>(
@@ -148,7 +148,7 @@ class RestaurantDetail extends Component{
                       <Grid item xs={1} />
                       <Grid item xs={11}>
                         <Typography align="left" 
-                            color={info['isOpenNow']==true?("#000000"):("secondary")}>
+                          color={info['isOpenNow']==true?("#000000"):("secondary")}>
                           {info['isOpenNow']==true?("營業中 查看營業時間⌵"):("非營業時間")}
                         </Typography>
                       </Grid>
@@ -163,7 +163,7 @@ class RestaurantDetail extends Component{
                       </Grid>
                       <Grid item xs={2}>
                         <Typography align="center">導航</Typography>
-                        <a href={"https://www.google.com/maps/place/?q=place_id:"+info['placeId']}><NearMe size="small" color="Inherit"/></a>
+                        <a href={"https://www.google.com/maps/search/?api=1&query="+info['location']['lat']+","+info['location']['long']+"&query_place_id="+info['placeId']}><NearMe size="small" color="Inherit"/></a>
                       </Grid>
                     </Grid>
                     <Grid container>
