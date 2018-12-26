@@ -76,6 +76,9 @@ class RestaurantDetail extends Component{
     constructor(props){
         super(props)
     }
+    state = {
+      time_click:0,
+    };
     generateStar = (rating) =>{
       const { classes } = this.props;
       if(rating>=1){
@@ -85,7 +88,7 @@ class RestaurantDetail extends Component{
         if(rating<=0.3){
           return <StarBorder className={classes.star} color="secondary"/>
         }
-        else if(rating<=0.7){
+        else if(rating<=0.6){
           return <StarHalf className={classes.star} color="secondary"/>
         }
         else{
@@ -105,9 +108,19 @@ class RestaurantDetail extends Component{
                 }
             }
         }
-
         return temp
     }
+    time_clicked = ()=>{
+      if(this.state.time_click%2 == 0){
+        return null;
+      }
+      else if(this.state.time_click%2 == 1){
+        return ;
+      }
+    }
+    /*statechange=()=>{
+      this.setState({time_click: state.time_click+1})
+    }*/
     render(){
         const { classes } = this.props;
         {console.log(geolocation.getLocation().then(d=>{return d.coords.latitude,d.coords.longitude}))}
@@ -146,11 +159,17 @@ class RestaurantDetail extends Component{
                   </div>
                     <Grid container>
                       <Grid item xs={1} />
-                      <Grid item xs={11}>
+                      <Grid item xs={11} >
+                        
                         <Typography align="left" 
                           color={info['isOpenNow']==true?("#000000"):("secondary")}>
-                          {info['isOpenNow']==true?("營業中 查看營業時間⌵"):("非營業時間")}
+                          {info['isOpenNow']==true?("營業中 查看營業時間⌵"):("非營業時間 查看營業時間⌵")}
                         </Typography>
+                        {info['openingHours'].map(hours=>(
+                            <Typography align="left">
+                              {hours}
+                            </Typography>
+                          ))}
                       </Grid>
                     </Grid>
 

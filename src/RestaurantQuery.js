@@ -7,8 +7,8 @@ import ModifyUrl from './ModifyUrl.js';
 import button1 from './image/image-5-01.jpg';
 
 const GET_RESTAURANT = gql`
-query searchRestaurants($tagIds: [ID!], $first:Int) {
-    searchRestaurants(tagIds: $tagIds, first:$first){
+query searchRestaurants($tagIds: [ID!]!, $first:Int, $lat: Float!, $lng: Float!) {
+    searchRestaurants(tagIds: $tagIds, first:$first, lat:$lat, lng:$lng){
         id,
         name,
         placeId,
@@ -50,15 +50,17 @@ export default {
 
     SearchRestaurant:(handleNext,restaurantDetail,tagIds) =>{
         const first = 20
+        const lat = 23.5
+        const lng = 120.2
         console.log(tagIds);
         return (
-            <Query query={GET_RESTAURANT} variables={{ tagIds, first }} >
+            <Query query={GET_RESTAURANT} variables={{ tagIds, first, lat, lng }} >
                 {({ loading, error, data }) => {
                     if (loading) {
                         return 'loading...'
                     }
-                    //if (error) return 'Error!: ${error}';
-                    //setTimeout(function(){ console.log(data); }, 10000);  
+                    if (error) return 'Error!: ${error}';
+                    setTimeout(function(){ console.log(data); }, 10000);  
                     return (
                         List(handleNext,restaurantDetail,data['searchRestaurants'],tagIds)
                     );
