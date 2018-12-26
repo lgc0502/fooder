@@ -68,14 +68,14 @@ class FullWidthTabs extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" style={{backgroundColor:'#FFC107'}}  className={classes.appBar}>
+        <AppBar position="static" style={{backgroundColor:'#FFC107'}} className={classes.appBar}>
           <Tabs
-            className={classes.tabs}
-            value={this.state.value}
-            onChange={this.handleChange}
-            indicatorColor="primary"
-            textColor="#263238"
-            fullWidth
+          className={classes.tabs}
+          value={this.state.value}
+          onChange={this.handleChange}
+          indicatorColor="primary"
+          textColor="#263238"
+          fullWidth
           >
             <Tab className={classes.tab} icon={<ViewList />} />
             <Tab className={classes.tab} icon={<Group />} />
@@ -84,18 +84,11 @@ class FullWidthTabs extends React.Component {
             <Tab className={classes.tab} icon={<Person />} />
           </Tabs>
         </AppBar>
-        <SwipeableViews
-          axis={theme.direction === 'rtl' ? 'x-reverse' : 'x'}
-          index={this.state.value}
-          onChangeIndex={this.handleChangeIndex}
-          style={{height:'100vh'}}
-        >
-          <TabContainer className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中1</TabContainer>
-          <TabContainer className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</TabContainer>
-          <TabContainer className={classes.tabcontainer} dir={theme.direction}><SearchPages /></TabContainer>
-          <TabContainer className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</TabContainer>
-          <TabContainer className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</TabContainer>
-        </SwipeableViews>
+        {this.state.value === 0 && <TabContainer className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中1</TabContainer>}
+        {this.state.value === 1 && <TabContainer className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</TabContainer>}
+        {this.state.value === 2 && <TabContainer className={classes.tabcontainer} dir={theme.direction}><SearchPages /></TabContainer>}
+        {this.state.value === 3 && <TabContainer className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</TabContainer>}
+        {this.state.value === 4 &&<TabContainer className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</TabContainer>}
       </div>
     );
   }
