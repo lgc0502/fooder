@@ -31,6 +31,7 @@ query searchRestaurants($tagIds: [ID!], $first:Int) {
         },
         photoUrls,
         isOpenNow,
+        reviewCount,
         openingHours,
     }
 }
@@ -59,7 +60,6 @@ export default {
                     //if (error) return 'Error!: ${error}';
                     //setTimeout(function(){ console.log(data); }, 10000);  
                     return (
-                        console.log(data),
                         List(handleNext,restaurantDetail,data['searchRestaurants'],tagIds)
                     );
                 }}

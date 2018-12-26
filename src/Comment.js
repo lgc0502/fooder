@@ -48,10 +48,18 @@ class Comment extends React.Component {
   generateStar = (rating) =>{
     const { classes } = this.props;
     if(rating>=1){
-        return <Star className={classes.star} color="secondary"/>
+      return <Star className={classes.star} color="secondary"/>
     }
     else if(rating>0){
+      if(rating<=0.3){
+        return <StarBorder className={classes.star} color="secondary"/>
+      }
+      else if(rating<=0.7){
         return <StarHalf className={classes.star} color="secondary"/>
+      }
+      else{
+        return <Star className={classes.star} color="secondary"/>
+      }
     }
     else if(rating<=0){
         return <StarBorder className={classes.star} color="secondary"/>
