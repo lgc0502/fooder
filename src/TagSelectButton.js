@@ -154,7 +154,7 @@ class TagSelectButton extends Component{
                 </div>
                   <Button className={classes.button} 
                     variant="contained" 
-                    style={{backgroundColor:'#FFC107'}} 
+                    style={{backgroundColor:'#FFC107','margin-bottom':'56px'}} 
                     onClick={() => handleNext(this.state.Selected)}>
                     <Typography variant="subtitle2" color='#263238' >
                         搜尋

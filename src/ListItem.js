@@ -17,22 +17,21 @@ import DistanceFormat from './DistanceFormat.js'
 
 const styles = theme => ({
   root: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-around',
-    overflow: 'auto',
+    //display: 'flex',
+   // flexWrap: 'wrap',
+    //justifyContent: 'space-around',
+    //overflow: 'auto',
     backgroundColor: theme.palette.background.paper,
-    
+    padding: theme.spacing.unit / 2,
+    width:'100vw'
   },
   gridList: {
-    flexWrap: 'nowrap',
-    transform: 'translateZ(0)',
-    height:'104px'
-   
+    'white-space': 'nowrap',
+    'overflow-x': 'scroll',
   },
   detail:{
-      padding:'5px 10px 5px 10px',
-      width:'100vw',
+      padding:'0 5px',
+      width:'calc(100vw - 10px)',
   },
   content:{
       padding:'0 5px'
@@ -40,6 +39,13 @@ const styles = theme => ({
   star:{
       height:'18px',
       width: '18px',
+  },
+  img:{
+      'border-radius':'4px',
+      display: 'inline-block',
+      height:'95px',
+      width:'auto',
+      margin:'0 2px'
   }
 });
 
@@ -103,13 +109,11 @@ class ListItem extends Component{
         return(
             <div>
                 <div className={classes.root}>
-                <GridList className={classes.gridList} cellHeight={104} >
+                <div className={classes.gridList}>
                     {this.props.restaurantinfo["smallphotoUrls"].map(tile => (
-                    <GridListTile >
                         <img className={classes.img} src={tile} key={this.props.restaurantinfo["smallphotoUrls"].indexOf(tile)}/>
-                    </GridListTile>
                     ))}
-                </GridList>
+                </div>
                 </div>
                 <div onClick={() => this.next(handleNext,restaurantDetail,info)} className={classes.detail}>
                     <div className={classes.content}>
