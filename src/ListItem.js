@@ -1,7 +1,7 @@
 import React ,{ Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-//import Grid from '@material-ui/core/Grid';
+import Grid from '@material-ui/core/Grid';
 import GridList from '@material-ui/core/GridList';
 import GridListTile from '@material-ui/core/GridListTile';
 //import GridListTileBar from '@material-ui/core/GridListTileBar';
@@ -13,6 +13,7 @@ import StarHalf from '@material-ui/icons/StarHalf';
 import StarBorder from '@material-ui/icons/StarBorder';
 
 import ModifyUrl from './ModifyUrl.js'
+import DistanceFormat from './DistanceFormat.js'
 
 const styles = theme => ({
   root: {
@@ -92,13 +93,13 @@ class ListItem extends Component{
         }
         return temp
     }
+    
     render(){
         const { classes } = this.props;
         const info = this.props.restaurantinfo;
         var handleNext =   this.props.handleNext;
         var restaurantDetail =   this.props.restaurantDetail;
 
-        //ModifyUrl.ModifyUrl(info['photoUrls']);
         return(
             <div>
                 <div className={classes.root}>
@@ -112,7 +113,17 @@ class ListItem extends Component{
                 </div>
                 <div onClick={() => this.next(handleNext,restaurantDetail,info)} className={classes.detail}>
                     <div className={classes.content}>
-                        <Typography align="left">{info['name']}</Typography>
+                        <Grid container>
+                            <Grid item xs={8}>
+                                <Typography align="left">{info['name']}</Typography>
+                            </Grid>
+                            <Grid item xs={4}>
+                                <Typography align="right" style={{overflow: 'hidden'}}>
+                                    {DistanceFormat.DistanceFormat(info['distance'])}
+                                </Typography>
+                            </Grid>
+                        </Grid>
+ 
                         <Typography align="left">{this.generateStar(info['rating'])}
                             {this.generateStar(info['rating']-1)}
                             {this.generateStar(info['rating']-2)}

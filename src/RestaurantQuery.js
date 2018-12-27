@@ -1,10 +1,12 @@
-import React from 'react';
+import React ,{ Component } from 'react';
 import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
 
 import ListItem from './ListItem.js';
 import ModifyUrl from './ModifyUrl.js';
 import button1 from './image/image-5-01.jpg';
+import geolocation from './geolocation.js';
+import Loading from './image/loading.gif';
 
 const GET_RESTAURANT = gql`
 query searchRestaurants($tagIds: [ID!]!, $first:Int, $lat: Float!, $lng: Float!) {
@@ -26,6 +28,7 @@ query searchRestaurants($tagIds: [ID!]!, $first:Int, $lat: Float!, $lng: Float!)
             rating,
             text,
         },
+        distance,
         location{
             address,
         },
@@ -33,6 +36,7 @@ query searchRestaurants($tagIds: [ID!]!, $first:Int, $lat: Float!, $lng: Float!)
         isOpenNow,
         reviewCount,
         openingHours,
+        
     }
 }
 `;
@@ -46,26 +50,79 @@ const List = (handleNext,restaurantDetail,info,tagIds) => (
     })
 );
 
-export default {
 
-    SearchRestaurant:(handleNext,restaurantDetail,tagIds) =>{
-        const first = 20
-        const lat = 23.5
-        const lng = 120.2
-        console.log(tagIds);
-        return (
+
+class SearchRestaurant extends Component{
+    constructor(props){
+        super(props)
+    }
+    state={
+        lat: 0,
+        lng: 0,
+    }
+    componentDidMount() {
+        geolocation.getLocation().then(d => this.setState({
+          lat: d.coords.latitude,
+          lng: d.coords.longitude
+        }))
+      }
+    render(){
+        const { classes } = this.props;
+        var handleNext =   this.props.handleNext;
+        var restaurantDetail =   this.props.restaurantDetail;
+        var tagIds = this.props.tag;
+        const lat = this.state.lat;
+        const lng = this.state.lng;
+        const first = 20;
+        return(
             <Query query={GET_RESTAURANT} variables={{ tagIds, first, lat, lng }} >
                 {({ loading, error, data }) => {
                     if (loading) {
-                        return 'loading...'
+                        return <img src={Loading} />
                     }
-                    if (error) return 'Error!: ${error}';
-                    setTimeout(function(){ console.log(data); }, 10000);  
+                    //if (error) return 'Error!: ${error}';
                     return (
+                        //'loading'
                         List(handleNext,restaurantDetail,data['searchRestaurants'],tagIds)
                     );
                 }}
             </Query>
-        )
+        );
     }
 }
+export default SearchRestaurant;
+
+
+
+
+
+
+
+
+
+
+/*
+export default {
+
+    SearchRestaurant:(handleNext,restaurantDetail,tagIds) =>{
+        const first = 20
+        geolocation.getLocation().then(d=>{
+            const lat = d.coords.latitude
+            const lng = d.coords.longitude
+            return (
+                <Query query={GET_RESTAURANT} variables={{ tagIds, first, lat, lng }} >
+                    {({ loading, error, data }) => {
+                        if (loading) {
+                            return 'loading...'
+                        }
+                        if (error) return 'Error!: ${error}';
+                        return (
+                            console.log(lat,lng),
+                            List(handleNext,restaurantDetail,data['searchRestaurants'],tagIds)
+                        );
+                    }}
+                </Query>
+            )
+        })
+    }
+}*/

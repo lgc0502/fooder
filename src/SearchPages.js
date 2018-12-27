@@ -30,7 +30,6 @@ class SearchPages extends React.Component {
       step: state.step + 1,
       Tags: [...state.Tags,...appendtag],
     }));
-    console.log(this.state.Tags)
   };
 
   handleBack = () => {

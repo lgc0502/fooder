@@ -12,15 +12,13 @@ import Chip from '@material-ui/core/Chip';
 import IconButton from '@material-ui/core/IconButton';
 import Fab from '@material-ui/core/Fab';
 
-import geolocation from './geolocation.js'
-
 import Star from '@material-ui/icons/Star';
 import StarHalf from '@material-ui/icons/StarHalf';
 import StarBorder from '@material-ui/icons/StarBorder';
 import LocationOn from '@material-ui/icons/LocationOn';
 import NearMe from '@material-ui/icons/NearMe';
 import Comment from './Comment.js'
-
+import DistanceFormat from './DistanceFormat.js'
 
 const styles = theme => ({
   page:{
@@ -118,12 +116,10 @@ class RestaurantDetail extends Component{
         return ;
       }
     }
-    /*statechange=()=>{
-      this.setState({time_click: state.time_click+1})
-    }*/
+    
     render(){
         const { classes } = this.props;
-        {console.log(geolocation.getLocation().then(d=>{return d.coords.latitude,d.coords.longitude}))}
+        
         const info = this.props.detail
         return(
             <MuiThemeProvider theme={theme}>
@@ -139,7 +135,17 @@ class RestaurantDetail extends Component{
                   </GridList>
                 </div>
                 <div className={classes.detail}>
-                  <Typography align="left">{info['name']}</Typography>
+                  <Grid container>
+                    <Grid item xs={8}>
+                      <Typography align="left">{info['name']}</Typography>
+                    </Grid>
+                    <Grid item xs={4}>
+                      <Typography align="right" style={{overflow: 'hidden'}}>
+                        {DistanceFormat.DistanceFormat(info['distance'])}
+                      </Typography>
+                    </Grid>
+                  </Grid>
+
                   <Typography align="left">{this.generateStar(info['rating'])}
                             {this.generateStar(info['rating']-1)}
                             {this.generateStar(info['rating']-2)}
@@ -197,6 +203,7 @@ class RestaurantDetail extends Component{
                     {info['reviews'].map(review =>(
                       <Comment review={review} />
                     ))}
+                    <Typography align="center" style={{"pading-top":"8px"}}>僅顯示Google map的5則最佳評論</Typography>
                 </div>
               </div>    
             </MuiThemeProvider>
