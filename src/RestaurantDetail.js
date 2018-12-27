@@ -24,10 +24,10 @@ const styles = theme => ({
   page:{
     display: 'flex',
     flexWrap: 'wrap',
-    height:'calc(100vh - 208px)',
     overflow:'auto',
     padding: theme.spacing.unit / 2,
     height:'calc(100vh - 116px)',
+    'margin-bottom':'56px'
   },
   root: {
     display: 'flex',
