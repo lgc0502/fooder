@@ -19,7 +19,7 @@ const styles = theme => ({
         display: 'flex',
         //justifyContent: 'center',
         flexWrap: 'wrap',
-        height:'calc(100vh - 208px)',
+        height:'calc(100% - 208px)',
         overflow:'auto',
         padding: theme.spacing.unit / 2,
         'padding-top': '20px',

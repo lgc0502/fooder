@@ -25,6 +25,12 @@
     <meta name="apple-mobile-web-app-capable" content="yes">    <!-- Make sure theme-color is defined -->
     <meta name="theme-color" content="#536878">
     <title>React App</title>
+    <script>
+      window.addEventListener("load",function() {  
+        setTimeout(function(){
+          window.scrollTo(0, 1); }, 10);
+      });
+    </script>
   </head>
   <body>
     <noscript>
@@ -44,10 +50,7 @@
   </body>
   <script>
     
-    window.addEventListener("load",function() {  
-      setTimeout(function(){
-      window.scrollTo(0, 1); }, 10);
-    });
+   
 
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', function() {
