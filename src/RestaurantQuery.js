@@ -91,38 +91,3 @@ class SearchRestaurant extends Component{
     }
 }
 export default SearchRestaurant;
-
-
-
-
-
-
-
-
-
-
-/*
-export default {
-
-    SearchRestaurant:(handleNext,restaurantDetail,tagIds) =>{
-        const first = 20
-        geolocation.getLocation().then(d=>{
-            const lat = d.coords.latitude
-            const lng = d.coords.longitude
-            return (
-                <Query query={GET_RESTAURANT} variables={{ tagIds, first, lat, lng }} >
-                    {({ loading, error, data }) => {
-                        if (loading) {
-                            return 'loading...'
-                        }
-                        if (error) return 'Error!: ${error}';
-                        return (
-                            console.log(lat,lng),
-                            List(handleNext,restaurantDetail,data['searchRestaurants'],tagIds)
-                        );
-                    }}
-                </Query>
-            )
-        })
-    }
-}*/
