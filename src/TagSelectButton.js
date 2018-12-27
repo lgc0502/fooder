@@ -15,13 +15,16 @@ import Done from '@material-ui/icons/Done';
 import Appbar from './App_Bar.js';
 
 const styles = theme => ({
+    root:{
+        height:'calc(100vh - 116px)',
+        overflow:'auto',
+        padding: theme.spacing.unit / 2,
+    },
     chips: {
         display: 'flex',
         //justifyContent: 'center',
         flexWrap: 'wrap',
-        height:'calc(100% - 208px)',
-        overflow:'auto',
-        padding: theme.spacing.unit / 2,
+        height:'calc(100vh - 208px)',
         'padding-top': '20px',
       },
     chip: {
@@ -133,29 +136,32 @@ class TagSelectButton extends Component{
         var handleNext =   this.props.handleNext;
         return(
             <MuiThemeProvider theme={theme}>
-            <div className={classes.chips} theme={theme}>
-                {this.state.Tags.map(data => {
-                    return (
-                        
-                        <Chip
-                            className={classes.chip}
-                            key={data.key}
-                            icon={<Add className={classes.chipaddicon}/>}
-                            label={data.label}
-                            onClick={this.handleClick(data)}
-                            color={data.choose==0?"primary":"secondary"}
-                        />
-                    );
-                  })}
+            <div className={classes.root}>
+                <div className={classes.chips}>
+                    {this.state.Tags.map(data => {
+                        return (
+                            
+                            <Chip
+                                className={classes.chip}
+                                key={data.key}
+                                icon={<Add className={classes.chipaddicon}/>}
+                                label={data.label}
+                                onClick={this.handleClick(data)}
+                                color={data.choose==0?"primary":"secondary"}
+                            />
+                        );
+                    })}
+                </div>
+                  <Button className={classes.button} 
+                    variant="contained" 
+                    style={{backgroundColor:'#FFC107'}} 
+                    onClick={() => handleNext(this.state.Selected)}>
+                    <Typography variant="subtitle2" color='#263238' >
+                        搜尋
+                    </Typography>
+                  </Button>
             </div>
-            <Button className={classes.button} 
-                variant="contained" 
-                style={{backgroundColor:'#FFC107'}} 
-                onClick={() => handleNext(this.state.Selected)}>
-                <Typography variant="subtitle2" color='#263238' >
-                    搜尋
-                </Typography>
-            </Button>
+            
             </MuiThemeProvider>
         )
     }
