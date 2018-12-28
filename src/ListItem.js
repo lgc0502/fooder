@@ -135,7 +135,7 @@ class ListItem extends Component{
                             {this.generateStar(info['rating']-2)}
                             {this.generateStar(info['rating']-3)}
                             {this.generateStar(info['rating']-4)}</Typography>
-                        <Typography align="left" style={{display:'inline-block'}}>{info['reviewCount'] + "個評語"}</Typography>
+                        <Typography align="left" style={{display:'inline-block'}}>{info['reviewCount'] + "則評論"}</Typography>
                         </Typography>
 
                         <Typography align="left">{'$ '+info['priceLevel']}</Typography>

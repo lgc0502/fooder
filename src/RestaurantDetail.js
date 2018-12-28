@@ -25,14 +25,14 @@ const styles = theme => ({
     display: 'flex',
     flexWrap: 'wrap',
     overflow:'auto',
-    padding: theme.spacing.unit / 2,
+    padding: '2px',
     height:'calc(100vh - 116px)',
     'margin-bottom':'56px'
   },
   root: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing.unit / 2,
-    width:'100vw'
+    width:'calc(100vw - 12px)'
   },
   gridList: {
     'white-space': 'nowrap',
@@ -74,8 +74,8 @@ const styles = theme => ({
     margin:'5px 5px'
   },
   icon:{
-    width:'18px',
-    height:'18px'
+    width:'16px',
+    height:'16px'
   },
 
 });
@@ -172,7 +172,7 @@ class RestaurantDetail extends Component{
                             {this.generateStar(info['rating']-4)}</Typography>
                     </Grid>
                     <Grid item xs={8}>
-                      <Typography align="left">{info['reviewCount'] + "個評語"}</Typography>
+                      <Typography align="left">{info['reviewCount'] + "則評論"}</Typography>
                     </Grid>
                   </Grid>
 
@@ -209,7 +209,7 @@ class RestaurantDetail extends Component{
                       </Grid>
                       <Grid item xs={9}>
                         <Typography align="left">{info['location']['address']}</Typography>
-                        <Typography align="left">{"電話 :"+info['phoneNumber']}</Typography>
+                        <Typography align="left">{"電話 : "+info['phoneNumber']}</Typography>
                       </Grid>
                       <Grid item xs={2}>
                         <Typography align="center">導航</Typography>
