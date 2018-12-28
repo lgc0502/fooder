@@ -17,24 +17,28 @@ const styles = theme => ({
         alignItems:'center',
     },
     img:{
-        width:'150px',
-        margins:'10px',
+        width:'153px',
+        margin:'10px',
     },
     buttontop:{
-        height:'192px',
-        'margin-top':'calc(50vh - 256px)',
+        height:'202px',
+        width:'160px',
+        'margin-top':'calc(50vh - 248px)',
     },
     buttonright:{
-        width:'153px',
-        'margin-right':'calc(50vw - 153px)'
+        height:'202px',
+        width:'160px',
+        'margin-right':'calc(50vw - 163px)'
     },
     buttonbottom:{
-        height:'192px',
+        height:'202px',
+        width:'160px',
         'margin-bottom':'calc(50vh - 200px)',
     },
     buttonleft:{
-        width:'153px',
-        'margin-left':'calc(50vw - 153px)'
+        height:'202px',
+        width:'160px',
+        'margin-left':'calc(50vw - 163px)'
     },
 });
 
