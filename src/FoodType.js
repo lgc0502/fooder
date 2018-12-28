@@ -23,22 +23,22 @@ const styles = theme => ({
     buttontop:{
         height:'202px',
         width:'160px',
-        'margin-top':'calc(50vh - 248px)',
+        'margin-top':'calc(50vh - 258px)',
     },
     buttonright:{
         height:'202px',
         width:'160px',
-        'margin-right':'calc(50vw - 163px)'
+        'margin-right':'calc(50vw - 170px)'
     },
     buttonbottom:{
         height:'202px',
         width:'160px',
-        'margin-bottom':'calc(50vh - 200px)',
+        'margin-bottom':'calc(50vh - 258px)',
     },
     buttonleft:{
         height:'202px',
         width:'160px',
-        'margin-left':'calc(50vw - 163px)'
+        'margin-left':'calc(50vw - 170px)'
     },
 });
 

@@ -73,21 +73,21 @@ class ListItem extends Component{
     generateStar = (rating) =>{
         const { classes } = this.props;
         if(rating>=1){
-            return <Star className={classes.star} color="secondary"/>
+            return <Star  style={{'margin-bottom':'-3px'}}className={classes.star} color="secondary"/>
         }
         else if(rating>0){
           if(rating<=0.3){
-            return <StarBorder className={classes.star} color="secondary"/>
+            return <StarBorder  style={{'margin-bottom':'-3px'}}className={classes.star} color="secondary"/>
           }
           else if(rating<=0.7){
-            return <StarHalf className={classes.star} color="secondary"/>
+            return <StarHalf  style={{'margin-bottom':'-3px'}}className={classes.star} color="secondary"/>
           }
           else{
-            return <Star className={classes.star} color="secondary"/>
+            return <Star  style={{'margin-bottom':'-3px'}}className={classes.star} color="secondary"/>
           }
         }
         else if(rating<=0){
-            return <StarBorder className={classes.star} color="secondary"/>
+            return <StarBorder  style={{'margin-bottom':'-3px'}}className={classes.star} color="secondary"/>
         }
     }
     maptags = (querytag, storetag) =>{
@@ -135,7 +135,7 @@ class ListItem extends Component{
                             {this.generateStar(info['rating']-2)}
                             {this.generateStar(info['rating']-3)}
                             {this.generateStar(info['rating']-4)}
-                            { info['reviewCount'] + "個評語"}</Typography>
+                            { +" "+info['reviewCount'] + "個評語"}</Typography>
                         <Typography align="left">{'$ '+info['priceLevel']}</Typography>
                         <Typography align="left">{this.maptags(this.props.tag,info["tags"]).map(tag =>(tag + " "))}</Typography>
                     </div>

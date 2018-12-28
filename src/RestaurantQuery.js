@@ -57,8 +57,8 @@ class SearchRestaurant extends Component{
         super(props)
     }
     state={
-        lat: 0,
-        lng: 0,
+        lat: 23.000403,
+        lng: 120.219540,
     }
     componentDidMount() {
         geolocation.getLocation().then(d => this.setState({
