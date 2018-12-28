@@ -30,7 +30,9 @@ TabContainer.propTypes = {
 
 const styles = theme => ({
   root: {
-    backgroundColor: theme.palette.background.paper
+    backgroundColor: theme.palette.background.paper,
+    alignItems:'center',
+    height:'100vh',
   },
   appBar: {
     height:56,
@@ -47,6 +49,8 @@ const styles = theme => ({
   tabcontainer:{
     bottom:56,
     top: 'auto',
+    'height':'100vh',
+    'line-height':'calc(100vh - 56px)'
   }
 });
 
@@ -84,11 +88,11 @@ class FullWidthTabs extends React.Component {
             <Tab className={classes.tab} icon={<Person />} />
           </Tabs>
         </AppBar>
-        {this.state.value === 0 && <TabContainer className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中1</TabContainer>}
-        {this.state.value === 1 && <TabContainer className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</TabContainer>}
-        {this.state.value === 2 && <TabContainer className={classes.tabcontainer} dir={theme.direction}><SearchPages /></TabContainer>}
-        {this.state.value === 3 && <TabContainer className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</TabContainer>}
-        {this.state.value === 4 &&<TabContainer className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</TabContainer>}
+        {this.state.value === 0 && <Typography className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</Typography>}
+        {this.state.value === 1 && <Typography className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</Typography>}
+        {this.state.value === 2 && <SearchPages />}
+        {this.state.value === 3 && <Typography className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</Typography>}
+        {this.state.value === 4 &&<Typography className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</Typography>}
       </div>
     );
   }

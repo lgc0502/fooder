@@ -41,7 +41,8 @@ const styles = theme => ({
     transform: 'translateZ(0)',
   },
   detail:{
-    padding:'10px 20px 10px 20px'
+    padding:'10px 20px 10px 20px',
+    width: 'calc(100vw - 40px)'
   },
   star:{
     height:'18px',
@@ -203,7 +204,7 @@ class RestaurantDetail extends Component{
                     {info['reviews'].map(review =>(
                       <Comment review={review} />
                     ))}
-                    <Typography align="center" style={{"pading-top":"8px"}}>僅顯示Google map的5則最佳評論</Typography>
+                    <Typography align="center" style={{"pading-top":"8px"}}>僅顯示 Google Maps 5則最佳評論</Typography>
                 </div>
               </div>    
             </MuiThemeProvider>
