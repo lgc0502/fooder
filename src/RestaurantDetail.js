@@ -16,7 +16,7 @@ import Star from '@material-ui/icons/Star';
 import StarHalf from '@material-ui/icons/StarHalf';
 import StarBorder from '@material-ui/icons/StarBorder';
 import LocationOn from '@material-ui/icons/LocationOn';
-import NearMe from '@material-ui/icons/NearMe';
+import NearMe from './image/icons8-near-me-filled-100.png';
 import Comment from './Comment.js'
 import DistanceFormat from './DistanceFormat.js'
 
@@ -213,7 +213,9 @@ class RestaurantDetail extends Component{
                       </Grid>
                       <Grid item xs={2}>
                         <Typography align="center">導航</Typography>
-                        <a href={"https://www.google.com/maps/search/?api=1&query="+info['location']['lat']+","+info['location']['long']+"&query_place_id="+info['placeId']}><NearMe size="small" color="Inherit"/></a>
+                          <a href={"https://www.google.com/maps/search/?api=1&query="+info['location']['lat']+","+info['location']['long']+"&query_place_id="+info['placeId']}>
+                            <img src={NearMe} style={{height:'28px'}}/>
+                          </a>
                       </Grid>
                     </Grid>
                 </div>
