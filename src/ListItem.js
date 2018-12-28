@@ -28,13 +28,15 @@ const styles = theme => ({
   gridList: {
     'white-space': 'nowrap',
     'overflow-x': 'scroll',
+    'text-align':'left',
   },
   detail:{
+      'line-height':'24px',
       padding:'0 5px',
       width:'calc(100vw - 10px)',
   },
   content:{
-      padding:'0 5px'
+      padding:'0px 13px 6px 13px'
   },
   star:{
       height:'18px',
@@ -43,7 +45,7 @@ const styles = theme => ({
   img:{
       'border-radius':'4px',
       display: 'inline-block',
-      height:'95px',
+      height:'104px',
       width:'auto',
       margin:'0 2px'
   }
