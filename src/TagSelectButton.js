@@ -22,7 +22,7 @@ const styles = theme => ({
     },
     chips: {
         display: 'flex',
-        //justifyContent: 'center',
+        justifyContent: 'center',
         flexWrap: 'wrap',
         height:'calc(100vh - 208px)',
         'padding-top': '20px',
