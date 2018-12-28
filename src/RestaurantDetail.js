@@ -59,7 +59,7 @@ const styles = theme => ({
     margin:'0 2px'
   },
   detail:{
-    padding:'10px 20px 10px 20px',
+    padding:'10px 20px 5px 20px',
     width: 'calc(100vw - 40px)'
   },
   star:{
@@ -163,13 +163,19 @@ class RestaurantDetail extends Component{
                       </Typography>
                     </Grid>
                   </Grid>
-
-                  <Typography align="left"> {this.generateStar(info['rating'])}
+                  <Grid container>
+                    <Grid item xs={4}>
+                    <Typography align="left"> {this.generateStar(info['rating'])}
                             {this.generateStar(info['rating']-1)}
                             {this.generateStar(info['rating']-2)}
                             {this.generateStar(info['rating']-3)}
-                            {this.generateStar(info['rating']-4)}
-                  {" "+info['reviewCount'] + "個評語"}</Typography>
+                            {this.generateStar(info['rating']-4)}</Typography>
+                    </Grid>
+                    <Grid item xs={8}>
+                      <Typography align="left">{info['reviewCount'] + "個評語"}</Typography>
+                    </Grid>
+                  </Grid>
+
                   <Typography align="left">{'$ '+info['priceLevel']}</Typography>
                   <div style={{justifyContent:"flex-start", 'text-align': 'left'}}>
                     {this.maptags(this.props.tags,info['tags']).map(tag =>(
@@ -185,7 +191,7 @@ class RestaurantDetail extends Component{
                       <Grid item xs={1} />
                       <Grid item xs={11} >
                         
-                        <Typography align="left" style={{'line-height':'25px' ,"margin-top":'10px'}}
+                        <Typography align="left" style={{'line-height':'25px' ,"margin-top":'5px'}}
                           color={info['isOpenNow']==true?("#000000"):("secondary")}>
                           {info['isOpenNow']==true?("營業中 查看營業時間⌵"):("非營業時間 查看營業時間⌵")}
                         </Typography>

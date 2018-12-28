@@ -129,13 +129,15 @@ class ListItem extends Component{
                                 </Typography>
                             </Grid>
                         </Grid>
- 
-                        <Typography align="left">{this.generateStar(info['rating'])}
+                        <Typography align="left">
+                        <Typography align="left" style={{width:'100px', display:'inline-block'}}> {this.generateStar(info['rating'])}
                             {this.generateStar(info['rating']-1)}
                             {this.generateStar(info['rating']-2)}
                             {this.generateStar(info['rating']-3)}
-                            {this.generateStar(info['rating']-4)}
-                            { +" "+info['reviewCount'] + "個評語"}</Typography>
+                            {this.generateStar(info['rating']-4)}</Typography>
+                        <Typography align="left" style={{display:'inline-block'}}>{info['reviewCount'] + "個評語"}</Typography>
+                        </Typography>
+
                         <Typography align="left">{'$ '+info['priceLevel']}</Typography>
                         <Typography align="left">{this.maptags(this.props.tag,info["tags"]).map(tag =>(tag + " "))}</Typography>
                     </div>
