@@ -130,14 +130,28 @@ class RestaurantDetail extends Component{
         return temp
     }
     time_clicked = ()=>{
-      if(this.state.time_click%2 == 0){
-        return null;
+      this.setState(state => {
+        time_click: state.time_click = state.time_click==1?0:1
+      })
+      if(this.state.time_click == 1){
+        document.getElementById("openhour").innerHTML=""
       }
-      else if(this.state.time_click%2 == 1){
-        return ;
+      else if(this.state.time_click == 0){
+        document.getElementById("openhour").innerHTML=this.props.detail['openingHours'][0]+"<br>"
+            +this.props.detail['openingHours'][1]+"<br>"
+            +this.props.detail['openingHours'][2]+"<br>"
+            +this.props.detail['openingHours'][3]+"<br>"
+            +this.props.detail['openingHours'][4]+"<br>"
+            +this.props.detail['openingHours'][5]+"<br>"
+            +this.props.detail['openingHours'][6]+"<br>"
       }
+      
+      
     }
-    
+    myFunction=()=> {
+      
+      
+    }
     render(){
         const { classes } = this.props;
         
@@ -192,14 +206,12 @@ class RestaurantDetail extends Component{
                       <Grid item xs={11} >
                         
                         <Typography align="left" style={{'line-height':'25px' ,"margin-top":'5px'}}
-                          color={info['isOpenNow']==true?("#000000"):("secondary")}>
+                          color={info['isOpenNow']==true?("#000000"):("secondary")}
+                          className={classes.opentime}
+                          onClick={()=>{this.time_clicked()}}>
                           {info['isOpenNow']==true?("營業中 查看營業時間⌵"):("非營業時間 查看營業時間⌵")}
                         </Typography>
-                        {info['openingHours'].map(hours=>(
-                            <Typography align="left" style={{'line-height':'25px'}}>
-                              {hours}
-                            </Typography>
-                          ))}
+                        <Typography id="openhour" align="left" style={{'line-height':'25px'}}> </Typography>
                       </Grid>
                     </Grid>
 
@@ -223,7 +235,7 @@ class RestaurantDetail extends Component{
                     {info['reviews'].map(review =>(
                       <Comment review={review} />
                     ))}
-                    <Typography align="center" style={{"pading-top":"8px"}}>僅顯示 Google Maps 5則最佳評論</Typography>
+                    <Typography align="center" style={{"padding-top":"8px"}}>僅顯示 Google Maps 5則最佳評論</Typography>
                 </div>
               </div>    
             </MuiThemeProvider>
