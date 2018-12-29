@@ -80,7 +80,7 @@ class SearchRestaurant extends Component{
                     if (loading) {
                         return <img src={Loading} />
                     }
-                    if (error) return '';
+                    if (error) return '沒有符合的結果，請返回上一頁';
                     return (
                         //'loading'
                         List(handleNext,restaurantDetail,data['searchRestaurants'],tagIds)
