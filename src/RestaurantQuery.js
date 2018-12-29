@@ -80,7 +80,7 @@ class SearchRestaurant extends Component{
                     if (loading) {
                         return <img src={Loading} />
                     }
-                    //if (error) return 'Error!: ${error}';
+                    if (error) return '';
                     return (
                         //'loading'
                         List(handleNext,restaurantDetail,data['searchRestaurants'],tagIds)
