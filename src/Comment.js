@@ -1,25 +1,13 @@
-import React from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import classnames from 'classnames';
 import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Collapse from '@material-ui/core/Collapse';
 import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
-import Star from '@material-ui/icons/Star';
-import StarHalf from '@material-ui/icons/StarHalf';
-import StarBorder from '@material-ui/icons/StarBorder';
 
+import RatingStar from './RatingStar.js'
 const styles = theme => ({
   card: {
     margin:'5px',
@@ -44,27 +32,8 @@ const styles = theme => ({
   },
 });
 
-class Comment extends React.Component {
-  generateStar = (rating) =>{
-    const { classes } = this.props;
-    if(rating>=1){
-      return <Star className={classes.star} color="secondary"/>
-    }
-    else if(rating>0){
-      if(rating<=0.3){
-        return <StarBorder className={classes.star} color="secondary"/>
-      }
-      else if(rating<=0.7){
-        return <StarHalf className={classes.star} color="secondary"/>
-      }
-      else{
-        return <Star className={classes.star} color="secondary"/>
-      }
-    }
-    else if(rating<=0){
-        return <StarBorder className={classes.star} color="secondary"/>
-    }
-  }
+class Comment extends Component {
+  
   render() {
     const { classes } = this.props;
     const info = this.props.review;
@@ -73,17 +42,13 @@ class Comment extends React.Component {
         <CardContent>
             <div className={classes.header}>
                 <Avatar aria-label="Recipe" className={classes.avatar} src={info['authorPhotoUrl']}></Avatar>
-                <Typography variant="subtitle1" style={{'font-weight':'bold'}}>{info['authorName']}</Typography>
+                <Typography variant="subtitle1" style={{fontWeight:'bold'}}>{info['authorName']}</Typography>
                 <Typography variant="subtitle2" style={{padding:'0 0 0 10px'}}> {info['relativeTime']}</Typography>
             </div>
             <div className={classes.header} style={{padding:'5px 0 0 0'}}>
-              {this.generateStar(info['rating'])}
-              {this.generateStar(info['rating']-1)}
-              {this.generateStar(info['rating']-2)}
-              {this.generateStar(info['rating']-3)}
-              {this.generateStar(info['rating']-4)}
+              <RatingStar rating={info['rating']}/>
             </div>
-            <Typography component="p" style={{'text-align':'left', padding:'10px 0 0 0'}}>
+            <Typography component="p" style={{textAlign:'left', padding:'10px 0 0 0'}}>
               {info['text']}
             </Typography>
         </CardContent>

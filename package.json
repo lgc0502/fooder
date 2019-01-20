@@ -15,6 +15,8 @@
     "react": "^16.6.3",
     "react-apollo": "2.3.2",
     "react-dom": "^16.6.3",
+    "react-infinite-scroll-component": "^4.2.0",
+    "react-native": "^0.57.8",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
     "react-swipeable-views": "^0.13.0"

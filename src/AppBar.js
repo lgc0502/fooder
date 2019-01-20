@@ -6,16 +6,30 @@ import Grid from '@material-ui/core/Grid';
 import KeyboardbackspaceIcon from '@material-ui/icons/KeyboardBackspace';
 import ButtonBase from '@material-ui/core/ButtonBase';
 
+import ViewList from '@material-ui/icons/ViewList'
+import LocationOn from '@material-ui/icons/LocationOn';
+
 class Appbar extends Component{
     
     constructor(props){
         super(props)
     }
-    
+    bartext=(state)=>{
+        switch (state) {
+            case 0: 
+              return "搜尋";
+            case 1:
+              return "偏好選擇";
+            case 2:
+              return "搜尋";
+            case 3:
+              return "店家";
+        }
+    }
     render(){
 
         var handleBack = this.props.handleBack;
-
+        var handleMode = this.props.handleMode;
         return(
             <div >
                 <AppBar position="relative" className="appbar" style={{
@@ -34,10 +48,16 @@ class Appbar extends Component{
                             </Grid>
                             <Grid item xs={8}>
                                 <Typography variant="subtitle2" color='#263238' className="title" >
-                                    {this.props.text}
+                                    {this.bartext(this.props.text)}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={2}></Grid>
+                            <Grid item xs={2}>
+                                {this.props.text == 2?
+                                    (this.props.mode == 0?(<LocationOn style={{color:'#263238'}} onClick={() => handleMode()}/>)
+                                                        :(<ViewList style={{color:'#263238'}} onClick={() => handleMode()}/>)
+                                    ):("")
+                                }
+                            </Grid>
                         </Grid>
                     </Toolbar>
                 </AppBar>

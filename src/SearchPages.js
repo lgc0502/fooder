@@ -3,9 +3,10 @@ import { withStyles } from '@material-ui/core/styles';
 
 import FoodType from './FoodType.js';
 import TagSelectButton from './TagSelectButton.js';
-import RestaurantLists from './RestaurantLists.js';
+import RestaurantList from './RestaurantList.js';
 import RestaurantDetail from './RestaurantDetail.js';
-import Appbar from './App_Bar.js'
+import Appbar from './AppBar.js'
+import geolocation from './geolocation.js';
 
 const styles = theme => ({
   appbar:{
@@ -21,10 +22,18 @@ const styles = theme => ({
 class SearchPages extends React.Component {
   state = {
     step: 0,
+    listmode: 0,
     Tags:[],
-    restaurant:{},
+    Info:{},
+    lat: 23.000403,
+    lng: 120.219540,
   };
-
+  componentDidMount() {
+    geolocation.getLocation().then(d => this.setState({
+      lat: d.coords.latitude,
+      lng: d.coords.longitude
+    }))
+  }
   handleNext = (appendtag) => {
     this.setState(state => ({
       step: state.step + 1,
@@ -45,10 +54,19 @@ class SearchPages extends React.Component {
         break;
     }
   };
-  restaurantDetail=(info) =>{
-    this.setState({restaurant: info});
+  handleMode = () => {
+    if(this.state.listmode == 0){
+        this.setState({listmode:1});
+    }
+    else{
+      this.setState({listmode:0});
+    }
+  };
+
+  restaurantInfo=(d) =>{
+    this.setState({Info: d});
   }
-  getSearchStepContent(step) {
+  getSearchStepContent(step,mode) {
     const { classes } = this.props;
     var handleNext =   this.handleNext;
     var restaurantDetail = this.restaurantDetail;
@@ -58,35 +76,45 @@ class SearchPages extends React.Component {
       case 1:
         return <TagSelectButton className={classes.content} handleNext = {handleNext.bind(this)} />;
       case 2:
-        return <RestaurantLists className={classes.content} tags={this.state.Tags} restaurantDetail={restaurantDetail.bind(this)} handleNext = {handleNext.bind(this)}/>;
+        return mode == 0?(
+                  <RestaurantList
+                    className={classes.content} 
+                    tags={this.state.Tags} 
+                    restaurantInfo={this.restaurantInfo.bind(this)} 
+                    handleNext = {handleNext.bind(this)} 
+                    position = {[this.state.lat,this.state.lng]}/>
+                ):(
+                  <RestaurantList
+                    className={classes.content} 
+                    tags={this.state.Tags} 
+                    restaurantInfo={this.restaurantInfo.bind(this)} 
+                    handleNext = {handleNext.bind(this)} 
+                    position = {[this.state.lat,this.state.lng]}/>
+                )
+
       case 3:
-        return <RestaurantDetail className={classes.content} tags={this.state.Tags} detail={this.state.restaurant}/>;
-    }
-  }
-  getAppBarContent(step) {
-    switch (step) {
-      case 0: 
-        return "搜尋";
-      case 1:
-        return "偏好選擇";
-      case 2:
-        return "搜尋";
-      case 3:
-        return "店家";
+        return <RestaurantDetail 
+                  className={classes.content} 
+                  tags={this.state.Tags} 
+                  info={this.state.Info}
+                />;
     }
   }
   
   render() {
     const { classes } = this.props;
     var handleBack = this.handleBack;
+    var handleMode = this.handleMode;
     return (
       <div>
         <Appbar 
             className={classes.appbar} 
             firstpage={this.state.step} 
-            text={this.getAppBarContent(this.state.step)} 
-            handleBack = {handleBack.bind(this)}/>
-          {this.getSearchStepContent(this.state.step)}
+            text={this.state.step} 
+            mode={this.state.listmode} 
+            handleBack = {handleBack.bind(this)}
+            handleMode = {handleMode.bind(this)}/>
+          {this.getSearchStepContent(this.state.step,this.state.listmode)}
       </div>
     );
   }

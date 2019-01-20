@@ -2,9 +2,6 @@ import React ,{ Component } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import ButtonBase from '@material-ui/core/ButtonBase';
-import Typography from '@material-ui/core/Typography';
-
-import Appbar from './App_Bar.js';
 
 import button1 from './image/image-5-01.jpg';
 import button2 from './image/image-5-02.jpg';
@@ -56,10 +53,10 @@ class FoodType extends Component{
         return(
             
             <div className={classes.root}>
-                <ButtonBase variant="contained" className={classes.buttontop+" "+classes.buttonleft} onClick={() => handleNext(["5c222d594bdbfc29bb7d47ae"])}> <img src={button1} className={classes.img}/> </ButtonBase>
-                <ButtonBase variant="contained" className={classes.buttontop+" "+classes.buttonright} onClick={() => handleNext(["5c222d594bdbfc29bb7d47af"])}> <img src={button2} className={classes.img}/> </ButtonBase>   
-                <ButtonBase variant="contained" className={classes.buttonbottom+" "+classes.buttonleft} onClick={() => handleNext(["5c222d594bdbfc29bb7d47b0"])}> <img src={button3} className={classes.img}/> </ButtonBase>    
-                <ButtonBase variant="contained" className={classes.buttonbottom+" "+classes.buttonright} onClick={() => handleNext(["5c222d594bdbfc29bb7d47b1"])}> <img src={button4} className={classes.img}/> </ButtonBase>  
+                <ButtonBase variant="contained" className={classes.buttontop+" "+classes.buttonleft} onClick={() => handleNext(["5c336c58600e60105ed1f3bb"])}> <img src={button1} className={classes.img}/> </ButtonBase>
+                <ButtonBase variant="contained" className={classes.buttontop+" "+classes.buttonright} onClick={() => handleNext(["5c336c58600e60105ed1f3bc"])}> <img src={button2} className={classes.img}/> </ButtonBase>   
+                <ButtonBase variant="contained" className={classes.buttonbottom+" "+classes.buttonleft} onClick={() => handleNext(["5c336c58600e60105ed1f3bd"])}> <img src={button3} className={classes.img}/> </ButtonBase>    
+                <ButtonBase variant="contained" className={classes.buttonbottom+" "+classes.buttonright} onClick={() => handleNext(["5c336c58600e60105ed1f3be"])}> <img src={button4} className={classes.img}/> </ButtonBase>  
             </div>
         )
     }

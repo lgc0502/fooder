@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { withStyles } from '@material-ui/core/styles';
-import SwipeableViews from 'react-swipeable-views';
 import AppBar from '@material-ui/core/AppBar';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
@@ -53,7 +53,12 @@ const styles = theme => ({
     'line-height':'calc(100vh - 56px)'
   }
 });
-
+const theme = createMuiTheme({
+  palette: {
+    primary: { main: '#263238' }, 
+    secondary: { main: '#CC0000' }, 
+  },
+});
 class FullWidthTabs extends React.Component {
   state = {
     value: 2,
@@ -72,27 +77,29 @@ class FullWidthTabs extends React.Component {
 
     return (
       <div className={classes.root}>
-        <AppBar position="static" style={{backgroundColor:'#FFC107'}} className={classes.appBar}>
-          <Tabs
-          className={classes.tabs}
-          value={this.state.value}
-          onChange={this.handleChange}
-          indicatorColor="primary"
-          textColor="#263238"
-          fullWidth
-          >
-            <Tab className={classes.tab} icon={<ViewList />} />
-            <Tab className={classes.tab} icon={<Group />} />
-            <Tab className={classes.tab} icon={<Search />} />
-            <Tab className={classes.tab} icon={<Bookmark />} />
-            <Tab className={classes.tab} icon={<Person />} />
-          </Tabs>
-        </AppBar>
-        {this.state.value === 0 && <Typography className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</Typography>}
-        {this.state.value === 1 && <Typography className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</Typography>}
-        {this.state.value === 2 && <SearchPages />}
-        {this.state.value === 3 && <Typography className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</Typography>}
-        {this.state.value === 4 &&<Typography className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</Typography>}
+        <MuiThemeProvider theme={theme}>
+          <AppBar position="static" style={{backgroundColor:'#FFC107'}} className={classes.appBar}>
+            <Tabs
+            className={classes.tabs}
+            value={this.state.value}
+            onChange={this.handleChange}
+            indicatorColor="primary"
+            textColor="#263238"
+            fullWidth
+            >
+              <Tab className={classes.tab} icon={<ViewList />} />
+              <Tab className={classes.tab} icon={<Group />} />
+              <Tab className={classes.tab} icon={<Search />} />
+              <Tab className={classes.tab} icon={<Bookmark />} />
+              <Tab className={classes.tab} icon={<Person />} />
+            </Tabs>
+          </AppBar>
+          {this.state.value === 0 && <Typography className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</Typography>}
+          {this.state.value === 1 && <Typography className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</Typography>}
+          {this.state.value === 2 && <SearchPages />}
+          {this.state.value === 3 && <Typography className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</Typography>}
+          {this.state.value === 4 &&<Typography className={classes.tabcontainer} dir={theme.direction}>噢噢...本功能目前開發中</Typography>}
+        </MuiThemeProvider>
       </div>
     );
   }
