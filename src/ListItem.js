@@ -92,7 +92,7 @@ class ListItem extends Component{
                         </div>
 
                         <Typography align="left">{'$ '+info['priceLevel']}</Typography>
-                        <Typography align="left">{TagsMapping.maptags(this.props.tag,info["tags"]).map(tag =>(tag + " "))}</Typography>
+                        <Typography align="left">{TagsMapping.sametags(this.props.tag,info["tags"]).map(tag =>(tag + " "))}</Typography>
                     </div>
                 </div>
             </div>

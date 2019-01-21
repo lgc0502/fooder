@@ -35,6 +35,17 @@ export default {
             }
         }
         return temp
+    },
+
+    sametags:(querytag, storetag)=>{
+        var temp = [];
+        for(var i=0;i<querytag.length;i++){
+            for(var j=0;j<storetag.length;j++){
+                if(querytag[i] == storetag[j]['id']){
+                    temp.push(storetag[j]['text'])
+                }
+            }
+        }
+        return temp
     }
-    
 }

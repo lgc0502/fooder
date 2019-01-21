@@ -17,32 +17,6 @@ const styles = theme => ({
   }
 });
 class InfiniteScrollList extends Component {
-  /*componentDidMount() {
-    console.log("jo")
-    window.addEventListener("scroll", this.handleOnScroll);
-  }
-
-  componentWillUnmount() {
-    console.log("jo2")
-    window.removeEventListener("scroll", this.handleOnScroll);
-  }
-
-  handleOnScroll = () => {
-    var scrollTop =
-      (document.documentElement && document.documentElement.scrollTop) ||
-      document.body.scrollTop;
-    var scrollHeight =
-      (document.documentElement && document.documentElement.scrollHeight) ||
-      document.body.scrollHeight;
-    var clientHeight =
-      document.documentElement.clientHeight || window.innerHeight;
-    var scrolledToBottom = Math.ceil(scrollTop + clientHeight) >= scrollHeight;
-    console.log(scrollTop, scrollHeight, clientHeight)
-    if (scrolledToBottom) {
-        console.log("jo")
-      this.props.onLoadMore();
-    }
-  };*/
   handleScroll = (e) => {
     const bottom = Math.abs(e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight) <= 1 &&
         e.target.scrollHeight != 108
@@ -53,7 +27,6 @@ class InfiniteScrollList extends Component {
   }
   render() {
     if (!this.props.listdata && this.props.loading) {
-      console.log('loading')
       return <p>Loading....</p>;
     }
     const data = this.props.listdata['restaurants'] || [];
@@ -73,7 +46,7 @@ class InfiniteScrollList extends Component {
                 /> 
             )
         })}  
-        {hasMore == true?(<p>loading</p>):('')}
+        {hasMore == true?(<p>loading</p>):(<p>噢噢...沒有更多店家了</p>)}
       </div>
     );
   }
