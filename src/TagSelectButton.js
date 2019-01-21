@@ -52,21 +52,22 @@ class TagSelectButton extends Component{
    
     state = { 
         Tags: [
-          { key: 0, label: ' 早午餐 ',  choose: 0, id: "5c336c58600e60105ed1f3cc" },
-          { key: 1, label: ' 下午茶 ', choose: 0, id: "5c336c58600e60105ed1f3cd" },
-          { key: 2, label: '午餐',   choose: 0, id: "5c336c58600e60105ed1f3ce" },
-          { key: 3, label: '晚餐',  choose: 0, id: "5c336c58600e60105ed1f3cf" },
-          { key: 4, label: '宵夜', choose: 0, id: "5c336c58600e60105ed1f3d0" },
-          { key: 5, label: ' 來點湯 ',  choose: 0, id: "5c336c58600e60105ed1f3c5" },
-          { key: 6, label: '  點心  ',   choose: 0, id: "5c336c58600e60105ed1f3c9" },
-          { key: 7, label: '  小吃  ',  choose: 0, id: "5c336c58600e60105ed1f3ca" },
-          { key: 8, label: '小編推薦', choose: 0, id: "5c336c58600e60105ed1f3e3"},
-          { key: 9, label: '氣氛悠閒', choose: 0, id: "5c336c58600e60105ed1f3d9" },
-          { key: 10, label: '相機先吃',  choose: 0, id: "5c336c58600e60105ed1f3d3" },
-          { key: 11, label: '  久坐  ', choose: 0, id: "5c336c58600e60105ed1f3d7" },
-          { key: 12, label: ' 吃粗飽 ',   choose: 0,  id: "5c336c58600e60105ed1f3c8"},
-          { key: 13, label: '氣氛歡樂',   choose: 0, id: "5c336c58600e60105ed1f3da" },
+          { key: 0, label: ' 早午餐 ',  choose: 0, id: "5c45e20893ad54dfd50e5ea4" },
+          { key: 1, label: ' 下午茶 ', choose: 0, id: "5c45e20893ad54dfd50e5ea5" },
+          { key: 2, label: '午餐',   choose: 0, id: "5c45e20893ad54dfd50e5ea6" },
+          { key: 3, label: '晚餐',  choose: 0, id: "5c45e20893ad54dfd50e5ea7" },
+          { key: 4, label: '宵夜', choose: 0, id: "5c45e20893ad54dfd50e5ea8" },
+          { key: 5, label: ' 來點湯 ',  choose: 0, id: "5c45e20893ad54dfd50e5e9d" },
+          { key: 6, label: '  點心  ',   choose: 0, id: "5c45e20893ad54dfd50e5ea1" },
+          { key: 7, label: '  小吃  ',  choose: 0, id: "5c45e20893ad54dfd50e5ea2" },
+          { key: 8, label: '小編推薦', choose: 0, id: "5c45e20893ad54dfd50e5ebb"},
+          { key: 9, label: '氣氛悠閒', choose: 0, id: "5c45e20893ad54dfd50e5eb1" },
+          { key: 10, label: '相機先吃',  choose: 0, id: "5c45e20893ad54dfd50e5eab" },
+          { key: 11, label: '  久坐  ', choose: 0, id: "5c45e20893ad54dfd50e5eaf" },
+          { key: 12, label: ' 吃粗飽 ',   choose: 0,  id: "5c45e20893ad54dfd50e5eb7"},
+          { key: 13, label: '氣氛歡樂',   choose: 0, id: "5c45e20893ad54dfd50e5eb2" },
         ],
+
         Selected:[],
     };
 

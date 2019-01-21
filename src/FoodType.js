@@ -53,10 +53,10 @@ class FoodType extends Component{
         return(
             
             <div className={classes.root}>
-                <ButtonBase variant="contained" className={classes.buttontop+" "+classes.buttonleft} onClick={() => handleNext(["5c336c58600e60105ed1f3bb"])}> <img src={button1} className={classes.img}/> </ButtonBase>
-                <ButtonBase variant="contained" className={classes.buttontop+" "+classes.buttonright} onClick={() => handleNext(["5c336c58600e60105ed1f3bc"])}> <img src={button2} className={classes.img}/> </ButtonBase>   
-                <ButtonBase variant="contained" className={classes.buttonbottom+" "+classes.buttonleft} onClick={() => handleNext(["5c336c58600e60105ed1f3bd"])}> <img src={button3} className={classes.img}/> </ButtonBase>    
-                <ButtonBase variant="contained" className={classes.buttonbottom+" "+classes.buttonright} onClick={() => handleNext(["5c336c58600e60105ed1f3be"])}> <img src={button4} className={classes.img}/> </ButtonBase>  
+                <ButtonBase variant="contained" className={classes.buttontop+" "+classes.buttonleft} onClick={() => handleNext(["5c45e20893ad54dfd50e5e93"])}> <img src={button1} className={classes.img}/> </ButtonBase>
+                <ButtonBase variant="contained" className={classes.buttontop+" "+classes.buttonright} onClick={() => handleNext(["5c45e20893ad54dfd50e5e94"])}> <img src={button2} className={classes.img}/> </ButtonBase>   
+                <ButtonBase variant="contained" className={classes.buttonbottom+" "+classes.buttonleft} onClick={() => handleNext(["5c45e20893ad54dfd50e5e95"])}> <img src={button3} className={classes.img}/> </ButtonBase>    
+                <ButtonBase variant="contained" className={classes.buttonbottom+" "+classes.buttonright} onClick={() => handleNext(["5c45e20893ad54dfd50e5e96"])}> <img src={button4} className={classes.img}/> </ButtonBase>  
             </div>
         )
     }
