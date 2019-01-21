@@ -44,7 +44,7 @@ class InfiniteScrollList extends Component {
     }
   };*/
   handleScroll = (e) => {
-    const bottom = Math.abs(e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight) == 0 &&
+    const bottom = Math.abs(e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight) <= 1 &&
         e.target.scrollHeight != 108
     //console.log(e.target.scrollHeight, e.target.scrollTop, e.target.clientHeight, Math.abs(e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight))
     if (bottom) {  
