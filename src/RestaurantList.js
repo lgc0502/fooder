@@ -61,25 +61,30 @@ class RestaurantList extends Component {
             return (
               <InfiniteScrollList
                 loading={loading}
-                data={data['searchRestaurants']}
+                listdata={data['searchRestaurants']}
                 handleNext = {handleNext}
                 restaurantInfo = {restaurantInfo}
                 tag = {tagIds}
                 onLoadMore={() =>
                   fetchMore({
                     variables: {
-                      tagIds, lat, lng,
+                      tagIds, 
+                      lat, 
+                      lng, 
                       cursor: data['searchRestaurants']['cursor']
                     },
                     updateQuery: (prevResult, { fetchMoreResult }) => {
-                      const newEdges = fetchMoreResult.search.edges;
-                      const pageInfo = fetchMoreResult.search.pageInfo;
-                      return newEdges.length
+                      const newData = fetchMoreResult['searchRestaurants']['restaurants'];
+                      const cursor = fetchMoreResult['searchRestaurants']['cursor'];
+                      const hasMore = fetchMoreResult['searchRestaurants']['hasMore'];
+                      return newData.length
                         ? {
-                            search: {
-                              __typename: prevResult.search.__typename,
-                              edges: [...prevResult.search.edges, ...newEdges],
-                              pageInfo
+                            searchRestaurants: {
+                              __typename: prevResult['searchRestaurants']['__typename'],
+                              cursor,
+                              hasMore,
+                              
+                              restaurants : [...prevResult['searchRestaurants']['restaurants'], ...fetchMoreResult['searchRestaurants']['restaurants']],
                             }
                           }
                         : prevResult;
