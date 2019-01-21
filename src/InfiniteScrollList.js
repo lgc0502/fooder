@@ -44,14 +44,20 @@ class InfiniteScrollList extends Component {
     }
   };*/
   handleScroll = (e) => {
-    const bottom = Math.abs(e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight) <= 1 &&
-                 Math.abs(e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight) > 0;
+    const bottom = Math.abs(e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight) == 0 &&
+        e.target.scrollHeight != 108
     //console.log(e.target.scrollHeight, e.target.scrollTop, e.target.clientHeight, Math.abs(e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight))
-    if (bottom) {  this.props.onLoadMore(); }
+    if (bottom) {  
+      this.props.onLoadMore(); 
+    }
   }
   render() {
-    if (!this.props.listdata && this.props.loading) return <p>Loading....</p>;
-    const data = this.props. listdata['restaurants'] || [];
+    if (!this.props.listdata && this.props.loading) {
+      console.log('loading')
+      return <p>Loading....</p>;
+    }
+    const data = this.props.listdata['restaurants'] || [];
+    const hasMore = this.props.listdata['hasMore'];
     const { classes } = this.props;
     return (
       <div className={classes.list} onScroll={this.handleScroll}>
@@ -66,7 +72,8 @@ class InfiniteScrollList extends Component {
                     restaurantInfo={this.props.restaurantInfo}
                 /> 
             )
-        })}
+        })}  
+        {hasMore == true?(<p>loading</p>):('')}
       </div>
     );
   }
