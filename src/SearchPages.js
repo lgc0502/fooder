@@ -3,10 +3,12 @@ import { withStyles } from '@material-ui/core/styles';
 
 import FoodType from './FoodType.js';
 import TagSelectButton from './TagSelectButton.js';
-import RestaurantList from './RestaurantList.js';
+import RestaurantSearch from './RestaurantSearch.js';
+import RestaurantMap from './RestaurantMap.js';
 import RestaurantDetail from './RestaurantDetail.js';
 import Appbar from './AppBar.js'
 import geolocation from './geolocation.js';
+import ListCard from './ListCard.js';
 
 const styles = theme => ({
   appbar:{
@@ -77,14 +79,14 @@ class SearchPages extends React.Component {
         return <TagSelectButton className={classes.content} handleNext = {handleNext.bind(this)} />;
       case 2:
         return mode == 0?(
-                  <RestaurantList
+                  <RestaurantSearch
                     className={classes.content} 
                     tags={this.state.Tags} 
                     restaurantInfo={this.restaurantInfo.bind(this)} 
                     handleNext = {handleNext.bind(this)} 
-                    position = {[this.state.lat,this.state.lng]}/>
+                    position = {[this.state.lat,this.state.lng]} />
                 ):(
-                  <RestaurantList
+                  <RestaurantMap
                     className={classes.content} 
                     tags={this.state.Tags} 
                     restaurantInfo={this.restaurantInfo.bind(this)} 

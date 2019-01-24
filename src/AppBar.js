@@ -37,17 +37,17 @@ class Appbar extends Component{
                         backgroundColor:'#FFC107', 
                         height:'48px'}}>
                     <Toolbar>
-                        <Grid container spacing={24}>
+                        <Grid container style={{'align-items':'center'}}>
                             <Grid item xs={2} >
                                 {
                                     this.props.firstpage === 0?(""):
-                                    (<ButtonBase variant="contained" onClick={() => handleBack()}>
+                                    (<ButtonBase variant="contained" onClick={() => handleBack()} style={{height:'25px'}}>
                                         <KeyboardbackspaceIcon style={{color:'#263238'}} />
                                     </ButtonBase>)
                                 }
                             </Grid>
                             <Grid item xs={8}>
-                                <Typography variant="subtitle2" color='#263238' className="title" >
+                                <Typography variant="subtitle2" color='#263238'>
                                     {this.bartext(this.props.text)}
                                 </Typography>
                             </Grid>

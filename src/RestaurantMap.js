@@ -4,17 +4,19 @@ import { Query } from "react-apollo";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 
-import InfiniteScrollList from "./InfiniteScrollList.js";
+import InfiniteScrollMap from "./InfiniteScrollMap.js";
+import Map from './Map.js';
 import moment from "moment";
+
 const styles = theme => ({
     list:{
         display: 'flex',
         justifyContent: 'center',
         flexWrap: 'wrap',
-        height:'calc(100vh - 146px)',
+        height:'calc(100vh - 106px)',
         'overflow-x':'hidden',
-        'overflow-y':'auto',
-        alignItems:'center',
+        'overflow-y':'hidden',
+        alignItems:'flex-end',
         'margin-bottom':'56px'
     }
 });
@@ -41,20 +43,7 @@ query searchRestaurants($tagIds: [ID!]!, $lat: Float!, $lng: Float!, $cursor: St
 }
 `;
 
-class RestaurantList extends Component {
-  SortType = (type)=>{
-    switch(type){
-      case 0:
-        return GET_RESTAURANT;
-      case 1:
-        return GET_RESTAURANT;
-      case 2:
-        return GET_RESTAURANT;
-      default:
-        return GET_RESTAURANT;
-      
-    }
-  }
+class RestaurantMap extends Component {
   render() {
     const { classes } = this.props;
     var tagIds = this.props.tags;
@@ -62,18 +51,18 @@ class RestaurantList extends Component {
     const lng = this.props.position[1];
     var handleNext =   this.props.handleNext;
     var restaurantInfo = this.props.restaurantInfo;
-    var type = this.props.type;
 
     return (
       <div className={classes.list}>
+        <Map isMarkerShown />
         <Query
-          query={this.SortType(type)}
+          query={GET_RESTAURANT}
           variables={{tagIds, lat, lng }}
         >
           {({ data, loading, error, fetchMore }) => {
             if (error) return <p>{'出現錯誤，請嘗試重新整理頁面'}</p>;
             return (
-              <InfiniteScrollList
+              <InfiniteScrollMap
                 loading={loading}
                 listdata={data['searchRestaurants']}
                 handleNext = {handleNext}
@@ -114,4 +103,4 @@ class RestaurantList extends Component {
   }
 }
 
-export default withStyles(styles)(RestaurantList);
+export default withStyles(styles)(RestaurantMap);

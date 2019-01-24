@@ -22,8 +22,8 @@ const styles = theme => ({
   avatar: {
     backgroundColor: red[500],
     margin:'0 10px 0 0',
-    height:'30px',
-    width:'30px',
+    height:'18px',
+    width:'18px',
   },
   star:{
     justifyContent: 'flex-start',
@@ -42,8 +42,8 @@ class Comment extends Component {
         <CardContent>
             <div className={classes.header}>
                 <Avatar aria-label="Recipe" className={classes.avatar} src={info['authorPhotoUrl']}></Avatar>
-                <Typography variant="subtitle1" style={{fontWeight:'bold'}}>{info['authorName']}</Typography>
-                <Typography variant="subtitle2" style={{padding:'0 0 0 10px'}}> {info['relativeTime']}</Typography>
+                <Typography style={{fontWeight:'bold'}}>{info['authorName']}</Typography>
+                <Typography style={{padding:'0 0 0 10px'}}> {info['relativeTime']}</Typography>
             </div>
             <div className={classes.header} style={{padding:'5px 0 0 0'}}>
               <RatingStar rating={info['rating']}/>
@@ -57,11 +57,7 @@ class Comment extends Component {
     );
   }
 }
-/*authorName,
-authorPhotoUrl,
-relativeTime,
-rating,
-text,*/
+
 Comment.propTypes = {
   classes: PropTypes.object.isRequired,
 };

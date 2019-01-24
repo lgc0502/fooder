@@ -21,7 +21,7 @@ class RatingStar extends Component {
           return <Star className={classes.star} color="secondary"/>
         }
         else if(rating>0){
-          if(rating<=0.3){
+          if(rating<0.3){
             return <StarBorder className={classes.star} color="secondary"/>
           }
           else if(rating<=0.7){

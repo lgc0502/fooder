@@ -9,6 +9,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Fab from '@material-ui/core/Fab';
 
 import LocationOn from '@material-ui/icons/LocationOn';
+import WatchLater from '@material-ui/icons/WatchLater';
+import Phone from '@material-ui/icons/Phone';
+
 import NearMe from './image/icons8-near-me-filled-100.png';
 import Comment from './Comment.js'
 import DistanceFormat from './DistanceFormat.js'
@@ -51,13 +54,14 @@ const styles = theme => ({
   },
   chip: {
     justifyContent: 'center',
-    width:'80px',
-    height:'26px',
+    width:'56px',
+    height:'17px',
+    'font-size':'10px',
     margin:'5px 10px 5px 0px'
   },
   icon:{
-    width:'16px',
-    height:'16px'
+    width:'18px',
+    height:'18px'
   },
 
 });
@@ -90,13 +94,13 @@ class RestaurantDetail extends Component{
         document.getElementById("openhour").innerHTML=""
       }
       else if(this.state.time_click == 0){
-        document.getElementById("openhour").innerHTML=this.props.info['openingHours'][0]+"<br>"
-            +this.props.info['openingHours'][1]+"<br>"
-            +this.props.info['openingHours'][2]+"<br>"
-            +this.props.info['openingHours'][3]+"<br>"
-            +this.props.info['openingHours'][4]+"<br>"
-            +this.props.info['openingHours'][5]+"<br>"
-            +this.props.info['openingHours'][6]+"<br>"
+        document.getElementById("openhour").innerHTML=this.props.detail['openingHours'][0]+"<br>"
+            +this.props.detail['openingHours'][1]+"<br>"
+            +this.props.detail['openingHours'][2]+"<br>"
+            +this.props.detail['openingHours'][3]+"<br>"
+            +this.props.detail['openingHours'][4]+"<br>"
+            +this.props.detail['openingHours'][5]+"<br>"
+            +this.props.detail['openingHours'][6]+"<br>"
       }
     }
 
@@ -104,7 +108,7 @@ class RestaurantDetail extends Component{
         const { classes } = this.props;
         const tag = this.props.tag;
         const info = this.props.info;
-
+        const detail = this.props.detail;
         return(
             <MuiThemeProvider theme={theme}>
                 <div  className={classes.page}>
@@ -117,66 +121,76 @@ class RestaurantDetail extends Component{
                     </div>
                     <div className={classes.detail}>
                         <Grid container>
-                            <Grid item xs={8}>
-                            <Typography align="left" style={{fontWeight:'700'}}>{info['name']}</Typography>
+                            <Grid item xs={9}>
+                                <Typography align="left" style={{fontWeight:'700'}}>{detail['name']}</Typography> 
                             </Grid>
-                            <Grid item xs={4}>
+                            <Grid item xs={3}>
                             <Typography align="right" style={{overflow: 'hidden'}}>
                                 {DistanceFormat.DistanceFormat(info['distance'])}
                             </Typography>
                             </Grid>
                         </Grid>
-                        <div align="left">
-                            <div align="left" style={{marginLeft:'-2px',width:'100px', display:'inline-block'}}> 
-                                <RatingStar rating={info['rating']} />
-                            </div>
-                            <Typography align="left" style={{display:'inline-block'}}>{info['rating']}</Typography>
-                        </div>
-
-                        <Typography align="left">{'$ '+info['priceLevel']}</Typography>
-                        <div style={{justifyContent:"flex-start", textAlign: 'left'}}>
-                            {TagsMapping.maptags(this.props.tag,info['tags']).map(tag =>(
-                                <Chip 
-                                    className={classes.chip}
-                                    key={this.props.tag.indexOf(tag)}
-                                    label={tag}
-                                    color="primary"
-                                />
-                            ))}
-                        </div>
                         <Grid container>
-                            <Grid item xs={1} />
-                            <Grid item xs={11} >
-                                <Typography align="left" style={{lineHeight:'25px' ,marginTop:'5px'}}
-                                    color={info['isOpenNow']==true?("#000000"):("secondary")}
+                            <Grid item xs={10} style={{paddingLeft:'5px'}}>
+                                <div align="left">
+                                    <Typography align="left" style={{display:'inline-block',paddingRight:'4px'}}>
+                                        {info['rating'].toFixed(1)}
+                                    </Typography>
+                                    <div align="left" style={{width:'87px', display:'inline-block'}}> 
+                                        <RatingStar rating={info['rating']} />
+                                    </div>
+                                    <Typography align="left" style={{display:'inline-block'}}>{'$ '+info['priceLevel']}</Typography>
+                                 </div>
+                                 <div style={{justifyContent:"flex-start", textAlign: 'left'}}>
+                                    {TagsMapping.maptags(this.props.tag,info['tags']).map(tag =>(
+                                        <Chip 
+                                            className={classes.chip}
+                                            key={this.props.tag.indexOf(tag)}
+                                            label={tag}
+                                            color="primary"
+                                        />
+                                    ))}
+                                </div>
+                            </Grid>
+                            <Grid item xs={2} style={{alignSelf:'center'}}>
+                            <Typography>
+                                <a href={"https://www.google.com/maps/search/?api=1&query="+detail['location']['lat']+","+detail['location']['lng']+"&query_place_id="+detail['placeId']}>
+                                    <img src={NearMe} style={{height:'38px'}}/>
+                                </a>
+                            </Typography>
+                            </Grid>
+                        </Grid>
+
+                        <Grid container style={{lineHeight:'25px' ,marginTop:'5px'}}>
+                            <Grid item xs={1} style={{textAlign:'left'}}>
+                                <WatchLater className={classes.icon}/>
+                            </Grid>
+                            <Grid item xs={15} >
+                                <Typography align="left" style={{lineHeight:'25px'}}
+                                    color={detail['isOpenNow']==true?("#000000"):("secondary")}
                                     className={classes.opentime}
                                     onClick={()=>{this.time_clicked()}}
                                 >
-                                    {info['isOpenNow']==true?("營業中 查看營業時間⌵"):("非營業時間 查看營業時間⌵")}
+                                    {detail['isOpenNow']==true?("營業中 ⌵"):("非營業時間 ⌵")}
                                 </Typography>
                                 <Typography id="openhour" align="left" style={{lineHeight:'25px'}}> </Typography>
                             </Grid>
                         </Grid>
 
                         <Grid container style={{lineHeight:'25px' ,marginTop:'5px'}}>
-                            <Grid item xs={1} style={{textAlign:'right'}}>
+                            <Grid item xs={1} style={{textAlign:'left'}}>
                                 <LocationOn className={classes.icon}/>
+                                <Phone className={classes.icon}/>
                             </Grid>
-                            <Grid item xs={9}>
-                                <Typography align="left">{info['location']['address']}</Typography>
-                                <Typography align="left">{"電話 : "+info['phoneNumber']}</Typography>
-                            </Grid>
-                            <Grid item xs={2}>
-                                <Typography align="center">導航</Typography>
-                                <a href={"https://www.google.com/maps/search/?api=1&query="+info['location']['lat']+","+info['location']['long']+"&query_place_id="+info['placeId']}>
-                                    <img src={NearMe} style={{height:'28px'}}/>
-                                </a>
+                            <Grid item xs={15}>
+                                <Typography align="left" style={{lineHeight:'25px'}}>{detail['location']['address']}</Typography>
+                                <Typography align="left">{"電話 : "+detail['phoneNumber']}</Typography>
                             </Grid>
                         </Grid>
                     </div>
                     <div style={{justifyContent:"flex-start", marginTop:"8px"}}>
-                        {info['reviews'].map(review =>(
-                            <Comment review={review} key={info['reviews'].indexOf(review)} />
+                        {detail['reviews'].map(review =>(
+                            <Comment review={review} key={detail['reviews'].indexOf(review)} />
                         ))}
                         <Typography align="center" style={{paddingTop:"8px"}}>僅顯示 Google Maps 5則最佳評論</Typography>
                     </div>
@@ -187,3 +201,6 @@ class RestaurantDetail extends Component{
 }
 
 export default withStyles(styles)(RestaurantDetail);
+/*
+
+*/ 

@@ -1,26 +1,22 @@
 import React, { Component } from "react";
 import { withStyles } from '@material-ui/core/styles';
 
-import ListItem from './ListItem.js';
+import ListCard from './ListCard.js';
 import ModifyUrl from './ModifyUrl.js';
 
 const styles = theme => ({
-  list:{
-      display: 'flex',
-      justifyContent: 'center',
-      flexWrap: 'wrap',
-      height:'calc(100vh - 146px)',
-      'overflow-x':'hidden',
-      'overflow-y':'auto',
-      alignItems:'center',
-      //'margin-bottom':'56px'
-  }
+    gridList: {
+        'white-space': 'nowrap',
+        'overflow-x': 'scroll',
+        'text-align':'left',
+        position: 'relative',
+        bottom: '105px',
+      },
 });
 class InfiniteScrollList extends Component {
   handleScroll = (e) => {
-    const bottom = Math.abs(e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight) <= 1 &&
-        e.target.scrollHeight != 108
-    //console.log(e.target.scrollHeight, e.target.scrollTop, e.target.clientHeight, Math.abs(e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight))
+    const bottom = Math.abs(e.target.scrollWidth - e.target.scrollLeft - e.target.clientWidth) <= 1;
+    console.log(e.target.scrollWidth, e.target.scrollLeft, e.target.clientWidth, Math.abs(e.target.scrollWidth - e.target.scrollLeft - e.target.clientWidth))
     if (bottom) {  
       this.props.onLoadMore(); 
     }
@@ -33,11 +29,11 @@ class InfiniteScrollList extends Component {
     const hasMore = this.props.listdata['hasMore'];
     const { classes } = this.props;
     return (
-      <div className={classes.list} onScroll={this.handleScroll}>
+      <div className={classes.gridList} onScroll={this.handleScroll}>
         {data.map(d => {
-            d['smallphotoUrls'] = ModifyUrl.ModifyUrl(d['photoUrls'])
             return(
-                <ListItem 
+                <ListCard
+                    //class
                     key={data.indexOf(d)}
                     tag={this.props.tag} 
                     handleNext={this.props.handleNext} 
@@ -46,7 +42,7 @@ class InfiniteScrollList extends Component {
                 /> 
             )
         })}  
-        {hasMore == true?(<p>loading</p>):(<p>噢噢...沒有更多店家了</p>)}
+        {/*hasMore == true?(<p>loading</p>):(<p>噢噢...沒有更多店家了</p>)*/}
       </div>
     );
   }

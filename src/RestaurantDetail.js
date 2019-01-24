@@ -33,7 +33,6 @@ class RestaurantDetail extends Component{
         const { classes } = this.props;
         var tags = this.props.tags;
         var info =this.props.info;
-        
         return(
           <div className={classes.content}>
             <DetailQuery

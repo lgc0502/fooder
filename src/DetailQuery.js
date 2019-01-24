@@ -12,13 +12,7 @@ query getRestaurantByPlaceId($placeId: String) {
         id,
         name,
         placeId,
-        rating,
-        priceLevel,
         phoneNumber,
-        tags{
-            id,
-            text,
-        },
         reviews{
             authorName,
             authorPhotoUrl,
@@ -28,8 +22,9 @@ query getRestaurantByPlaceId($placeId: String) {
         },
         location{
             address,
+            lat,
+            lng,
         },
-        photoUrls,
         isOpenNow,
         reviewCount,
         openingHours,
@@ -58,7 +53,8 @@ class DetailQuery extends Component{
                         //'loading'
                         <DetailInfo 
                             tag={tag} 
-                            info={data['getRestaurantByPlaceId']}
+                            info = {info}
+                            detail={data['getRestaurantByPlaceId']}
                         />
                     );
                 }}
