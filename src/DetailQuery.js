@@ -3,7 +3,7 @@ import gql from 'graphql-tag';
 import {Query} from 'react-apollo';
 
 import geolocation from './geolocation.js';
-import Loading from './image/loading.gif';
+import Loading from './image/Spin-1s-200px.gif';
 import DetailInfo from './DetailInfo.js';
 
 const GET_RESTAURANT = gql`

@@ -38,7 +38,7 @@ class Appbar extends Component{
                         height:'48px'}}>
                     <Toolbar>
                         <Grid container style={{'align-items':'center'}}>
-                            <Grid item xs={2} >
+                            <Grid item xs={2}  style={{'text-align':'left'}}>
                                 {
                                     this.props.firstpage === 0?(""):
                                     (<ButtonBase variant="contained" onClick={() => handleBack()} style={{height:'25px'}}>
@@ -51,7 +51,7 @@ class Appbar extends Component{
                                     {this.bartext(this.props.text)}
                                 </Typography>
                             </Grid>
-                            <Grid item xs={2}>
+                            <Grid item xs={2} style={{'text-align':'right'}}>
                                 {this.props.text == 2?
                                     (this.props.mode == 0?(<LocationOn style={{color:'#263238'}} onClick={() => handleMode()}/>)
                                                         :(<ViewList style={{color:'#263238'}} onClick={() => handleMode()}/>)

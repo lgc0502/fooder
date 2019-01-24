@@ -41,11 +41,7 @@ class RestaurantSearch extends Component {
         return (
             <div>
                 <MuiThemeProvider theme={theme}>
-                    <BottomNavigation value={value} onChange={this.handleChange} showLabels style={{height:'40px', alignItems:'center'}}>
-                        <BottomNavigationAction label="熱門程度" /><div style={{'color':'#CFCFCF'}}>|</div>
-                        <BottomNavigationAction label="距離排序" /><div style={{'color':'#CFCFCF'}}>|</div>
-                        <BottomNavigationAction label="價格範圍↕" />
-                    </BottomNavigation>
+                    
                     <RestaurantList
                         className={classes.content} 
                         tags={tag} 
@@ -60,3 +56,11 @@ class RestaurantSearch extends Component {
 }
 
 export default withStyles(styles)(RestaurantSearch);
+
+/*
+<BottomNavigation value={value} onChange={this.handleChange} showLabels style={{height:'40px', alignItems:'center'}}>
+                        <BottomNavigationAction label="熱門程度" /><div style={{'color':'#CFCFCF'}}>|</div>
+                        <BottomNavigationAction label="距離排序" /><div style={{'color':'#CFCFCF'}}>|</div>
+                        <BottomNavigationAction label="價格範圍↕" />
+                    </BottomNavigation>
+*/

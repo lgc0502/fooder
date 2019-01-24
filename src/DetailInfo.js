@@ -122,7 +122,7 @@ class RestaurantDetail extends Component{
                     <div className={classes.detail}>
                         <Grid container>
                             <Grid item xs={9}>
-                                <Typography align="left" style={{fontWeight:'700'}}>{detail['name']}</Typography> 
+                                <Typography align="left" style={{fontWeight:'700','font-size':'16px'}}>{detail['name']}</Typography> 
                             </Grid>
                             <Grid item xs={3}>
                             <Typography align="right" style={{overflow: 'hidden'}}>
@@ -184,7 +184,7 @@ class RestaurantDetail extends Component{
                             </Grid>
                             <Grid item xs={15}>
                                 <Typography align="left" style={{lineHeight:'25px'}}>{detail['location']['address']}</Typography>
-                                <Typography align="left">{"電話 : "+detail['phoneNumber']}</Typography>
+                                <Typography align="left">{detail['phoneNumber']}</Typography>
                             </Grid>
                         </Grid>
                     </div>

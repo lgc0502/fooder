@@ -27,7 +27,7 @@ const styles = theme => ({
       'margin-bottom':'10px',
   },
   content:{
-      padding:'0px 0 6px 13px'
+      padding:'0px 6px 6px 13px'
   },
   img:{
       'border-radius':'4px',

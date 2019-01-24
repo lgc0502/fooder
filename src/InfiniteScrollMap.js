@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { withStyles } from '@material-ui/core/styles';
+//import Card from '@material-ui/core/Card';
+//import CardContent from '@material-ui/core/CardContent';
 
 import ListCard from './ListCard.js';
 import ModifyUrl from './ModifyUrl.js';
@@ -42,7 +44,9 @@ class InfiniteScrollList extends Component {
                 /> 
             )
         })}  
-        {/*hasMore == true?(<p>loading</p>):(<p>噢噢...沒有更多店家了</p>)*/}
+        {hasMore == true?
+            (<p style={{display:'inline-block',position:'relative',top:'-60px',padding:'24px'}}>loading</p>):
+            (<p style={{display:'inline-block',position:'relative',top:'-60px',padding:'24px'}}>噢噢...沒有更多店家了</p>)}
       </div>
     );
   }
