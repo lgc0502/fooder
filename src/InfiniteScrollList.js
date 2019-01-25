@@ -3,6 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import ListItem from './ListItem.js';
 import ModifyUrl from './ModifyUrl.js';
+import Loading from './image/Spin-1s-200px.gif';
 
 const styles = theme => ({
   list:{
@@ -27,7 +28,7 @@ class InfiniteScrollList extends Component {
   }
   render() {
     if (!this.props.listdata && this.props.loading) {
-      return <p>Loading....</p>;
+      return <img src={Loading} />;
     }
     const data = this.props.listdata['restaurants'] || [];
     const hasMore = this.props.listdata['hasMore'];

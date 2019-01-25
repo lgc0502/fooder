@@ -152,7 +152,7 @@ class RestaurantDetail extends Component{
                                     ))}
                                 </div>
                             </Grid>
-                            <Grid item xs={2} style={{alignSelf:'center'}}>
+                            <Grid item xs={2} style={{alignSelf:'center', paddingLeft:'5px'}}>
                             <Typography>
                                 <a href={"https://www.google.com/maps/search/?api=1&query="+detail['location']['lat']+","+detail['location']['lng']+"&query_place_id="+detail['placeId']}>
                                     <img src={NearMe} style={{height:'38px'}}/>
