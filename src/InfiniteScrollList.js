@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 import ListItem from './ListItem.js';
 import ModifyUrl from './ModifyUrl.js';
-import Loading from './image/Spin-1s-200px.gif';
+import Loading from './image/Spin-1s-63px.gif';
 
 const styles = theme => ({
   list:{

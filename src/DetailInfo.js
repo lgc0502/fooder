@@ -180,11 +180,11 @@ class RestaurantDetail extends Component{
                         <Grid container style={{lineHeight:'25px' ,marginTop:'5px'}}>
                             <Grid item xs={1} style={{textAlign:'left'}}>
                                 <LocationOn className={classes.icon}/>
-                                <Phone className={classes.icon}/>
+                                <Phone className={classes.icon} style={{paddingTop: '5px', paddingLeft: '2px'}}/>
                             </Grid>
                             <Grid item xs={15}>
                                 <Typography align="left" style={{lineHeight:'25px'}}>{detail['location']['address']}</Typography>
-                                <Typography align="left">{detail['phoneNumber']}</Typography>
+                                <Typography align="left" style={{lineHeight:'30px'}}>{detail['phoneNumber']}</Typography>
                             </Grid>
                         </Grid>
                     </div>
