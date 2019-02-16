@@ -7,7 +7,7 @@ import Avatar from '@material-ui/core/Avatar';
 import Typography from '@material-ui/core/Typography';
 import red from '@material-ui/core/colors/red';
 
-import RatingStar from './RatingStar.js'
+import RatingStar from './RestaurantSearch/RatingStar.js'
 const styles = theme => ({
   card: {
     margin:'5px',

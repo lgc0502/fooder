@@ -8,9 +8,9 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
 
-import DistanceFormat from './DistanceFormat.js'
-import RatingStar from './RatingStar.js'
-import TagsMapping from './TagsMapping.js'
+import DistanceFormat from './RestaurantSearch/DistanceFormat.js'
+import RatingStar from './RestaurantSearch/RatingStar.js'
+import TagsMapping from './RestaurantSearch/TagsMapping.js'
 
 const styles = {
   card: {
@@ -47,7 +47,7 @@ class ListCard extends Component {
         const { classes } = this.props;
         const info = this.props.restaurantinfo;
         var handleNext =   this.props.handleNext;
-        var restaurantInfo = this.props.restaurantInfo;
+        var restaurantInfo = this.props.restaurantInfoFunc;
 
         return (
             <Card className={classes.card}  onClick={() => this.next(handleNext,info,restaurantInfo)}>
