@@ -3,7 +3,7 @@ import { withStyles } from '@material-ui/core/styles'
 //import Card from '@material-ui/core/Card';
 //import CardContent from '@material-ui/core/CardContent';
 
-import ListCard from '../ListCard.js'
+import ListCard from './ListCard.js'
 // import ModifyUrl from './RestaurantSearch/ModifyUrl.js';
 
 const styles = theme => ({

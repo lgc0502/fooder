@@ -24,20 +24,18 @@ const theme = createMuiTheme({
 })
 
 class RestaurantSearch extends Component {
-  state = {
-    value: 0
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: 0
+    }
   }
   handleChange = (event, value) => {
     this.setState({ value })
   }
   render() {
-    const { classes } = this.props
+    const { classes, tags: tag, handleNext, restaurantInfo, position } = this.props
     // const { value } = this.state
-
-    var tag = this.props.tags
-    var handleNext = this.props.handleNext
-    var restaurantInfo = this.props.restaurantInfo
-    var position = this.props.position
 
     return (
       <div>

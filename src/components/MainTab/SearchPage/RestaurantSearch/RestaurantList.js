@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 
 import InfiniteScrollList from './InfiniteScrollList.js'
-import moment from 'moment'
+// import moment from 'moment'
 const styles = theme => ({
   list: {
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
     height: 'calc(100vh - 106px)',
-    'overflow-x': 'hidden',
-    'overflow-y': 'auto',
+    overflowX: 'hidden',
+    overflowY: 'auto',
     alignItems: 'center',
-    'margin-bottom': '56px'
+    marginBottom: '56px'
   }
 })
 
@@ -66,19 +66,23 @@ class RestaurantList extends Component {
     }
   }
   render() {
-    const { classes } = this.props
-    var tagIds = this.props.tags
-    const lat = this.props.position[0]
-    const lng = this.props.position[1]
-    var handleNext = this.props.handleNext
-    var restaurantInfo = this.props.restaurantInfo
-    var type = this.props.type
+    const {
+      classes,
+      tags: tagIds,
+      position,
+      handleNext,
+      restaurantInfo,
+      type
+    } = this.props
+    const lat = position[0]
+    const lng = position[1]
 
     return (
       <div className={classes.list}>
         <Query query={this.SortType(type)} variables={{ tagIds, lat, lng }}>
           {({ data, loading, error, fetchMore }) => {
             if (error) return <p>{'出現錯誤，請嘗試重新整理頁面'}</p>
+            console.log(data)
             return (
               <InfiniteScrollList
                 loading={loading}
@@ -108,14 +112,9 @@ class RestaurantList extends Component {
                                 prevResult['searchRestaurants']['__typename'],
                               cursor,
                               hasMore,
-
                               restaurants: [
-                                ...prevResult['searchRestaurants'][
-                                  'restaurants'
-                                ],
-                                ...fetchMoreResult['searchRestaurants'][
-                                  'restaurants'
-                                ]
+                                ...prevResult['searchRestaurants']['restaurants'],
+                                ...fetchMoreResult['searchRestaurants']['restaurants']
                               ]
                             }
                           }

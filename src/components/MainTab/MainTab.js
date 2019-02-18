@@ -15,19 +15,6 @@ import Bookmark from '@material-ui/icons/Bookmark'
 
 import SearchPages from './SearchPage/SearchPage.js'
 
-function TabContainer({ children, dir }) {
-  return (
-    <Typography component='div' dir={dir}>
-      {children}
-    </Typography>
-  )
-}
-
-TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
-  dir: PropTypes.string.isRequired
-}
-
 const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
@@ -57,6 +44,9 @@ const theme = createMuiTheme({
   palette: {
     primary: { main: '#263238' },
     secondary: { main: '#CC0000' }
+  },
+  typography: {
+    useNextVariants: true
   }
 })
 class FullWidthTabs extends React.Component {

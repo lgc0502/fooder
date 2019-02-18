@@ -58,8 +58,8 @@ class Appbar extends Component {
                 </Typography>
               </Grid>
               <Grid item xs={2} style={{ 'text-align': 'right' }}>
-                {this.props.text == 2 ? (
-                  this.props.mode == 0 ? (
+                {this.props.text === 2 ? (
+                  this.props.mode === 0 ? (
                     <LocationOn
                       style={{ color: '#263238' }}
                       onClick={() => handleMode()}

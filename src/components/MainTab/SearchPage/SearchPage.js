@@ -6,8 +6,8 @@ import TagSelectButton from './TagSelectButton/TagSelectButton.js'
 import RestaurantSearch from './RestaurantSearch/RestaurantSearch.js'
 import RestaurantMap from './RestaurantMap/RestaurantMap.js'
 import RestaurantDetail from './RestaurantDetail/RestaurantDetail.js'
-import Appbar from './AppBar.js'
-import geolocation from './geolocation.js'
+import Appbar from './AppBar/AppBar.js'
+import geolocation from './Common/geolocation.js'
 // import ListCard from './ListCard.js'
 
 const styles = theme => ({
@@ -75,17 +75,12 @@ class SearchPages extends React.Component {
     // var restaurantDetail = this.restaurantDetail
     switch (step) {
       case 0:
-        return (
-          <FoodType
-            className={classes.content}
-            handleNext={handleNext.bind(this)}
-          />
-        )
+        return <FoodType className={classes.content} handleNext={handleNext} />
       case 1:
         return (
           <TagSelectButton
             className={classes.content}
-            handleNext={handleNext.bind(this)}
+            handleNext={handleNext}
           />
         )
       case 2:
@@ -93,16 +88,16 @@ class SearchPages extends React.Component {
           <RestaurantSearch
             className={classes.content}
             tags={this.state.Tags}
-            restaurantInfo={this.restaurantInfo.bind(this)}
-            handleNext={handleNext.bind(this)}
+            restaurantInfo={this.restaurantInfo}
+            handleNext={handleNext}
             position={[this.state.lat, this.state.lng]}
           />
         ) : (
           <RestaurantMap
             className={classes.content}
             tags={this.state.Tags}
-            restaurantInfo={this.restaurantInfo.bind(this)}
-            handleNext={handleNext.bind(this)}
+            restaurantInfo={this.restaurantInfo}
+            handleNext={handleNext}
             position={[this.state.lat, this.state.lng]}
           />
         )

@@ -14,9 +14,9 @@ import Phone from '@material-ui/icons/Phone'
 
 import NearMe from '../../../image/icons8-near-me-filled-100.png'
 import Comment from './Comment.js'
-import DistanceFormat from './RestaurantSearch/DistanceFormat.js'
-import RatingStar from './RestaurantSearch/RatingStar.js'
-import TagsMapping from './RestaurantSearch/TagsMapping.js'
+import DistanceFormat from './Common/DistanceFormat.js'
+import RatingStar from './Common/RatingStar.js'
+import TagsMapping from './Common/TagsMapping.js'
 
 const styles = theme => ({
   page: {
@@ -73,25 +73,27 @@ const theme = createMuiTheme({
     },
     secondary: { main: '#FF0000' },
     Inherit: '#263238'
+  },
+  typography: {
+    useNextVariants: true,
   }
 })
 
 class RestaurantDetail extends Component {
   constructor(props) {
     super(props)
-  }
-
-  state = {
-    time_click: 0
+    this.state = {
+      time_click: 0
+    }
   }
 
   time_clicked = () => {
-    this.setState(state => {
-      time_click: state.time_click = state.time_click == 1 ? 0 : 1
+    this.setState({
+      time_click: this.state.time_click ? 0 : 1
     })
-    if (this.state.time_click == 1) {
+    if (this.state.time_click === 1) {
       document.getElementById('openhour').innerHTML = ''
-    } else if (this.state.time_click == 0) {
+    } else if (this.state.time_click === 0) {
       document.getElementById('openhour').innerHTML =
         this.props.detail['openingHours'][0] +
         '<br>' +
@@ -111,10 +113,7 @@ class RestaurantDetail extends Component {
   }
 
   render() {
-    const { classes } = this.props
-    const tag = this.props.tag
-    const info = this.props.info
-    const detail = this.props.detail
+    const { classes, tag, info, detail } = this.props
     return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.page}>
@@ -125,6 +124,7 @@ class RestaurantDetail extends Component {
                   className={classes.img}
                   src={tile}
                   key={info['photoUrls'].indexOf(tile)}
+                  alt={'title'}
                 />
               ))}
             </div>
@@ -195,7 +195,11 @@ class RestaurantDetail extends Component {
                       detail['placeId']
                     }
                   >
-                    <img src={NearMe} style={{ height: '38px' }} />
+                    <img
+                      src={NearMe}
+                      style={{ height: '38px' }}
+                      alt={'NearMe'}
+                    />
                   </a>
                 </Typography>
               </Grid>
@@ -209,13 +213,13 @@ class RestaurantDetail extends Component {
                 <Typography
                   align='left'
                   style={{ lineHeight: '25px' }}
-                  color={detail['isOpenNow'] == true ? '#000000' : 'secondary'}
+                  color={detail['isOpenNow'] === true ? '#000000' : 'secondary'}
                   className={classes.opentime}
                   onClick={() => {
                     this.time_clicked()
                   }}
                 >
-                  {detail['isOpenNow'] == true ? '營業中 ⌵' : '非營業時間 ⌵'}
+                  {detail['isOpenNow'] === true ? '營業中 ⌵' : '非營業時間 ⌵'}
                 </Typography>
                 <Typography
                   id='openhour'

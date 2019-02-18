@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
 
 import ListItem from './ListItem.js'
-import ModifyUrl from './ModifyUrl.js'
+import ModifyUrl from '../Common/ModifyUrl.js'
 import Loading from '../../../../image/Spin-1s-63px.gif'
 
 const styles = theme => ({
@@ -30,7 +30,7 @@ class InfiniteScrollList extends Component {
   }
   render() {
     if (!this.props.listdata && this.props.loading) {
-      return <img src={Loading} alt={'Loading'}/>
+      return <img src={Loading} alt={'Loading'} />
     }
     const data = this.props.listdata['restaurants'] || []
     const hasMore = this.props.listdata['hasMore']
@@ -41,7 +41,7 @@ class InfiniteScrollList extends Component {
           d['smallphotoUrls'] = ModifyUrl.ModifyUrl(d['photoUrls'])
           return (
             <ListItem
-              key={data.indexOf(d)}
+              key={d.id}
               tag={this.props.tag}
               handleNext={this.props.handleNext}
               restaurantinfo={d}

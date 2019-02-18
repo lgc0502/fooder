@@ -1,7 +1,5 @@
-Array.prototype.diff = function(a) {
-  return this.filter(function(i) {
-    return a.indexOf(i) < 0
-  })
+const diff = (array, target) => {
+  return array.filter( element => target.indexOf(element) < 0 )
 }
 
 export default {
@@ -24,12 +22,12 @@ export default {
       { key: 12, label: ' 吃粗飽 ', choose: 0, id: '5c222d594bdbfc29bb7d47d2' },
       { key: 13, label: '氣氛歡樂', choose: 0, id: '5c222d594bdbfc29bb7d47cd' }
     ]
-    for (let i = 0; i < storetag.diff(querytag).length; i++) {
-      difftag.push(storetag.diff(querytag)[i]['text'])
+    for (let i = 0; i < diff(storetag, querytag).length; i++) {
+      difftag.push(diff(storetag, querytag)[i]['text'])
     }
     for (let i = 0; i < Tags.length; i++) {
       for (let j = 0; j < difftag.length; j++) {
-        if (Tags[i]['label'] == difftag[j]) {
+        if (Tags[i]['label'] === difftag[j]) {
           temp.push(Tags[i]['label'])
         }
       }
@@ -41,7 +39,7 @@ export default {
     const temp = []
     for (let i = 0; i < querytag.length; i++) {
       for (let j = 0; j < storetag.length; j++) {
-        if (querytag[i] == storetag[j]['id']) {
+        if (querytag[i] === storetag[j]['id']) {
           temp.push(storetag[j]['text'])
         }
       }

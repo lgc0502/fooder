@@ -94,12 +94,8 @@ const RestaurantMap = props => {
                             cursor,
                             hasMore,
                             restaurants: [
-                              ...prevResult['searchRestaurants'][
-                                'restaurants'
-                              ],
-                              ...fetchMoreResult['searchRestaurants'][
-                                'restaurants'
-                              ]
+                              ...prevResult['searchRestaurants']['restaurants'],
+                              ...fetchMoreResult['searchRestaurants']['restaurants']
                             ]
                           }
                         }

@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
+// import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
+import { createMuiTheme } from '@material-ui/core/styles'
 import Chip from '@material-ui/core/Chip'
 
-import DistanceFormat from './DistanceFormat.js'
-import RatingStar from './RatingStar.js'
-import TagsMapping from './TagsMapping.js'
+import DistanceFormat from '../Common/DistanceFormat.js'
+import RatingStar from '../Common/RatingStar.js'
+import TagsMapping from '../Common/TagsMapping.js'
 
 const styles = theme => ({
   root: {
@@ -54,6 +54,9 @@ const theme = createMuiTheme({
       main: '#FFF350'
     },
     secondary: { main: '#CC0000' }
+  },
+  typography: {
+    useNextVariants: true
   }
 })
 
@@ -64,10 +67,12 @@ class ListItem extends Component {
   }
 
   render() {
-    const { classes } = this.props
-    const info = this.props.restaurantinfo
-    const handleNext = this.props.handleNext
-    const restaurantInfo = this.props.restaurantInfoFunc
+    const {
+      classes,
+      restaurantinfo: info,
+      handleNext,
+      restaurantInfoFunc: restaurantInfo
+    } = this.props
     return (
       <div>
         <div
@@ -80,6 +85,7 @@ class ListItem extends Component {
                 className={classes.img}
                 src={tile}
                 key={this.props.restaurantinfo['smallphotoUrls'].indexOf(tile)}
+                alt={'title'}
               />
             ))}
           </div>
