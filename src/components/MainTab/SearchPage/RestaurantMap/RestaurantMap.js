@@ -55,7 +55,16 @@ const GET_RESTAURANT = gql`
 `
 
 const RestaurantMap = props => {
-  const { classes, tags: tagIds, position, handleNext, restaurantInfo } = props
+  
+  const { 
+    classes, 
+    tags: tagIds, 
+    position, 
+    handleNext, 
+    restaurantInfo,
+    handleScrollRecord, 
+    scrollrecord, 
+  } = props
   const lat = position[0]
   const lng = position[1]
   return (
@@ -71,6 +80,8 @@ const RestaurantMap = props => {
               handleNext={handleNext}
               restaurantInfo={restaurantInfo}
               tag={tagIds}
+              handleScrollRecord={handleScrollRecord}
+              scrollrecord={scrollrecord}
               onLoadMore={() =>
                 fetchMore({
                   variables: {

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import ReactDOM from 'react-dom'
 //import Card from '@material-ui/core/Card';
 //import CardContent from '@material-ui/core/CardContent';
 
@@ -22,18 +23,16 @@ class InfiniteScrollList extends Component {
       Math.abs(
         e.target.scrollWidth - e.target.scrollLeft - e.target.clientWidth
       ) <= 1
-    console.log(
-      e.target.scrollWidth,
-      e.target.scrollLeft,
-      e.target.clientWidth,
-      Math.abs(
-        e.target.scrollWidth - e.target.scrollLeft - e.target.clientWidth
-      )
-    )
+    this.props.handleScrollRecord(Math.floor(e.target.scrollLeft/260))
     if (bottom) {
       this.props.onLoadMore()
     }
   }
+  componentDidMount(){
+    if(ReactDOM.findDOMNode(this.refs.list) != null) {
+      ReactDOM.findDOMNode(this.refs.list).scrollTo(this.props.scrollrecord*260, 0)
+    }
+  }  
   render() {
     if (!this.props.listdata && this.props.loading) {
       return <p>Loading....</p>
@@ -44,12 +43,13 @@ class InfiniteScrollList extends Component {
     return (
       <div
         className={classes.gridList}
+        ref={"list"}
         onScroll={this.handleScroll}
         onTouchStart={e => {
-          console.log(e.changedTouches[0].pageX)
+          //console.log(e.changedTouches[0].pageX)
         }}
         onTouchEnd={e => {
-          console.log(e.changedTouches[0].pageX)
+          //console.log(e.changedTouches[0].pageX)
         }}
       >
         {data.map(d => {

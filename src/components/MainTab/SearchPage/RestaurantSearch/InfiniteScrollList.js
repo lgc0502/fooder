@@ -18,25 +18,23 @@ const styles = theme => ({
   }
 })
 
-var position;
-
 class InfiniteScrollList extends Component {
   handleScroll = e => {
     const bottom =
       Math.abs(
         e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight
       ) <= 1 && e.target.scrollHeight !== 108
-    position = e.target.scrollTop
+    this.props.handleScrollRecord(Math.floor((e.target.scrollTop-177+200)/200))
     if (bottom) {
       this.props.onLoadMore()
     }
   }
   componentDidMount(){
-    if(ReactDOM.findDOMNode(this.refs.list) == null) {
-      position = 0
-    }
+    /*if(ReactDOM.findDOMNode(this.refs.list) == null) {
+      //position = 0
+    }*/
     if(ReactDOM.findDOMNode(this.refs.list) != null) {
-      ReactDOM.findDOMNode(this.refs.list).scrollTo(0, position)
+      ReactDOM.findDOMNode(this.refs.list).scrollTo(0, this.props.scrollrecord*200)
     }
   }  
   render() {

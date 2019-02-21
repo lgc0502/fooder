@@ -72,7 +72,9 @@ class RestaurantList extends Component {
       position,
       handleNext,
       restaurantInfo,
-      type
+      type,
+      handleScrollRecord, 
+      scrollrecord,
     } = this.props
     const lat = position[0]
     const lng = position[1]
@@ -90,6 +92,8 @@ class RestaurantList extends Component {
                 handleNext={handleNext}
                 restaurantInfo={restaurantInfo}
                 tag={tagIds}
+                handleScrollRecord={handleScrollRecord}
+                scrollrecord={scrollrecord}
                 onLoadMore={() =>
                   fetchMore({
                     variables: {
