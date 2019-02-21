@@ -82,7 +82,7 @@ class RestaurantList extends Component {
         <Query query={this.SortType(type)} variables={{ tagIds, lat, lng }}>
           {({ data, loading, error, fetchMore }) => {
             if (error) return <p>{'出現錯誤，請嘗試重新整理頁面'}</p>
-            console.log(data)
+            
             return (
               <InfiniteScrollList
                 loading={loading}

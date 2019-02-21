@@ -236,14 +236,14 @@ class RestaurantDetail extends Component {
                 <LocationOn className={classes.icon} />
                 <Phone
                   className={classes.icon}
-                  style={{ paddingTop: '5px', paddingLeft: '2px' }}
+                  style={{ paddingTop: '7px', paddingLeft: '2px' }}
                 />
               </Grid>
               <Grid item xs={15}>
                 <Typography align='left' style={{ lineHeight: '25px' }}>
                   {detail['location']['address']}
                 </Typography>
-                <Typography align='left' style={{ lineHeight: '30px' }}>
+                <Typography align='left' style={{ lineHeight: '35px' }}>
                   {detail['phoneNumber']}
                 </Typography>
               </Grid>
