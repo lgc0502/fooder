@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
 import Grid from '@material-ui/core/Grid'
 import KeyboardbackspaceIcon from '@material-ui/icons/KeyboardBackspace'
 import ButtonBase from '@material-ui/core/ButtonBase'
@@ -18,9 +17,8 @@ class Appbar extends Component {
         return '偏好選擇'
       case 2:
         return '搜尋'
-      case 3:
-        return '店家'
       default:
+        return state
     }
   }
   render() {
@@ -33,8 +31,8 @@ class Appbar extends Component {
           className='appbar'
           style={{
             text: this.props.text,
-            backgroundColor: '#FFC107',
-            height: '48px'
+            backgroundColor: '#FFFFFF',
+            height: '56px'
           }}
         >
           <Toolbar>
@@ -53,9 +51,9 @@ class Appbar extends Component {
                 )}
               </Grid>
               <Grid item xs={8}>
-                <Typography variant='subtitle2' color='#263238'>
+                <p style={{ color: '#000000', fontSize: '1.06rem', fontWeight: 'bold'}}>
                   {this.bartext(this.props.text)}
-                </Typography>
+                </p>
               </Grid>
               <Grid item xs={2} style={{ 'text-align': 'right' }}>
                 {this.props.text === 2 ? (
