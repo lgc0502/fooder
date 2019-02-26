@@ -54,10 +54,12 @@ const styles = theme => ({
   },
   chip: {
     justifyContent: 'center',
-    width: '56px',
-    height: '17px',
-    'font-size': '10px',
-    margin: '5px 10px 5px 0px'
+    margin: '5px 12px 5px 0px',
+    backgroundColor: '#ffffff',
+    border: '1px #000000 solid',
+    width: '80px',
+    height: '32px',
+    fontSize: '12px',
   },
   icon: {
     width: '18px',
@@ -71,7 +73,7 @@ const theme = createMuiTheme({
       light: '#FFF350',
       main: '#FFF350'
     },
-    secondary: { main: '#FF0000' },
+    secondary: { main: '#ffeb3b' },
     Inherit: '#263238'
   },
   typography: {
@@ -146,61 +148,23 @@ class RestaurantDetail extends Component {
               </Grid>
             </Grid>
             <Grid container>
-              <Grid item xs={10} style={{ paddingLeft: '5px' }}>
+              <Grid item xs={10} >
                 <div align='left'>
-                  <Typography
-                    align='left'
-                    style={{ display: 'inline-block', paddingRight: '4px' }}
-                  >
-                    {info['rating'].toFixed(1)}
-                  </Typography>
                   <div
                     align='left'
                     style={{ width: '87px', display: 'inline-block' }}
                   >
                     <RatingStar rating={info['rating']} />
                   </div>
-                  <Typography align='left' style={{ display: 'inline-block' }}>
-                    {'$ ' + info['priceLevel']}
+                  <Typography
+                    align='left'
+                    style={{ display: 'inline-block', paddingRight: '4px' }}
+                  >
+                    {info['rating'].toFixed(1)}
                   </Typography>
                 </div>
-                <div
-                  style={{ justifyContent: 'flex-start', textAlign: 'left' }}
-                >
-                  {TagsMapping.maptags(this.props.tag, info['tags']).map(
-                    tag => (
-                      <Chip
-                        className={classes.chip}
-                        key={this.props.tag.indexOf(tag)}
-                        label={tag}
-                        color='primary'
-                      />
-                    )
-                  )}
-                </div>
-              </Grid>
-              <Grid
-                item
-                xs={2}
-                style={{ alignSelf: 'center', paddingLeft: '5px' }}
-              >
-                <Typography>
-                  <a
-                    href={
-                      'https://www.google.com/maps/search/?api=1&query=' +
-                      detail['location']['lat'] +
-                      ',' +
-                      detail['location']['lng'] +
-                      '&query_place_id=' +
-                      detail['placeId']
-                    }
-                  >
-                    <img
-                      src={NearMe}
-                      style={{ height: '38px' }}
-                      alt={'NearMe'}
-                    />
-                  </a>
+                <Typography align='left' >
+                  {'$ ' + info['priceLevel']}
                 </Typography>
               </Grid>
             </Grid>
@@ -213,7 +177,7 @@ class RestaurantDetail extends Component {
                 <Typography
                   align='left'
                   style={{ lineHeight: '25px' }}
-                  color={detail['isOpenNow'] === true ? '#000000' : 'secondary'}
+                  color='default'
                   className={classes.opentime}
                   onClick={() => {
                     this.time_clicked()
@@ -239,7 +203,7 @@ class RestaurantDetail extends Component {
                   style={{ paddingTop: '7px', paddingLeft: '2px' }}
                 />
               </Grid>
-              <Grid item xs={15}>
+              <Grid item xs={9}>
                 <Typography align='left' style={{ lineHeight: '25px' }}>
                   {detail['location']['address']}
                 </Typography>
@@ -247,7 +211,47 @@ class RestaurantDetail extends Component {
                   {detail['phoneNumber']}
                 </Typography>
               </Grid>
+              <Grid
+                item
+                xs={2}
+                style={{ alignSelf: 'center', paddingLeft: '5px' }}
+              >
+                <Typography>
+                  <a
+                    href={
+                      'https://www.google.com/maps/search/?api=1&query=' +
+                      detail['location']['lat'] +
+                      ',' +
+                      detail['location']['lng'] +
+                      '&query_place_id=' +
+                      detail['placeId']
+                    }
+                  >
+                    <img
+                      src={NearMe}
+                      style={{ height: '38px' }}
+                      alt={'NearMe'}
+                    />
+                  </a>
+                </Typography>
+                <Typography align='center'>
+                  {'導航'}
+                </Typography>
+              </Grid>
             </Grid>
+          </div>
+          <div
+            style={{ justifyContent: 'flex-start', textAlign: 'left', marginLeft: '1.25rem' }}
+          >
+            {TagsMapping.maptags(this.props.tag, info['tags']).map(
+              tag => (
+                <Chip
+                  className={classes.chip}
+                  key={this.props.tag.indexOf(tag)}
+                  label={tag}
+                />
+              )
+            )}
           </div>
           <div style={{ justifyContent: 'flex-start', marginTop: '8px' }}>
             {detail['reviews'].map(review => (

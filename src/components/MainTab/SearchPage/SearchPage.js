@@ -28,7 +28,7 @@ class SearchPages extends React.Component {
     Info: {},
     lat: 23.000403,
     lng: 120.21954,
-    scrollrecord: 0,
+    scrollrecord: 0
   }
   componentDidMount() {
     geolocation.getLocation().then(d =>
@@ -66,7 +66,7 @@ class SearchPages extends React.Component {
       this.setState({ listmode: 0 })
     }
   }
-  handleScrollRecord = scrollitem =>{
+  handleScrollRecord = scrollitem => {
     this.setState({
       scrollrecord: scrollitem
     })
@@ -133,7 +133,7 @@ class SearchPages extends React.Component {
         <Appbar
           className={classes.appbar}
           firstpage={this.state.step}
-          text={this.state.step}
+          text={this.state.step === 3 ? this.state.Info.name : this.state.step}
           mode={this.state.listmode}
           handleBack={handleBack.bind(this)}
           handleMode={handleMode.bind(this)}

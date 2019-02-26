@@ -10,8 +10,8 @@ const styles = theme => ({
     justifyContent: 'flex-start',
     height: '18px',
     width: '18px',
-    'margin-bottom': '-4px',
-    'margin-left': '-2px'
+    marginBottom: '-4px',
+    marginLeft: '-2px'
   }
 })
 
