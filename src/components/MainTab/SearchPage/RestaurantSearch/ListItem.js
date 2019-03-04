@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { withCookies } from 'react-cookie'
 // import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
@@ -150,4 +151,4 @@ class ListItem extends Component {
     )
   }
 }
-export default withStyles(styles)(ListItem)
+export default withCookies(withStyles(styles)(ListItem))

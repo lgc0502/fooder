@@ -40,6 +40,17 @@ const styles = theme => ({
     justifyContent: 'center',
     width: '100%'
   },
+  chipEven: {
+    transform: 'translateX(-30px)'
+  },
+  chipOdd: {
+    transform: 'translateX(30px)'
+  },
+  chipContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%'
+  },
   chipaddicon: {
     height: '15px'
   },
