@@ -102,11 +102,7 @@ class FullWidthTabs extends React.Component {
           {this.state.value === 2 && <SearchPages />}
           {this.state.value === 3 && (
             <Typography className={classes.tabcontainer} dir={theme.direction}>
-<<<<<<< HEAD
               {localStorage.getItem('id')}
-=======
-              {cookies.get('id')}
->>>>>>> ee9907cd4e5e30c35a2405bdd27e0c8ef7195b16
             </Typography>
           )}
           {this.state.value === 4 && (
