@@ -36,8 +36,8 @@ class Appbar extends Component {
           }}
         >
           <Toolbar>
-            <Grid container style={{ 'align-items': 'center' }}>
-              <Grid item xs={2} style={{ 'text-align': 'left' }}>
+            <Grid container style={{ alignItems: 'center' }}>
+              <Grid item xs={2} style={{ textAlign: 'left' }}>
                 {this.props.firstpage === 0 ? (
                   ''
                 ) : (
@@ -55,7 +55,7 @@ class Appbar extends Component {
                   {this.bartext(this.props.text)}
                 </p>
               </Grid>
-              <Grid item xs={2} style={{ 'text-align': 'right' }}>
+              <Grid item xs={2} style={{ textAlign: 'right' }}>
                 {this.props.text === 2 ? (
                   this.props.mode === 0 ? (
                     <LocationOn

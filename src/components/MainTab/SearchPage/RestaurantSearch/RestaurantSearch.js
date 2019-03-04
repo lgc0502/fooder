@@ -6,6 +6,7 @@ import { withStyles } from '@material-ui/core/styles'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
 import RestaurantList from './RestaurantList.js'
+import Sort from './Sort'
 // import moment from 'moment'
 const styles = theme => ({
   content: {
@@ -19,7 +20,7 @@ const theme = createMuiTheme({
       light: '#FF0000',
       main: '#FF0000'
     },
-    secondary: { main: '#FF0000' } 
+    secondary: { main: '#FF0000' }
   }
 })
 
@@ -34,14 +35,14 @@ class RestaurantSearch extends Component {
     this.setState({ value })
   }
   render() {
-    const { 
-      classes, 
-      tags: tag, 
-      handleNext, 
-      restaurantInfo, 
-      position, 
-      handleScrollRecord, 
-      scrollrecord, 
+    const {
+      classes,
+      tags: tag,
+      handleNext,
+      restaurantInfo,
+      position,
+      handleScrollRecord,
+      scrollrecord
     } = this.props
     // const { value } = this.state
     return (

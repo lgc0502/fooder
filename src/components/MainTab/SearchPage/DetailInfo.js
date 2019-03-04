@@ -9,8 +9,9 @@ import Chip from '@material-ui/core/Chip'
 // import Fab from '@material-ui/core/Fab';
 
 import LocationOn from '@material-ui/icons/LocationOn'
-import WatchLater from '@material-ui/icons/WatchLater'
+import AccessTime from '@material-ui/icons/AccessTime'
 import Phone from '@material-ui/icons/Phone'
+import Bookmark from '@material-ui/icons/Bookmark'
 
 import NearMe from '../../../image/icons8-near-me-filled-100.png'
 import Comment from './Comment.js'
@@ -32,12 +33,12 @@ const styles = theme => ({
     width: 'calc(100vw - 12px)'
   },
   gridList: {
-    'white-space': 'nowrap',
-    'overflow-x': 'scroll',
-    'text-align': 'left'
+    whiteSpace: 'nowrap',
+    overflowX: 'scroll',
+    textAlign: 'left'
   },
   img: {
-    'border-radius': '4px',
+    borderRadius: '4px',
     display: 'inline-block',
     height: '200px',
     width: 'auto',
@@ -50,7 +51,7 @@ const styles = theme => ({
   star: {
     height: '18px',
     width: '18px',
-    'margin-bottom': '-2px'
+    marginBottom: '-2px'
   },
   chip: {
     justifyContent: 'center',
@@ -59,7 +60,7 @@ const styles = theme => ({
     border: '1px #000000 solid',
     width: '80px',
     height: '32px',
-    fontSize: '12px',
+    fontSize: '12px'
   },
   icon: {
     width: '18px',
@@ -77,7 +78,7 @@ const theme = createMuiTheme({
     Inherit: '#263238'
   },
   typography: {
-    useNextVariants: true,
+    useNextVariants: true
   }
 })
 
@@ -147,8 +148,9 @@ class RestaurantDetail extends Component {
                 </Typography>
               </Grid>
             </Grid>
+
             <Grid container>
-              <Grid item xs={10} >
+              <Grid item xs={11}>
                 <div align='left'>
                   <div
                     align='left'
@@ -163,59 +165,80 @@ class RestaurantDetail extends Component {
                     {info['rating'].toFixed(1)}
                   </Typography>
                 </div>
-                <Typography align='left' >
+                <Typography align='left'>
                   {'$ ' + info['priceLevel']}
                 </Typography>
               </Grid>
-            </Grid>
-
-            <Grid container style={{ lineHeight: '25px', marginTop: '5px' }}>
-              <Grid item xs={1} style={{ textAlign: 'left' }}>
-                <WatchLater className={classes.icon} />
-              </Grid>
-              <Grid item xs={15}>
-                <Typography
-                  align='left'
-                  style={{ lineHeight: '25px' }}
-                  color='default'
-                  className={classes.opentime}
-                  onClick={() => {
-                    this.time_clicked()
-                  }}
-                >
-                  {detail['isOpenNow'] === true ? '營業中 ⌵' : '非營業時間 ⌵'}
-                </Typography>
-                <Typography
-                  id='openhour'
-                  align='left'
-                  style={{ lineHeight: '25px' }}
-                >
-                  {' '}
-                </Typography>
-              </Grid>
-            </Grid>
-
-            <Grid container style={{ lineHeight: '25px', marginTop: '5px' }}>
-              <Grid item xs={1} style={{ textAlign: 'left' }}>
-                <LocationOn className={classes.icon} />
-                <Phone
+              <Grid item xs={1}>
+                <Bookmark
                   className={classes.icon}
-                  style={{ paddingTop: '7px', paddingLeft: '2px' }}
+                  style={{ paddingTop: '5px', paddingLeft: '2px' }}
                 />
               </Grid>
-              <Grid item xs={9}>
-                <Typography align='left' style={{ lineHeight: '25px' }}>
-                  {detail['location']['address']}
-                </Typography>
-                <Typography align='left' style={{ lineHeight: '35px' }}>
-                  {detail['phoneNumber']}
-                </Typography>
+            </Grid>
+            <div style={{ display: 'flex' }}>
+              <Grid container style={{ lineHeight: '25px', marginTop: '5px' }}>
+                <Grid
+                  item
+                  xs={1}
+                  style={{ textAlign: 'left', paddingTop: '2px' }}
+                >
+                  <AccessTime
+                    className={classes.icon}
+                    style={{ paddingTop: '5px', paddingLeft: '2px' }}
+                  />
+                </Grid>
+                <Grid item xs={11}>
+                  <Typography
+                    align='left'
+                    style={{ lineHeight: '35px' }}
+                    color='default'
+                    onClick={() => {
+                      this.time_clicked()
+                    }}
+                  >
+                    {detail['isOpenNow'] === true ? '營業中 ⌵' : '非營業時間 ⌵'}
+                  </Typography>
+                  <Typography
+                    id='openhour'
+                    align='left'
+                    style={{ lineHeight: '35px' }}
+                  >
+                    {' '}
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={1}
+                  style={{ textAlign: 'left', paddingTop: '2px' }}
+                >
+                  <LocationOn
+                    className={classes.icon}
+                    style={{ paddingTop: '5px', paddingLeft: '2px' }}
+                  />
+                </Grid>
+                <Grid item xs={11}>
+                  <Typography align='left' style={{ lineHeight: '35px' }}>
+                    {detail['location']['address']}
+                  </Typography>
+                </Grid>
+                <Grid
+                  item
+                  xs={1}
+                  style={{ textAlign: 'left', paddingTop: '2px' }}
+                >
+                  <Phone
+                    className={classes.icon}
+                    style={{ paddingTop: '5px', paddingLeft: '2px' }}
+                  />
+                </Grid>
+                <Grid item xs={11}>
+                  <Typography align='left' style={{ lineHeight: '35px' }}>
+                    {detail['phoneNumber']}
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid
-                item
-                xs={2}
-                style={{ alignSelf: 'center', paddingLeft: '5px' }}
-              >
+              <div style={{ marginTop: '40px' }}>
                 <Typography>
                   <a
                     href={
@@ -234,24 +257,24 @@ class RestaurantDetail extends Component {
                     />
                   </a>
                 </Typography>
-                <Typography align='center'>
-                  {'導航'}
-                </Typography>
-              </Grid>
-            </Grid>
+                <Typography align='center'>{'導航'}</Typography>
+              </div>
+            </div>
           </div>
           <div
-            style={{ justifyContent: 'flex-start', textAlign: 'left', marginLeft: '1.25rem' }}
+            style={{
+              justifyContent: 'flex-start',
+              textAlign: 'left',
+              marginLeft: '1.25rem'
+            }}
           >
-            {TagsMapping.maptags(this.props.tag, info['tags']).map(
-              tag => (
-                <Chip
-                  className={classes.chip}
-                  key={this.props.tag.indexOf(tag)}
-                  label={tag}
-                />
-              )
-            )}
+            {TagsMapping.maptags(this.props.tag, info['tags']).map(tag => (
+              <Chip
+                className={classes.chip}
+                key={this.props.tag.indexOf(tag)}
+                label={tag}
+              />
+            ))}
           </div>
           <div style={{ justifyContent: 'flex-start', marginTop: '8px' }}>
             {detail['reviews'].map(review => (
