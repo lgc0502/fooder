@@ -149,7 +149,6 @@ class TagSelectButton extends Component {
       this.state.array.push(temp)
       i += 2
     }
-    console.log(this.state.array)
   }
 
   handleClick = data => {
@@ -198,7 +197,7 @@ class TagSelectButton extends Component {
                   )
               }
               return (
-                <div className={classes.chipContainer}>
+                <div key={index} className={classes.chipContainer}>
                   <Chip
                     className={`${classes.chip} ${transform}`}
                     key={data[0].key}
