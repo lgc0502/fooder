@@ -19,12 +19,12 @@ class Map extends Component {
     googleMapURL:
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyAGQwS8HQIBVmsK1LLwx0Hu3w1MeG0P_YE&v=3.exp&libraries=geometry,drawing,places'
   }
-
+  
   CMap = withScriptjs(
     withGoogleMap(props => (
       <GoogleMap
-        defaultZoom={16}
-        defaultCenter={{ lat: 23.000403, lng: 120.21954 }}
+        defaultZoom={13}
+        defaultCenter={{ lat: this.props.position[0], lng: this.props.position[1] }}
         defaultOptions={defaultMapOptions}
       >
         {props.children}
@@ -33,6 +33,7 @@ class Map extends Component {
   )
 
   render() {
+    const { position, data } = this.props
     return (
       <Fragment>
         <this.CMap
@@ -41,10 +42,21 @@ class Map extends Component {
           containerElement={
             <div style={{ height: `calc(100vh - 106px)`, width: `100vw` }} />
           }
-          mapElement={<div style={{ height: `110%` }} />}
+          mapElement={<div style={{ height: `100%` }} />}
           center={{ lat: 25.03, lng: 121.6 }}
         >
-          <Marker position={{ lat: 23.000403, lng: 120.21954 }} />
+          <Marker 
+            position={{ lat: this.props.position[0], lng: this.props.position[1] }} 
+          />
+          {data.map(d => {
+            return (
+              <Marker
+                key={data.indexOf(d)}
+                position={{ lat: d.location.lat, lng: d.location.lng }} 
+                color={'#CFCFCF'}
+              />
+            )
+          })}
         </this.CMap>
       </Fragment>
     )

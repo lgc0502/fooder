@@ -70,7 +70,6 @@ class SearchPages extends React.Component {
     this.setState({
       scrollrecord: scrollitem
     })
-    console.log(scrollitem)
   }
   restaurantInfo = d => {
     this.setState({ Info: d })
