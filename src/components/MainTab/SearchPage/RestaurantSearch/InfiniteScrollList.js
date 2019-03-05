@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import ReactDOM from 'react-dom'
 
 import ListItem from './ListItem.js'
 import ModifyUrl from '../Common/ModifyUrl.js'
@@ -14,20 +15,28 @@ const styles = theme => ({
     overflowX: 'hidden',
     overflowY: 'auto',
     alignItems: 'center'
-    //'margin-bottom':'56px'
   }
 })
+
 class InfiniteScrollList extends Component {
   handleScroll = e => {
     const bottom =
       Math.abs(
         e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight
       ) <= 1 && e.target.scrollHeight !== 108
-    //console.log(e.target.scrollHeight, e.target.scrollTop, e.target.clientHeight, Math.abs(e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight))
+    this.props.handleScrollRecord(Math.floor((e.target.scrollTop-177+200)/200))
     if (bottom) {
       this.props.onLoadMore()
     }
   }
+  componentDidMount(){
+    /*if(ReactDOM.findDOMNode(this.refs.list) == null) {
+      //position = 0
+    }*/
+    if(ReactDOM.findDOMNode(this.refs.list) != null) {
+      ReactDOM.findDOMNode(this.refs.list).scrollTo(0, this.props.scrollrecord*200)
+    }
+  }  
   render() {
     if (!this.props.listdata && this.props.loading) {
       return <img src={Loading} alt={'Loading'} />
@@ -36,7 +45,7 @@ class InfiniteScrollList extends Component {
     const hasMore = this.props.listdata['hasMore']
     const { classes } = this.props
     return (
-      <div className={classes.list} onScroll={this.handleScroll}>
+      <div className={classes.list} ref={"list"} onScroll={this.handleScroll}>
         {data.map(d => {
           d['smallphotoUrls'] = ModifyUrl.ModifyUrl(d['photoUrls'])
           return (

@@ -1,9 +1,11 @@
 import React, { Component } from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import ReactDOM from 'react-dom'
 //import Card from '@material-ui/core/Card';
 //import CardContent from '@material-ui/core/CardContent';
 
 import ListCard from './ListCard.js'
+import Map from './Map.js'
 // import ModifyUrl from './RestaurantSearch/ModifyUrl.js';
 
 const styles = theme => ({
@@ -13,6 +15,16 @@ const styles = theme => ({
     textAlign: 'left',
     position: 'relative',
     bottom: '105px'
+  },
+  list: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    height: 'calc(100vh - 106px)',
+    overflowX: 'hidden',
+    overflowY: 'hidden',
+    alignItems: 'flex-end',
+    marginBottom: '56px'
   }
 })
 
@@ -22,34 +34,47 @@ class InfiniteScrollList extends Component {
       Math.abs(
         e.target.scrollWidth - e.target.scrollLeft - e.target.clientWidth
       ) <= 1
-    console.log(
-      e.target.scrollWidth,
-      e.target.scrollLeft,
-      e.target.clientWidth,
-      Math.abs(
-        e.target.scrollWidth - e.target.scrollLeft - e.target.clientWidth
-      )
-    )
+    this.props.handleScrollRecord(Math.floor(e.target.scrollLeft/260))
     if (bottom) {
       this.props.onLoadMore()
     }
   }
+  componentDidMount(){
+    if(ReactDOM.findDOMNode(this.refs.list) != null) {
+      ReactDOM.findDOMNode(this.refs.list).scrollTo(this.props.scrollrecord*260, 0)
+    }
+  }  
   render() {
     if (!this.props.listdata && this.props.loading) {
       return <p>Loading....</p>
     }
-    const { classes, listdata, tag, handleNext } = this.props
+    const { 
+      classes, 
+      listdata, 
+      tag,
+      handleNext, 
+      scrollrecord, 
+      position 
+    } = this.props
     const data = listdata['restaurants'] || []
     const hasMore = listdata['hasMore']
     return (
+      <div className={classes.list}>
+      <Map 
+        isMarkerShown
+        scrollrecord={scrollrecord}
+        data={data}
+        position={position}
+      />
       <div
         className={classes.gridList}
+        ref={"list"}
         onScroll={this.handleScroll}
         onTouchStart={e => {
-          console.log(e.changedTouches[0].pageX)
+          //console.log(e.changedTouches[0].pageX)
         }}
         onTouchEnd={e => {
-          console.log(e.changedTouches[0].pageX)
+          //console.log(e.changedTouches[0].pageX)
         }}
       >
         {data.map(d => {
@@ -87,6 +112,7 @@ class InfiniteScrollList extends Component {
             噢噢...沒有更多店家了
           </p>
         )}
+      </div>
       </div>
     )
   }

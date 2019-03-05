@@ -18,8 +18,8 @@ const theme = createMuiTheme({
     primary: {
       light: '#FF0000',
       main: '#FF0000'
-    }, // Purple and green play nicely together.
-    secondary: { main: '#FF0000' } // This is just green.A700 as hex.
+    },
+    secondary: { main: '#FF0000' } 
   }
 })
 
@@ -34,9 +34,16 @@ class RestaurantSearch extends Component {
     this.setState({ value })
   }
   render() {
-    const { classes, tags: tag, handleNext, restaurantInfo, position } = this.props
+    const { 
+      classes, 
+      tags: tag, 
+      handleNext, 
+      restaurantInfo, 
+      position, 
+      handleScrollRecord, 
+      scrollrecord, 
+    } = this.props
     // const { value } = this.state
-
     return (
       <div>
         <MuiThemeProvider theme={theme}>
@@ -47,6 +54,8 @@ class RestaurantSearch extends Component {
             restaurantInfo={restaurantInfo}
             handleNext={handleNext}
             position={position}
+            handleScrollRecord={handleScrollRecord}
+            scrollrecord={scrollrecord}
           />
         </MuiThemeProvider>
       </div>

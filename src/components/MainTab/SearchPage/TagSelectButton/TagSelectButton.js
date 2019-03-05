@@ -19,13 +19,24 @@ const styles = theme => ({
     justifyContent: 'center',
     flexWrap: 'wrap',
     height: 'calc(100vh - 208px)',
-    'padding-top': '20px'
+    paddingTop: '20px'
   },
   chip: {
     justifyContent: 'center',
-    margin: '0 10px 0 10px',
+    margin: '0 15px 0 15px',
     padding: '20px 5px 20px 5px',
     width: '114px'
+  },
+  chipEven: {
+    transform: 'translateX(-30px)'
+  },
+  chipOdd: {
+    transform: 'translateX(30px)'
+  },
+  chipContainer: {
+    display: 'flex',
+    justifyContent: 'center',
+    width: '100%'
   },
   chipaddicon: {
     height: '15px'
@@ -68,11 +79,19 @@ class TagSelectButton extends Component {
         { key: 12, label: ' 吃粗飽 ', choose: 0, id: '5c45e20893ad54dfd50e5eb7' },
         { key: 13, label: '氣氛歡樂', choose: 0, id: '5c45e20893ad54dfd50e5eb2' }
       ],
-      Selected: []
+      Selected: [],
+      array: []
     }
+    let i = 0
+    while (this.state.Tags[i]) {
+      const temp = [this.state.Tags[i], this.state.Tags[i + 1]]
+      this.state.array.push(temp)
+      i += 2
+    }
+    console.log(this.state.array)
   }
 
-  handleClick = data => () => {
+  handleClick = data => {
     this.setState(state => {
       const Data = {
         Tags: [...state.Tags]
@@ -95,16 +114,33 @@ class TagSelectButton extends Component {
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
           <div className={classes.chips}>
-            {this.state.Tags.map(data => {
+            {this.state.array.map((data, index) => {
+              const transform = index % 2 === 0 ? classes.chipEven : classes.chipOdd
+              const chip = () => {
+                if (data[1])
+                  return (
+                    <Chip
+                      className={`${classes.chip} ${transform}`}
+                      key={data[1].key}
+                      icon={<Add className={classes.chipaddicon} />}
+                      label={data[1].label}
+                      onClick={() => this.handleClick(data[1])}
+                      color={data[1].choose === 0 ? 'primary' : 'secondary'}
+                    />
+                  )
+              }
               return (
-                <Chip
-                  className={classes.chip}
-                  key={data.key}
-                  icon={<Add className={classes.chipaddicon} />}
-                  label={data.label}
-                  onClick={this.handleClick(data)}
-                  color={data.choose === 0 ? 'primary' : 'secondary'}
-                />
+                <div className={classes.chipContainer}>
+                  <Chip
+                    className={`${classes.chip} ${transform}`}
+                    key={data[0].key}
+                    icon={<Add className={classes.chipaddicon} />}
+                    label={data[0].label}
+                    onClick={() => this.handleClick(data[0])}
+                    color={data[0].choose === 0 ? 'primary' : 'secondary'}
+                  />
+                  {chip()}
+                </div>
               )
             })}
           </div>
