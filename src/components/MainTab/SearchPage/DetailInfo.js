@@ -137,7 +137,7 @@ class RestaurantDetail extends Component {
               <Grid item xs={9}>
                 <Typography
                   align='left'
-                  style={{ fontWeight: '700', 'font-size': '16px' }}
+                  style={{ fontWeight: '700', fontSize: '16px' }}
                 >
                   {detail['name']}
                 </Typography>
@@ -268,10 +268,10 @@ class RestaurantDetail extends Component {
               marginLeft: '1.25rem'
             }}
           >
-            {TagsMapping.maptags(this.props.tag, info['tags']).map(tag => (
+            {TagsMapping.maptags(this.props.tag, info['tags']).map((tag, index) => (
               <Chip
                 className={classes.chip}
-                key={this.props.tag.indexOf(tag)}
+                key={index}
                 label={tag}
               />
             ))}
