@@ -5,7 +5,6 @@ import { Query } from 'react-apollo'
 import { withStyles } from '@material-ui/core/styles'
 
 import InfiniteScrollMap from './InfiniteScrollMap.js'
-import Map from './Map.js'
 // import moment from "moment";
 
 const styles = theme => ({
@@ -47,6 +46,10 @@ const GET_RESTAURANT = gql`
           id
           text
         }
+        location {
+          lat
+          lng
+        }
         distance
         photoUrls
       }
@@ -68,57 +71,55 @@ const RestaurantMap = props => {
   const lat = position[0]
   const lng = position[1]
   return (
-    <div className={classes.list}>
-      <Map isMarkerShown />
-      <Query query={GET_RESTAURANT} variables={{ tagIds, lat, lng }}>
-        {({ data, loading, error, fetchMore }) => {
-          if (error) return <p>{'出現錯誤，請嘗試重新整理頁面'}</p>
-          return (
-            <InfiniteScrollMap
-              loading={loading}
-              listdata={data['searchRestaurants']}
-              handleNext={handleNext}
-              restaurantInfo={restaurantInfo}
-              tag={tagIds}
-              handleScrollRecord={handleScrollRecord}
-              scrollrecord={scrollrecord}
-              onLoadMore={() =>
-                fetchMore({
-                  variables: {
-                    tagIds,
-                    lat,
-                    lng,
-                    cursor: data['searchRestaurants']['cursor']
-                  },
-                  updateQuery: (prevResult, { fetchMoreResult }) => {
-                    const newData =
-                      fetchMoreResult['searchRestaurants']['restaurants']
-                    const cursor =
-                      fetchMoreResult['searchRestaurants']['cursor']
-                    const hasMore =
-                      fetchMoreResult['searchRestaurants']['hasMore']
-                    return newData.length
-                      ? {
-                          searchRestaurants: {
-                            __typename:
-                              prevResult['searchRestaurants']['__typename'],
-                            cursor,
-                            hasMore,
-                            restaurants: [
-                              ...prevResult['searchRestaurants']['restaurants'],
-                              ...fetchMoreResult['searchRestaurants']['restaurants']
-                            ]
-                          }
+    <Query query={GET_RESTAURANT} variables={{ tagIds, lat, lng }}>
+      {({ data, loading, error, fetchMore }) => {
+        if (error) return <p>{'出現錯誤，請嘗試重新整理頁面'}</p>
+        return (
+          <InfiniteScrollMap
+            loading={loading}
+            listdata={data['searchRestaurants']}
+            handleNext={handleNext}
+            restaurantInfo={restaurantInfo}
+            tag={tagIds}
+            handleScrollRecord={handleScrollRecord}
+            scrollrecord={scrollrecord}
+            position={position}
+            onLoadMore={() =>
+              fetchMore({
+                variables: {
+                  tagIds,
+                  lat,
+                  lng,
+                  cursor: data['searchRestaurants']['cursor']
+                },
+                updateQuery: (prevResult, { fetchMoreResult }) => {
+                  const newData =
+                    fetchMoreResult['searchRestaurants']['restaurants']
+                  const cursor =
+                    fetchMoreResult['searchRestaurants']['cursor']
+                  const hasMore =
+                    fetchMoreResult['searchRestaurants']['hasMore']
+                  return newData.length
+                    ? {
+                        searchRestaurants: {
+                          __typename:
+                            prevResult['searchRestaurants']['__typename'],
+                          cursor,
+                          hasMore,
+                          restaurants: [
+                            ...prevResult['searchRestaurants']['restaurants'],
+                            ...fetchMoreResult['searchRestaurants']['restaurants']
+                          ]
                         }
-                      : prevResult
-                  }
-                })
-              }
-            />
-          )
-        }}
-      </Query>
-    </div>
+                      }
+                    : prevResult
+                }
+              })
+            }
+          />
+        )
+      }}
+    </Query>
   )
 }
 

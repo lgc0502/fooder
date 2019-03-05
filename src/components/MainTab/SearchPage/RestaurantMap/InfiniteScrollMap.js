@@ -5,6 +5,7 @@ import ReactDOM from 'react-dom'
 //import CardContent from '@material-ui/core/CardContent';
 
 import ListCard from './ListCard.js'
+import Map from './Map.js'
 // import ModifyUrl from './RestaurantSearch/ModifyUrl.js';
 
 const styles = theme => ({
@@ -14,6 +15,16 @@ const styles = theme => ({
     textAlign: 'left',
     position: 'relative',
     bottom: '105px'
+  },
+  list: {
+    display: 'flex',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    height: 'calc(100vh - 106px)',
+    overflowX: 'hidden',
+    overflowY: 'hidden',
+    alignItems: 'flex-end',
+    marginBottom: '56px'
   }
 })
 
@@ -37,10 +48,24 @@ class InfiniteScrollList extends Component {
     if (!this.props.listdata && this.props.loading) {
       return <p>Loading....</p>
     }
-    const { classes, listdata, tag, handleNext } = this.props
+    const { 
+      classes, 
+      listdata, 
+      tag,
+      handleNext, 
+      scrollrecord, 
+      position 
+    } = this.props
     const data = listdata['restaurants'] || []
     const hasMore = listdata['hasMore']
     return (
+      <div className={classes.list}>
+      <Map 
+        isMarkerShown
+        scrollrecord={scrollrecord}
+        data={data}
+        position={position}
+      />
       <div
         className={classes.gridList}
         ref={"list"}
@@ -87,6 +112,7 @@ class InfiniteScrollList extends Component {
             噢噢...沒有更多店家了
           </p>
         )}
+      </div>
       </div>
     )
   }
