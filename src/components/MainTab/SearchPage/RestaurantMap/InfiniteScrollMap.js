@@ -34,7 +34,7 @@ class InfiniteScrollList extends Component {
       Math.abs(
         e.target.scrollWidth - e.target.scrollLeft - e.target.clientWidth
       ) <= 1
-    this.props.handleScrollRecord(Math.floor(e.target.scrollLeft/260))
+    this.props.handleScrollRecord(Math.floor((e.target.scrollLeft+100)/260))
     if (bottom) {
       this.props.onLoadMore()
     }
@@ -80,7 +80,6 @@ class InfiniteScrollList extends Component {
         {data.map(d => {
           return (
             <ListCard
-              //class
               key={data.indexOf(d)}
               tag={tag}
               handleNext={handleNext}
