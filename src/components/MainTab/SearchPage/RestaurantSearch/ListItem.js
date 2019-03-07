@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { withCookies } from 'react-cookie'
 // import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
@@ -63,9 +62,9 @@ const theme = createMuiTheme({
 
 class ListItem extends Component {
   next = (handleNext, props, restaurantInfo) => {
-    const { cookies } = this.props
-    const last = cookies.get('id')
-    cookies.set('id', `${last ? `${last} ` : ''}${props.id}`, { path: '/' })
+    // TODO: LocalStorage save id, and should send it to backend
+    const prevData = localStorage.getItem('id')
+    localStorage.setItem('id', `${prevData ? `${prevData}\n` : ''}${props.id}`)
     handleNext('')
     restaurantInfo(props)
   }
@@ -136,10 +135,10 @@ class ListItem extends Component {
               </Typography>
             </div>
             <div style={{ justifyContent: 'flex-start', textAlign: 'left' }}>
-              {TagsMapping.sametags(this.props.tag, info['tags']).map(tag => (
+              {TagsMapping.sametags(this.props.tag, info['tags']).map((tag, index) => (
                 <Chip
                   className={classes.chip}
-                  key={this.props.tag.indexOf(tag)}
+                  key={index}
                   label={tag}
                   color='primary'
                 />
@@ -151,4 +150,4 @@ class ListItem extends Component {
     )
   }
 }
-export default withCookies(withStyles(styles)(ListItem))
+export default withStyles(styles)(ListItem)

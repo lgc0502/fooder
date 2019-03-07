@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withCookies } from 'react-cookie'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -64,7 +63,7 @@ class FullWidthTabs extends React.Component {
   }
 
   render() {
-    const { classes, cookies } = this.props
+    const { classes } = this.props
 
     return (
       <div className={classes.root}>
@@ -102,7 +101,7 @@ class FullWidthTabs extends React.Component {
           {this.state.value === 2 && <SearchPages />}
           {this.state.value === 3 && (
             <Typography className={classes.tabcontainer} dir={theme.direction}>
-              {cookies.get('id')}
+              {localStorage.getItem('id')}
             </Typography>
           )}
           {this.state.value === 4 && (
@@ -121,4 +120,4 @@ FullWidthTabs.propTypes = {
   theme: PropTypes.object.isRequired
 }
 
-export default withCookies(withStyles(styles, { withTheme: true })(FullWidthTabs))
+export default withStyles(styles, { withTheme: true })(FullWidthTabs)

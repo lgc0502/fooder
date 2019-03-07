@@ -5,7 +5,6 @@ import { ApolloProvider } from 'react-apollo'
 import { ApolloClient } from 'apollo-client'
 import { HttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
-import { CookiesProvider } from 'react-cookie'
 
 import Tab from './components/MainTab/MainTab.js'
 // URL for httplink
@@ -29,11 +28,9 @@ class App extends Component {
     return (
       <ApolloProvider client={client}>
         <BrowserRouter>
-          <CookiesProvider>
-            <div className='App'>
-              <Tab position='fixed' alignItems='flex-end' />
-            </div>
-          </CookiesProvider>
+          <div className='App'>
+            <Tab position='fixed' alignItems='flex-end' />
+          </div>
         </BrowserRouter>
       </ApolloProvider>
     )

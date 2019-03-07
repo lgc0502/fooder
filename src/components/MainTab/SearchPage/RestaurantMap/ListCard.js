@@ -91,10 +91,10 @@ class ListCard extends Component {
             </Typography>
           </div>
           <div style={{ justifyContent: 'flex-start', textAlign: 'left' }}>
-            {TagsMapping.sametags(this.props.tag, info['tags']).map(tag => (
+            {TagsMapping.sametags(this.props.tag, info['tags']).map((tag, index) => (
               <Chip
                 className={classes.chip}
-                key={this.props.tag.indexOf(tag)}
+                key={index}
                 label={tag}
                 color='primary'
               />

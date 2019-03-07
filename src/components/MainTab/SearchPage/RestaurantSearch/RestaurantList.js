@@ -73,8 +73,8 @@ class RestaurantList extends Component {
       handleNext,
       restaurantInfo,
       type,
-      handleScrollRecord, 
-      scrollrecord,
+      handleScrollRecord,
+      scrollrecord
     } = this.props
     const lat = position[0]
     const lng = position[1]
@@ -84,7 +84,7 @@ class RestaurantList extends Component {
         <Query query={this.SortType(type)} variables={{ tagIds, lat, lng }}>
           {({ data, loading, error, fetchMore }) => {
             if (error) return <p>{'出現錯誤，請嘗試重新整理頁面'}</p>
-            
+
             return (
               <InfiniteScrollList
                 loading={loading}
@@ -117,8 +117,12 @@ class RestaurantList extends Component {
                               cursor,
                               hasMore,
                               restaurants: [
-                                ...prevResult['searchRestaurants']['restaurants'],
-                                ...fetchMoreResult['searchRestaurants']['restaurants']
+                                ...prevResult['searchRestaurants'][
+                                  'restaurants'
+                                ],
+                                ...fetchMoreResult['searchRestaurants'][
+                                  'restaurants'
+                                ]
                               ]
                             }
                           }
