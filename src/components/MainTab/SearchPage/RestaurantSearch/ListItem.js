@@ -63,9 +63,6 @@ const theme = createMuiTheme({
 
 class ListItem extends Component {
   next = (handleNext, props, restaurantInfo) => {
-    // TODO: LocalStorage save id, and should send it to backend
-    const prevData = localStorage.getItem('id')
-    localStorage.setItem('id', `${prevData ? `${prevData}\n` : ''}${props.id}`)
     handleNext('')
     restaurantInfo(props)
   }

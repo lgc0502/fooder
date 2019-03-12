@@ -18,7 +18,6 @@ import Comment from './Comment.js'
 import DistanceFormat from './Common/DistanceFormat.js'
 import RatingStar from './Common/RatingStar.js'
 import TagsMapping from './Common/TagsMapping.js'
-
 const styles = theme => ({
   page: {
     display: 'flex',
@@ -85,8 +84,17 @@ const theme = createMuiTheme({
 class RestaurantDetail extends Component {
   constructor(props) {
     super(props)
+    const temp = localStorage.getItem('id')
+    let bool
+    if (temp === null)
+      bool = false
+    else if (temp.indexOf(props.info.id) === -1)
+      bool = false
+    else
+      bool = true
     this.state = {
-      time_click: 0
+      time_click: 0,
+      bookmarkClick: bool
     }
   }
 
@@ -113,6 +121,28 @@ class RestaurantDetail extends Component {
         this.props.detail['openingHours'][6] +
         '<br>'
     }
+  }
+
+  handleBookmarkClick = id => {
+    const prevData = localStorage.getItem('id')
+    if (this.state.bookmarkClick) {
+      if (prevData.indexOf(id) !== -1) {
+        let tempArray = prevData.split(' ')
+        tempArray = tempArray.filter(element => element !== id)
+        localStorage.setItem('id', tempArray.join(' '))
+      }
+    } else {
+      if (prevData === null){
+        localStorage.setItem('id', id)
+      } else if (prevData.indexOf(id) === -1) {
+        const tempArray = prevData.split(' ')
+        tempArray.push(id)
+        localStorage.setItem('id', tempArray.join(' '))
+      }
+    }
+    this.setState({
+      bookmarkClick: !this.state.bookmarkClick
+    })
   }
 
   render() {
@@ -172,7 +202,9 @@ class RestaurantDetail extends Component {
               <Grid item xs={1}>
                 <Bookmark
                   className={classes.icon}
-                  style={{ paddingTop: '5px', paddingLeft: '2px' }}
+                  style={{ paddingTop: '5px', paddingLeft: '2px'}}
+                  onClick={() => this.handleBookmarkClick(info.id)}
+                  color={this.state.bookmarkClick ? 'secondary' : 'inherit'}
                 />
               </Grid>
             </Grid>
