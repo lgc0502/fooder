@@ -202,13 +202,9 @@ class RestaurantDetail extends Component {
               <Grid item xs={1}>
                 <Bookmark
                   className={classes.icon}
-<<<<<<< HEAD
                   style={{ paddingTop: '5px', paddingLeft: '2px'}}
                   onClick={() => this.handleBookmarkClick(info.id)}
                   color={this.state.bookmarkClick ? 'secondary' : 'inherit'}
-=======
-                  style={{ paddingTop: '5px', paddingLeft: '2px' }}
->>>>>>> 46aea4e9baa4eee0eadd991a52cd572f2a5890bb
                 />
               </Grid>
             </Grid>
