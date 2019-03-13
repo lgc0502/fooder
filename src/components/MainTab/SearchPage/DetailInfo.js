@@ -88,7 +88,7 @@ class RestaurantDetail extends Component {
     let bool
     if (temp === null)
       bool = false
-    else if (temp.indexOf(props.info.id) === -1)
+    else if (temp.indexOf(props.info.placeId) === -1)
       bool = false
     else
       bool = true
@@ -203,7 +203,7 @@ class RestaurantDetail extends Component {
                 <Bookmark
                   className={classes.icon}
                   style={{ paddingTop: '5px', paddingLeft: '2px'}}
-                  onClick={() => this.handleBookmarkClick(info.id)}
+                  onClick={() => this.handleBookmarkClick(info.placeId)}
                   color={this.state.bookmarkClick ? 'secondary' : 'inherit'}
                 />
               </Grid>
