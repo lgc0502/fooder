@@ -53,7 +53,7 @@ class Appbar extends Component {
               </Grid>
               <Grid item xs={8}>
                 <p style={{ color: '#000000', fontSize: '1.06rem', fontWeight: 'bold', textAlign: 'left'}}>
-                  {this.bartext(this.props.text)}
+                  { this.bartext(this.props.text)}
                 </p>
               </Grid>
               <Grid item xs={2} style={{ textAlign: 'right' }}>
