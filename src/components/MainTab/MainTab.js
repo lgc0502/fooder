@@ -1,6 +1,5 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import { withCookies } from 'react-cookie'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { withStyles } from '@material-ui/core/styles'
 import AppBar from '@material-ui/core/AppBar'
@@ -121,4 +120,4 @@ FullWidthTabs.propTypes = {
   theme: PropTypes.object.isRequired
 }
 
-export default withCookies(withStyles(styles, { withTheme: true })(FullWidthTabs))
+export default withStyles(styles, { withTheme: true })(FullWidthTabs)
