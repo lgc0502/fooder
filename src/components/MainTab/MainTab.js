@@ -14,6 +14,7 @@ import Search from '@material-ui/icons/Search'
 import Bookmark from '@material-ui/icons/Bookmark'
 
 import SearchPages from './SearchPage/SearchPage.js'
+import BookmarkPage from './BookmarkPage/BookmarkPage.js'
 
 const styles = theme => ({
   root: {
@@ -67,6 +68,7 @@ class FullWidthTabs extends React.Component {
 
     return (
       <div className={classes.root}>
+        <button className={'installButton'}>click</button>
         <MuiThemeProvider theme={theme}>
           <AppBar
             position='static'
@@ -99,11 +101,7 @@ class FullWidthTabs extends React.Component {
             </Typography>
           )}
           {this.state.value === 2 && <SearchPages />}
-          {this.state.value === 3 && (
-            <Typography className={classes.tabcontainer} dir={theme.direction}>
-              {localStorage.getItem('id')}
-            </Typography>
-          )}
+          {this.state.value === 3 && <BookmarkPage />}
           {this.state.value === 4 && (
             <Typography className={classes.tabcontainer} dir={theme.direction}>
               噢噢...本功能目前開發中
