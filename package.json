@@ -21,11 +21,12 @@
     "react-native": "^0.57.8",
     "react-router-dom": "^4.3.1",
     "react-scripts": "2.1.1",
-    "react-swipeable-views": "^0.13.0"
+    "react-swipeable-views": "^0.13.0",
+    "sw-precache": "^5.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && sw-precache --config=sw-precache-config.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },

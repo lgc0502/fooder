@@ -10,3 +10,17 @@ ReactDOM.render(<App />, document.getElementById('root'))
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.register()
+let deferredPrompt
+const installButton = document.querySelector('.installButton')
+installButton.style.display = 'none'
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault()
+  deferredPrompt = e
+  //Add 'Install PWA' button to the page if the browser supports it.
+  if (deferredPrompt != undefined) {
+    installButton.style.display = 'block'
+    installButton.addEventListener('click', e => {
+      deferredPrompt.prompt()
+    })
+  }
+})
