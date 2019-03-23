@@ -3,8 +3,8 @@ import { withStyles } from '@material-ui/core/styles'
 import ReactDOM from 'react-dom'
 
 import ListItem from './ListItem.js'
-import ModifyUrl from '../Common/ModifyUrl.js'
-import Loading from '../../../../image/Spin-1s-63px.gif'
+import ModifyUrl from '../../MainTab/SearchPage/Common/ModifyUrl.js'
+import Loading from '../../../image/Spin-1s-63px.gif'
 
 const styles = theme => ({
   list: {
@@ -19,18 +19,6 @@ const styles = theme => ({
 })
 
 class InfiniteScrollList extends Component {
-  handleScroll = e => {
-    const bottom =
-      Math.abs(
-        e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight
-      ) <= 1 && e.target.scrollHeight !== 108
-    this.props.handleScrollRecord(
-      Math.floor((e.target.scrollTop - 177 + 200) / 200)
-    )
-    if (bottom) {
-      this.props.onLoadMore()
-    }
-  }
   componentDidMount() {
     /*if(ReactDOM.findDOMNode(this.refs.list) == null) {
       //position = 0
@@ -46,25 +34,23 @@ class InfiniteScrollList extends Component {
     if (!this.props.listdata && this.props.loading) {
       return <img src={Loading} alt={'Loading'} />
     }
-    const data = this.props.listdata['restaurants'] || []
-    const hasMore = this.props.listdata['hasMore']
-    const { classes } = this.props
+    const data = this.props.listdata || []
+    const { classes, handleRestaurant, handleNext } = this.props
     return (
       <div className={classes.list} ref={'list'} onScroll={this.handleScroll}>
         {data.map(d => {
           d['smallphotoUrls'] = ModifyUrl.ModifyUrl(d['photoUrls'])
           return (
-            <p>123</p>
-            /* <ListItem
+            <ListItem
               key={d.id}
-              tag={this.props.tag}
-              handleNext={this.props.handleNext}
+              tag={d.tags}
+              handleNext={handleNext}
               restaurantinfo={d}
-              restaurantInfoFunc={this.props.restaurantInfo}
-            />*/
+              handleRestaurant={handleRestaurant}
+            />
           )
         })}
-        {hasMore === true ? <p>loading</p> : <p>噢噢...沒有更多店家了</p>}
+        <p>噢噢...沒有更多店家了</p>
       </div>
     )
   }

@@ -4,7 +4,7 @@ import { Query } from 'react-apollo'
 // import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 
-// import InfiniteScrollList from './InfiniteScrollList.js'
+import InfiniteScrollList from './InfiniteScrollList.js'
 // import moment from 'moment'
 const styles = theme => ({
   list: {
@@ -58,67 +58,24 @@ class RestaurantList extends Component {
     const {
       classes,
       handleNext,
-      restaurantInfo,
+      handleRestaurant,
       type,
-      handleScrollRecord,
-      scrollrecord
     } = this.props
 
     const placeIds = localStorage.getItem('id').split(' ')
-    console.log(placeIds)
     return (
       <div className={classes.list}>
         <Query query={this.SortType(type)} variables={{ placeIds }}>
           {({ data, loading, error, fetchMore }) => {
             if (error) return <p>{'出現錯誤，請嘗試重新整理頁面'}</p>
-            console.log(data)
+            console.log(data.getRestaurantsByPlaceId)
             return (
-              <p>123</p>
-              /*<InfiniteScrollList
+              <InfiniteScrollList
                 loading={loading}
-                listdata={data['searchRestaurants']}
+                listdata={data.getRestaurantsByPlaceId}
                 handleNext={handleNext}
-                restaurantInfo={restaurantInfo}
-                tag={tagIds}
-                handleScrollRecord={handleScrollRecord}
-                scrollrecord={scrollrecord}
-                onLoadMore={() =>
-                  fetchMore({
-                    variables: {
-                      tagIds,
-                      lat,
-                      lng,
-                      cursor: data['searchRestaurants']['cursor']
-                    },
-                    updateQuery: (prevResult, { fetchMoreResult }) => {
-                      const newData =
-                        fetchMoreResult['searchRestaurants']['restaurants']
-                      const cursor =
-                        fetchMoreResult['searchRestaurants']['cursor']
-                      const hasMore =
-                        fetchMoreResult['searchRestaurants']['hasMore']
-                      return newData.length
-                        ? {
-                            searchRestaurants: {
-                              __typename:
-                                prevResult['searchRestaurants']['__typename'],
-                              cursor,
-                              hasMore,
-                              restaurants: [
-                                ...prevResult['searchRestaurants'][
-                                  'restaurants'
-                                ],
-                                ...fetchMoreResult['searchRestaurants'][
-                                  'restaurants'
-                                ]
-                              ]
-                            }
-                          }
-                        : prevResult
-                    }
-                  })
-                }
-              />*/
+                handleRestaurant={handleRestaurant}
+              />
             )
           }}
         </Query>

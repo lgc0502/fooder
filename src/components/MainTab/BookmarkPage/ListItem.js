@@ -6,9 +6,9 @@ import Typography from '@material-ui/core/Typography'
 import { createMuiTheme } from '@material-ui/core/styles'
 import Chip from '@material-ui/core/Chip'
 
-import DistanceFormat from '../Common/DistanceFormat.js'
-import RatingStar from '../Common/RatingStar.js'
-import TagsMapping from '../Common/TagsMapping.js'
+import DistanceFormat from '../../MainTab/SearchPage/Common/DistanceFormat.js'
+import RatingStar from '../../MainTab/SearchPage/Common/RatingStar.js'
+import TagsMapping from '../../MainTab/SearchPage/Common/TagsMapping.js'
 
 const styles = theme => ({
   root: {
@@ -61,49 +61,49 @@ const theme = createMuiTheme({
 })
 
 class ListItem extends Component {
-  next = (handleNext, props, restaurantInfo) => {
+  next = (handleNext, props, handleRestaurant) => {
     handleNext('')
-    restaurantInfo(props)
+    handleRestaurant(props)
   }
 
   render() {
     const {
       classes,
-      restaurantinfo: info,
+      restaurantinfo,
       handleNext,
-      restaurantInfoFunc: restaurantInfo
+      handleRestaurant
     } = this.props
     return (
       <div>
         <div
           className={classes.root}
-          onClick={() => this.next(handleNext, info, restaurantInfo)}
+          onClick={() => this.next(handleNext, restaurantinfo, handleRestaurant)}
         >
           <div className={classes.gridList}>
-            {this.props.restaurantinfo['smallphotoUrls'].map(tile => (
+            {restaurantinfo['smallphotoUrls'].map(tile => (
               <img
                 className={classes.img}
                 src={tile}
-                key={this.props.restaurantinfo['smallphotoUrls'].indexOf(tile)}
+                key={restaurantinfo['smallphotoUrls'].indexOf(tile)}
                 alt={'title'}
               />
             ))}
           </div>
         </div>
         <div
-          onClick={() => this.next(handleNext, info, restaurantInfo)}
+          onClick={() => this.next(handleNext, restaurantinfo, handleRestaurant)}
           className={classes.detail}
         >
           <div className={classes.content}>
             <Grid container>
               <Grid item xs={9} style={{ height: '20px' }}>
                 <Typography align='left' style={{ fontWeight: '700' }}>
-                  {info['name']}
+                  {restaurantinfo['name']}
                 </Typography>
               </Grid>
               <Grid item xs={3}>
                 <Typography align='right' style={{ overflow: 'hidden' }}>
-                  {DistanceFormat.DistanceFormat(info['distance'])}
+                  {DistanceFormat.DistanceFormat(restaurantinfo['distance'])}
                 </Typography>
               </Grid>
             </Grid>
@@ -116,23 +116,23 @@ class ListItem extends Component {
                   fontSize: '12px'
                 }}
               >
-                {info['rating'].toFixed(1)}
+                {restaurantinfo['rating'].toFixed(1)}
               </Typography>
               <div
                 align='left'
                 style={{ width: '87px', display: 'inline-block' }}
               >
-                <RatingStar rating={info['rating']} />
+                <RatingStar rating={restaurantinfo['rating']} />
               </div>
               <Typography
                 align='left'
                 style={{ display: 'inline-block', fontSize: '12px' }}
               >
-                {'$ ' + info['priceLevel']}
+                {'$ ' + restaurantinfo['priceLevel']}
               </Typography>
             </div>
             <div style={{ justifyContent: 'flex-start', textAlign: 'left' }}>
-              {TagsMapping.sametags(this.props.tag, info['tags']).map((tag, index) => (
+              {TagsMapping.sametags(this.props.tag, restaurantinfo['tags']).map((tag, index) => (
                 <Chip
                   className={classes.chip}
                   key={index}

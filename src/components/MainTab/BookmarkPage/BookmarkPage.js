@@ -5,7 +5,9 @@ import { withStyles } from '@material-ui/core/styles'
 // import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
+import RestaurantDetail from './RestaurantDetail'
 import RestaurantList from './RestaurantList.js'
+import Appbar from '../SearchPage/AppBar/AppBar.js'
 // import moment from 'moment'
 const styles = theme => ({
   content: {
@@ -27,30 +29,59 @@ class RestaurantSearch extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: 0
+      step: 0,
+      Info: {}
     }
   }
-  handleChange = (event, value) => {
-    this.setState({ value })
+  handleNext = () => {
+    this.setState({ step: this.state.step + 1 })
+  }
+  handleBack = () => {
+    this.setState({ step: this.state.step - 1 })
+  }
+  handleRestaurant = d => {
+    this.setState({ Info: d })
+  }
+  getStepContent = step => {
+    const { classes } = this.props
+    const handleNext = this.handleNext
+    switch (step) {
+      case 0:
+        return (
+          <MuiThemeProvider theme={theme}>
+            <RestaurantList
+              className={classes.content}
+              handleNext={this.handleNext}
+              handleRestaurant={this.handleRestaurant}
+            />
+          </MuiThemeProvider>
+        )
+      case 1:
+        return (
+          <RestaurantDetail
+            className={classes.content}
+            tags={this.state.Info.tags}
+            info={this.state.Info}
+          />
+        )
+      default:
+    }
   }
   render() {
     const {
       classes,
-      handleNext,
-      handleScrollRecord,
-      scrollrecord
     } = this.props
     // const { value } = this.state
     return (
       <div>
-        <MuiThemeProvider theme={theme}>
-          <RestaurantList
-            className={classes.content}
-            handleNext={handleNext}
-            handleScrollRecord={handleScrollRecord}
-            scrollrecord={scrollrecord}
-          />
-        </MuiThemeProvider>
+        <Appbar
+          className={classes.appbar}
+          firstpage={this.state.step}
+          text={this.state.step === 3 ? this.state.Info.name : this.state.step}
+          mode={this.state.listmode}
+          handleBack={this.handleBack}
+        />
+        {this.getStepContent(this.state.step)}
       </div>
     )
   }
