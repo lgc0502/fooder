@@ -78,7 +78,6 @@ class RestaurantList extends Component {
     } = this.props
     const lat = position[0]
     const lng = position[1]
-    console.log(tagIds)
     return (
       <div className={classes.list}>
         <Query query={this.SortType(type)} variables={{ tagIds, lat, lng }}>

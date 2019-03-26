@@ -8,12 +8,11 @@ import Loading from '../../../../image/Spin-1s-63px.gif'
 
 const styles = theme => ({
   list: {
-    display: 'flex',
-    justifyContent: 'center',
-    flexWrap: 'wrap',
-    height: 'calc(100vh - 106px)',
+    display: 'block',
+    height: '100%',
     overflowX: 'hidden',
     overflowY: 'auto',
+    '-webkit-overflow-scrolling': 'touch',
     alignItems: 'center'
   }
 })
@@ -24,9 +23,6 @@ class InfiniteScrollList extends Component {
       Math.abs(
         e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight
       ) <= 1 && e.target.scrollHeight !== 108
-    this.props.handleScrollRecord(
-      Math.floor((e.target.scrollTop - 177 + 200) / 200)
-    )
     if (bottom) {
       this.props.onLoadMore()
     }
@@ -57,6 +53,7 @@ class InfiniteScrollList extends Component {
             <ListItem
               key={d.id}
               tag={this.props.tag}
+              handleScrollRecord={this.props.handleScrollRecord}
               handleNext={this.props.handleNext}
               restaurantinfo={d}
               restaurantInfoFunc={this.props.restaurantInfo}

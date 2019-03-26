@@ -7,8 +7,8 @@ import Loading from '../../../../image/Spin-1s-63px.gif'
 import DetailInfo from '../DetailInfo.js'
 
 const GET_RESTAURANT = gql`
-  query getRestaurantByPlaceId($placeId: String) {
-    getRestaurantByPlaceId(placeId: $placeId) {
+  query getRestaurantsByPlaceId($placeIds: [String]!) {
+    getRestaurantsByPlaceId(placeIds: $placeIds) {
       id
       name
       placeId
@@ -22,8 +22,7 @@ const GET_RESTAURANT = gql`
       }
       location {
         address
-        lat
-        lng
+        coordinates
       }
       isOpenNow
       reviewCount
@@ -34,9 +33,9 @@ const GET_RESTAURANT = gql`
 
 const DetailQuery = props => {
   const { tag, info } = props
-  const placeId = info['placeId']
+  const placeIds = info['placeId']
   return (
-    <Query query={GET_RESTAURANT} variables={{ placeId }}>
+    <Query query={GET_RESTAURANT} variables={{ placeIds: [placeIds] }}>
       {({ loading, error, data }) => {
         if (loading) {
           return <img src={Loading} alt={'Loading'}/>
@@ -47,7 +46,7 @@ const DetailQuery = props => {
           <DetailInfo
             tag={tag}
             info={info}
-            detail={data['getRestaurantByPlaceId']}
+            detail={data['getRestaurantsByPlaceId'][0]}
           />
         )
       }}

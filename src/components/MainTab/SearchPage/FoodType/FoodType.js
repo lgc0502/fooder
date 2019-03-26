@@ -46,7 +46,7 @@ const FoodType = props => {
       <ButtonBase
         variant='contained'
         className={classes.buttontop + ' ' + classes.buttonleft}
-        onClick={() => handleNext(['5c45e20893ad54dfd50e5e93'])}
+        onClick={() => handleNext(['5c7ecdc8ede547650ddb1b40'])}
       >
         {' '}
         <img className={classes.img} src={button1} alt={'隨便吃'} />
@@ -54,7 +54,7 @@ const FoodType = props => {
       <ButtonBase
         variant='contained'
         className={classes.buttontop + ' ' + classes.buttonright}
-        onClick={() => handleNext(['5c45e20893ad54dfd50e5e94'])}
+        onClick={() => handleNext(['5c7ecdc8ede547650ddb1b41'])}
       >
         {' '}
         <img className={classes.img} src={button2} alt={'觀光'} />
@@ -62,7 +62,7 @@ const FoodType = props => {
       <ButtonBase
         variant='contained'
         className={classes.buttonbottom + ' ' + classes.buttonleft}
-        onClick={() => handleNext(['5c45e20893ad54dfd50e5e95'])}
+        onClick={() => handleNext(['5c7ecdc8ede547650ddb1b42'])}
       >
         {' '}
         <img className={classes.img} src={button3} alt={'聚餐'} />
@@ -70,7 +70,7 @@ const FoodType = props => {
       <ButtonBase
         variant='contained'
         className={classes.buttonbottom + ' ' + classes.buttonright}
-        onClick={() => handleNext(['5c45e20893ad54dfd50e5e96'])}
+        onClick={() => handleNext(['5c7ecdc8ede547650ddb1b43'])}
       >
         {' '}
         <img className={classes.img} src={button4} alt={'工作'} />

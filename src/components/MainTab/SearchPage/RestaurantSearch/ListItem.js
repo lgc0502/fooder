@@ -14,24 +14,28 @@ const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing.unit / 2,
-    width: '100vw'
+    width: '100vw',
+    position: 'relative'
   },
   gridList: {
-    'white-space': 'nowrap',
-    'overflow-x': 'scroll',
-    'text-align': 'left'
+    whiteSpace: 'nowrap',
+    textAlign: 'left',
+    overflow: 'auto',
+    '-webkit-overflow-scrolling': 'touch',
+    cursor: 'pointer'
   },
   detail: {
     padding: '0 5px',
     width: 'calc(100vw - 10px)',
-    'margin-bottom': '10px'
+    marginBottom: '10px'
   },
   content: {
     padding: '0px 6px 6px 13px'
   },
   img: {
-    'border-radius': '4px',
+    borderRadius: '4px',
     display: 'inline-block',
+    position: 'relative',
     height: '104px',
     width: 'auto',
     margin: '0 2px'
@@ -40,7 +44,7 @@ const styles = theme => ({
     justifyContent: 'center',
     width: '56px',
     height: '17px',
-    'font-size': '10px',
+    fontSize: '10px',
     margin: '5px 10px 5px 0px',
     backgroundColor: '#FFF350',
     color: '#263238'
@@ -61,7 +65,10 @@ const theme = createMuiTheme({
 })
 
 class ListItem extends Component {
-  next = (handleNext, props, restaurantInfo) => {
+  next = (e, handleNext, props, restaurantInfo) => {
+    this.props.handleScrollRecord(
+      Math.floor((e.target.parentNode.parentNode.parentNode.scrollTop - 177 + 200) / 200)
+    )
     handleNext('')
     restaurantInfo(props)
   }
@@ -74,21 +81,19 @@ class ListItem extends Component {
       restaurantInfoFunc: restaurantInfo
     } = this.props
     return (
-      <div>
-        <div
-          className={classes.root}
-          onClick={() => this.next(handleNext, info, restaurantInfo)}
-        >
-          <div className={classes.gridList}>
-            {this.props.restaurantinfo['smallphotoUrls'].map(tile => (
-              <img
-                className={classes.img}
-                src={tile}
-                key={this.props.restaurantinfo['smallphotoUrls'].indexOf(tile)}
-                alt={'title'}
-              />
-            ))}
-          </div>
+      <div
+        className={classes.root}
+        onClick={e => this.next(e, handleNext, info, restaurantInfo)}
+      >
+        <div className={classes.gridList} >
+          {this.props.restaurantinfo['smallphotoUrls'].map(tile => (
+            <img
+              className={classes.img}
+              src={tile}
+              key={this.props.restaurantinfo['smallphotoUrls'].indexOf(tile)}
+              alt={'title'}
+            />
+          ))}
         </div>
         <div
           onClick={() => this.next(handleNext, info, restaurantInfo)}

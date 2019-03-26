@@ -194,6 +194,16 @@ class RestaurantDetail extends Component {
                   >
                     {info['rating'].toFixed(1)}
                   </Typography>
+                  <Typography
+                    align='left'
+                    style={{ display: 'inline-block', paddingRight: '4px', color:'rgba(0, 0, 0, 0.6)' }}
+                    onClick={() => window.open(
+                      `https://www.google.com/search?q=${detail['name']}`,
+                      '_blank' // <- This is what makes it open in a new window.
+                    )}
+                  >
+                    {' - Google'}
+                  </Typography>
                 </div>
                 <Typography align='left'>
                   {'$ ' + info['priceLevel']}
@@ -275,9 +285,9 @@ class RestaurantDetail extends Component {
                   <a
                     href={
                       'https://www.google.com/maps/search/?api=1&query=' +
-                      detail['location']['lat'] +
+                      detail['location']['coordinates']['lat'] +
                       ',' +
-                      detail['location']['lng'] +
+                      detail['location']['coordinates']['lng'] +
                       '&query_place_id=' +
                       detail['placeId']
                     }
