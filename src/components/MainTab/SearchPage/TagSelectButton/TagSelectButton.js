@@ -9,13 +9,23 @@ import Button from '@material-ui/core/Button'
 import Add from '@material-ui/icons/Add'
 import Check from '@material-ui/icons/Check'
 
+import TagSetting from './TagSetting'
+
 const styles = theme => ({
   root: {
     paddingRight: '0',
     paddingLeft: '0',
     height: 'calc(100vh - 116px)',
     overflow: 'auto',
-    padding: theme.spacing.unit / 2
+    paddingBottom: '150px',
+  },
+  shadow: {
+    bottom: '56px',
+    width: '100%',
+    height: '80px',
+    zIndex: '1',
+    position: 'fixed',
+    background: 'linear-gradient(180deg, rgba(255, 255, 255, 0)0%, rgba(255, 255, 255, 1)100%)'
   },
   subtitle: {
     display: 'flex',
@@ -33,7 +43,6 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    height: 'calc(100vh - 208px)',
     paddingTop: '20px'
   },
   chip: {
@@ -41,7 +50,6 @@ const styles = theme => ({
     margin: '0 5px 0 5px',
     padding: '20px 5px 20px 5px',
     width: '120px',
-    height: '40px',
     border: '1px rgba(0, 0, 0, 0.12) solid',
     borderRadius: '25px'
   },
@@ -54,16 +62,17 @@ const styles = theme => ({
   chipContainer: {
     display: 'flex',
     justifyContent: 'center',
-    width: '100%'
+    width: '100%',
+    height: '40px',
+    marginBottom: '12px'
   },
   chipaddicon: {
     height: '15px'
   },
   button: {
     padding: '0px 40px 0px 40px',
-    margin: '10px',
+    marginTop: '30px',
     backgroundColor: '#37474f',
-    marginBottom: '56px',
     width: '158px',
     borderRadius: '25px'
   }
@@ -86,95 +95,48 @@ class TagSelectButton extends Component {
     super(props)
     /** TODO: 把tag模組化 */
     this.state = {
-      Tags: [
-        {
-          key: 0,
-          label: ' 早午餐 ',
-          choose: 0,
-          id: '5c7ecdc8ede547650ddb1b51'
-        },
-        {
-          key: 1,
-          label: ' 下午茶 ',
-          choose: 0,
-          id: '5c7ecdc8ede547650ddb1b52'
-        },
-        { key: 2, label: '午餐', choose: 0, id: '5c7ecdc8ede547650ddb1b53' },
-        { key: 3, label: '晚餐', choose: 0, id: '5c7ecdc8ede547650ddb1b54' },
-        { key: 4, label: '宵夜', choose: 0, id: '5c7ecdc8ede547650ddb1b55' },
-        {
-          key: 5,
-          label: ' 來點湯 ',
-          choose: 0,
-          id: '5c7ecdc8ede547650ddb1b4a'
-        },
-        {
-          key: 6,
-          label: '  點心  ',
-          choose: 0,
-          id: '5c7ecdc8ede547650ddb1b4e'
-        },
-        {
-          key: 7,
-          label: '  小吃  ',
-          choose: 0,
-          id: '5c7ecdc8ede547650ddb1b4f'
-        },
-        {
-          key: 8,
-          label: '小編推薦',
-          choose: 0,
-          id: '5c7ecdc8ede547650ddb1b68'
-        },
-        {
-          key: 9,
-          label: '氣氛悠閒',
-          choose: 0,
-          id: '5c7ecdc8ede547650ddb1b5e'
-        },
-        {
-          key: 10,
-          label: '相機先吃',
-          choose: 0,
-          id: '5c7ecdc8ede547650ddb1b58'
-        },
-        {
-          key: 11,
-          label: '  久坐  ',
-          choose: 0,
-          id: '5c7ecdc8ede547650ddb1b5c'
-        },
-        {
-          key: 12,
-          label: ' 吃粗飽 ',
-          choose: 0,
-          id: '5c7ecdc8ede547650ddb1b64'
-        },
-        {
-          key: 13,
-          label: '氣氛歡樂',
-          choose: 0,
-          id: '5c7ecdc8ede547650ddb1b5f'
-        }
-      ],
+      foodType: TagSetting.foodType,
+      atmosphere: TagSetting.atmosphere,
       Selected: [],
-      array: []
+      arrayFoodType: [],
+      arrayAtmosphere: []
     }
     let i = 0
-    while (this.state.Tags[i]) {
-      const temp = [this.state.Tags[i], this.state.Tags[i + 1]]
-      this.state.array.push(temp)
+    while (this.state.foodType[i]) {
+      const temp = [this.state.foodType[i], this.state.foodType[i + 1]]
+      this.state.arrayFoodType.push(temp)
+      i += 2
+    }
+    i = 0
+    while (this.state.atmosphere[i]) {
+      const temp = [this.state.atmosphere[i], this.state.atmosphere[i + 1]]
+      this.state.arrayAtmosphere.push(temp)
       i += 2
     }
   }
 
+  handleClickAtmosphere = data => {
+    this.setState(state => {
+      const Data = {
+        atmosphere: [...state.atmosphere]
+      }
+      Data.atmosphere[data.key].choose = Data.atmosphere[data.key].choose === 1 ? 0 : 1
+      if (Data.atmosphere[data.key].choose === 1) {
+        state.Selected.push(data.id)
+      } else {
+        const chipToDelete = state.Selected.indexOf(data.id)
+        state.Selected.splice(chipToDelete, 1)
+      }
+      return { Data }
+    })
+  }
   handleClick = data => {
     this.setState(state => {
       const Data = {
-        Tags: [...state.Tags]
+        foodType: [...state.foodType]
       }
-      Data.Tags[data.key].choose = Data.Tags[data.key].choose === 1 ? 0 : 1
-      if (Data.Tags[data.key].choose === 1) {
+      Data.foodType[data.key].choose = Data.foodType[data.key].choose === 1 ? 0 : 1
+      if (Data.foodType[data.key].choose === 1) {
         state.Selected.push(data.id)
       } else {
         const chipToDelete = state.Selected.indexOf(data.id)
@@ -194,7 +156,7 @@ class TagSelectButton extends Component {
             {'菜系'}
           </div>
           <div className={classes.chips}>
-            {this.state.array.map((data, index) => {
+            {this.state.arrayFoodType.map((data, index) => {
               const transform =
                 index % 2 === 0 ? classes.chipEven : classes.chipOdd
               const chip = () => {
@@ -240,6 +202,52 @@ class TagSelectButton extends Component {
           <div className={classes.subtitle}>
             {'氛圍'}
           </div>
+          <div className={classes.chips}>
+            {this.state.arrayAtmosphere.map((data, index) => {
+              const transform =
+                index % 2 === 0 ? classes.chipEven : classes.chipOdd
+              const chip = () => {
+                if (data[1])
+                  return (
+                    <Chip
+                      className={`${classes.chip} ${transform}`}
+                      key={data[1].key}
+                      icon={
+                        data[1].choose === 0 ? (
+                          <Add className={classes.chipaddicon} />
+                        ) : (
+                          <Check className={classes.chipaddicon} />
+                        )
+                      }
+                      label={data[1].label}
+                      onClick={() => this.handleClickAtmosphere(data[1])}
+                      color={data[1].choose === 0 ? 'primary' : 'secondary'}
+                    />
+                  )
+              }
+              return (
+                <div key={index} className={classes.chipContainer}>
+                  <Chip
+                    className={`${classes.chip} ${transform}`}
+                    key={data[0].key}
+                    icon={
+                      data[0].choose === 0 ? (
+                        <Add className={classes.chipaddicon} />
+                      ) : (
+                        <Check className={classes.chipaddicon} />
+                      )
+                    }
+                    label={data[0].label}
+                    onClick={() => this.handleClickAtmosphere(data[0])}
+                    color={data[0].choose === 0 ? 'primary' : 'secondary'}
+                  />
+                  {chip()}
+                </div>
+              )
+            })}
+          </div>
+        </div>
+        <div className={classes.shadow}>
           <Button
             className={classes.button}
             variant='contained'
