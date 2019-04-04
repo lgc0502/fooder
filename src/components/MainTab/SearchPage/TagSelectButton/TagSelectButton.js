@@ -11,9 +11,23 @@ import Check from '@material-ui/icons/Check'
 
 const styles = theme => ({
   root: {
+    paddingRight: '0',
+    paddingLeft: '0',
     height: 'calc(100vh - 116px)',
     overflow: 'auto',
     padding: theme.spacing.unit / 2
+  },
+  subtitle: {
+    display: 'flex',
+    alignItems: 'center',
+    height: '34px',
+    width: '100%',
+    backgroundColor: 'rgb(97, 97, 97, 0.08)',
+    lineHeight: '24px',
+    color: '#424242',
+    fontSize: '14.09px',
+    fontWeight: 'bold',
+    paddingLeft: '34px'
   },
   chips: {
     display: 'flex',
@@ -24,10 +38,12 @@ const styles = theme => ({
   },
   chip: {
     justifyContent: 'center',
-    margin: '0 15px 0 15px',
+    margin: '0 5px 0 5px',
     padding: '20px 5px 20px 5px',
-    width: '114px',
-    border: '1px rgba(0, 0, 0, 0.12) solid'
+    width: '120px',
+    height: '40px',
+    border: '1px rgba(0, 0, 0, 0.12) solid',
+    borderRadius: '25px'
   },
   chipEven: {
     transform: 'translateX(-30px)'
@@ -68,6 +84,7 @@ const theme = createMuiTheme({
 class TagSelectButton extends Component {
   constructor(props) {
     super(props)
+    /** TODO: 把tag模組化 */
     this.state = {
       Tags: [
         {
@@ -173,6 +190,9 @@ class TagSelectButton extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
+          <div className={classes.subtitle}>
+            {'菜系'}
+          </div>
           <div className={classes.chips}>
             {this.state.array.map((data, index) => {
               const transform =
@@ -216,6 +236,9 @@ class TagSelectButton extends Component {
                 </div>
               )
             })}
+          </div>
+          <div className={classes.subtitle}>
+            {'氛圍'}
           </div>
           <Button
             className={classes.button}

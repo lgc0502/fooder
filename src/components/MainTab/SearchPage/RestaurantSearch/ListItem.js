@@ -65,9 +65,9 @@ const theme = createMuiTheme({
 })
 
 class ListItem extends Component {
-  next = (e, handleNext, props, restaurantInfo) => {
+  next = (handleNext, props, restaurantInfo, height) => {
     this.props.handleScrollRecord(
-      Math.floor((e.target.parentNode.parentNode.parentNode.scrollTop - 177 + 200) / 200)
+      Math.floor((height - 177 + 200) / 200)
     )
     handleNext('')
     restaurantInfo(props)
@@ -78,12 +78,13 @@ class ListItem extends Component {
       classes,
       restaurantinfo: info,
       handleNext,
-      restaurantInfoFunc: restaurantInfo
+      restaurantInfoFunc: restaurantInfo,
+      height
     } = this.props
     return (
       <div
         className={classes.root}
-        onClick={e => this.next(e, handleNext, info, restaurantInfo)}
+        onClick={e => this.next(handleNext, info, restaurantInfo, height)}
       >
         <div className={classes.gridList} >
           {this.props.restaurantinfo['smallphotoUrls'].map(tile => (
@@ -96,7 +97,6 @@ class ListItem extends Component {
           ))}
         </div>
         <div
-          onClick={() => this.next(handleNext, info, restaurantInfo)}
           className={classes.detail}
         >
           <div className={classes.content}>

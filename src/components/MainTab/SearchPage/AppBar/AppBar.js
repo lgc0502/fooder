@@ -14,9 +14,9 @@ class Appbar extends Component {
       case 0:
         return '搜尋'
       case 1:
-        return '偏好選擇'
-      case 2:
         return '搜尋'
+      case 2:
+        return '搜尋結果'
       default:
         return state
     }

@@ -18,6 +18,12 @@ const styles = theme => ({
 })
 
 class InfiniteScrollList extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      scrollTop: 0
+    }
+  }
   handleScroll = e => {
     const bottom =
       Math.abs(
@@ -26,6 +32,9 @@ class InfiniteScrollList extends Component {
     if (bottom) {
       this.props.onLoadMore()
     }
+    this.setState({
+      scrollTop: e.target.scrollTop
+    })
   }
   componentDidMount() {
     /*if(ReactDOM.findDOMNode(this.refs.list) == null) {
@@ -57,6 +66,7 @@ class InfiniteScrollList extends Component {
               handleNext={this.props.handleNext}
               restaurantinfo={d}
               restaurantInfoFunc={this.props.restaurantInfo}
+              height={this.state.scrollTop}
             />
           )
         })}
