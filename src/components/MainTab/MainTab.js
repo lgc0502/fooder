@@ -52,7 +52,7 @@ const theme = createMuiTheme({
 })
 class FullWidthTabs extends React.Component {
   state = {
-    value: 2
+    value: 0
   }
 
   handleChange = (event, value) => {
@@ -82,26 +82,14 @@ class FullWidthTabs extends React.Component {
               textColor='#263238'
               fullWidth
             >
-              <Tab className={classes.tab} icon={<ViewList />} />
-              <Tab className={classes.tab} icon={<Group />} />
               <Tab className={classes.tab} icon={<Search />} />
               <Tab className={classes.tab} icon={<Bookmark />} />
               <Tab className={classes.tab} icon={<Person />} />
             </Tabs>
           </AppBar>
-          {this.state.value === 0 && (
-            <Typography className={classes.tabcontainer} dir={theme.direction}>
-              噢噢...本功能目前開發中
-            </Typography>
-          )}
-          {this.state.value === 1 && (
-            <Typography className={classes.tabcontainer} dir={theme.direction}>
-              噢噢...本功能目前開發中
-            </Typography>
-          )}
-          {this.state.value === 2 && <SearchPages />}
-          {this.state.value === 3 && <BookmarkPage />}
-          {this.state.value === 4 && (
+          {this.state.value === 0 && <SearchPages />}
+          {this.state.value === 1 && <BookmarkPage />}
+          {this.state.value === 2 && (
             <Typography className={classes.tabcontainer} dir={theme.direction}>
               噢噢...本功能目前開發中
             </Typography>
