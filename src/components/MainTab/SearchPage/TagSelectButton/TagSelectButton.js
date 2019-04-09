@@ -31,7 +31,6 @@ const styles = theme => ({
     display: 'flex',
     alignItems: 'center',
     height: '34px',
-    width: '100%',
     backgroundColor: 'rgb(97, 97, 97, 0.08)',
     lineHeight: '24px',
     color: '#424242',

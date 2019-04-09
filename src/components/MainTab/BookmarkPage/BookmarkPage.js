@@ -29,7 +29,7 @@ class RestaurantSearch extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      step: 0,
+      step: 4,
       Info: {}
     }
   }
@@ -46,7 +46,7 @@ class RestaurantSearch extends Component {
     const { classes } = this.props
     const handleNext = this.handleNext
     switch (step) {
-      case 0:
+      case 4:
         return (
           <MuiThemeProvider theme={theme}>
             <RestaurantList
@@ -56,7 +56,7 @@ class RestaurantSearch extends Component {
             />
           </MuiThemeProvider>
         )
-      case 1:
+      case 5:
         return (
           <RestaurantDetail
             className={classes.content}
@@ -76,8 +76,8 @@ class RestaurantSearch extends Component {
       <div>
         <Appbar
           className={classes.appbar}
-          firstpage={this.state.step}
-          text={this.state.step === 3 ? this.state.Info.name : this.state.step}
+          firstpage={this.state.step === 4 ? 0 : this.state.step}
+          text={this.state.step === 5 ? this.state.Info.name : this.state.step}
           mode={this.state.listmode}
           handleBack={this.handleBack}
         />

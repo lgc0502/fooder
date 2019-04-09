@@ -15,6 +15,7 @@ import Bookmark from '@material-ui/icons/Bookmark'
 
 import SearchPages from './SearchPage/SearchPage.js'
 import BookmarkPage from './BookmarkPage/BookmarkPage.js'
+import Account from './Account/Account.js'
 
 const styles = theme => ({
   root: {
@@ -90,11 +91,7 @@ class FullWidthTabs extends React.Component {
           </AppBar>
           {this.state.value === 0 && <SearchPages />}
           {this.state.value === 1 && <BookmarkPage />}
-          {this.state.value === 2 && (
-            <Typography className={classes.tabcontainer} dir={theme.direction}>
-              噢噢...本功能目前開發中
-            </Typography>
-          )}
+          {this.state.value === 2 && <Account />}
         </MuiThemeProvider>
       </div>
     )
