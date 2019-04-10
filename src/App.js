@@ -8,7 +8,7 @@ import { InMemoryCache } from 'apollo-cache-inmemory'
 
 import Tab from './components/MainTab/MainTab.js'
 // URL for httplink
-const URL = 'https://fooder-backend.herokuapp.com/'
+const URL = 'https://fooder-backend-dev.herokuapp.com/'
 
 //httpLink for client
 const httpLink = new HttpLink({
