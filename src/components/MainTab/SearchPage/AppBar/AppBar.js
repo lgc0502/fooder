@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ButtonBase from '@material-ui/core/ButtonBase'
 
-import ViewList from '@material-ui/icons/ViewList'
+import ViewList from '@material-ui/icons/ViewDay'
 import LocationOn from '@material-ui/icons/LocationOn'
 
 class Appbar extends Component {
@@ -16,7 +16,7 @@ class Appbar extends Component {
       case 1:
         return '偏好選擇'
       case 2:
-        return '搜尋'
+        return '搜尋結果'
       default:
         return state
     }
@@ -33,7 +33,7 @@ class Appbar extends Component {
             text: this.props.text,
             backgroundColor: '#FFFFFF',
             height: '56px',
-            'box-shadow': '0 1px 0 0 #DFDFDF'
+            'box-shadow': this.props.text<2?'0 1px 0 0 #DFDFDF':'0 1px 0 0 #FFFFFF'
           }}
         >
           <Toolbar>
@@ -52,7 +52,11 @@ class Appbar extends Component {
                 )}
               </Grid>
               <Grid item xs={8}>
-                <p style={{ color: '#000000', fontSize: '1.06rem', fontWeight: 'bold', textAlign: 'left'}}>
+                <p style={{ 
+                  color: 'rgba(0,0,0,0.87)', 
+                  fontSize: '1.06rem', 
+                  fontWeight: 'bold',
+                  textAlign: this.props.text<3?'left':'center'}}>
                   {this.bartext(this.props.text)}
                 </p>
               </Grid>

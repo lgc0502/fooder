@@ -5,15 +5,15 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Chip from '@material-ui/core/Chip'
-// import IconButton from '@material-ui/core/IconButton';
+import IconButton from '@material-ui/core/IconButton';
 // import Fab from '@material-ui/core/Fab';
 
 import LocationOn from '@material-ui/icons/LocationOn'
 import AccessTime from '@material-ui/icons/AccessTime'
 import Phone from '@material-ui/icons/Phone'
 import Bookmark from '@material-ui/icons/Bookmark'
+import NearMe from '@material-ui/icons/Navigation'
 
-import NearMe from '../../../image/icons8-near-me-filled-100.png'
 import Comment from './Comment.js'
 import DistanceFormat from './Common/DistanceFormat.js'
 import RatingStar from './Common/RatingStar.js'
@@ -28,7 +28,7 @@ const styles = theme => ({
   },
   root: {
     backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing.unit / 2,
+    //padding: '0 theme.spacing.unit / 2',
     width: 'calc(100vw - 12px)'
   },
   gridList: {
@@ -37,9 +37,9 @@ const styles = theme => ({
     textAlign: 'left'
   },
   img: {
-    borderRadius: '4px',
+    //borderRadius: '4px',
     display: 'inline-block',
-    height: '200px',
+    height: '208px',
     width: 'auto',
     margin: '0 2px'
   },
@@ -48,22 +48,24 @@ const styles = theme => ({
     width: 'calc(100vw - 40px)'
   },
   star: {
-    height: '18px',
-    width: '18px',
+    height: '20px',
+    width: '20px',
     marginBottom: '-2px'
   },
   chip: {
     justifyContent: 'center',
     margin: '5px 12px 5px 0px',
     backgroundColor: '#ffffff',
-    border: '1px #000000 solid',
-    width: '80px',
-    height: '32px',
-    fontSize: '12px'
+    border: '1px rgba(0, 0, 0, 0.12) solid',
+    //width: '80px',
+    color:'rgba(0, 0, 0, 0.87)',
+    height: '35px',
+    padding: '0 3px',
+    fontSize: '12.33px'
   },
   icon: {
-    width: '18px',
-    height: '18px'
+    width: '16px',
+    height: '16px'
   }
 })
 
@@ -186,7 +188,7 @@ class RestaurantDetail extends Component {
                     align='left'
                     style={{ width: '87px', display: 'inline-block' }}
                   >
-                    <RatingStar rating={info['rating']} />
+                    <RatingStar rating={info['rating']} theme={1}/>
                   </div>
                   <Typography
                     align='left'
@@ -195,7 +197,7 @@ class RestaurantDetail extends Component {
                     {info['rating'].toFixed(1)}
                   </Typography>
                 </div>
-                <Typography align='left'>
+                <Typography align='left' style={{ lineHeight:'28px',color:'rgba(0, 0, 0, 0.6)' }}>
                   {'$ ' + info['priceLevel']}
                 </Typography>
               </Grid>
@@ -213,24 +215,43 @@ class RestaurantDetail extends Component {
                 <Grid
                   item
                   xs={1}
-                  style={{ textAlign: 'left', paddingTop: '2px' }}
+                  style={{ textAlign: 'left', paddingTop: '5px' }}
                 >
                   <AccessTime
                     className={classes.icon}
-                    style={{ paddingTop: '5px', paddingLeft: '2px' }}
+                    style={{ paddingTop: '5px', paddingLeft: '2px',color:'rgba(0, 0, 0, 0.6)' }}
                   />
                 </Grid>
-                <Grid item xs={11}>
-                  <Typography
-                    align='left'
-                    style={{ lineHeight: '35px' }}
-                    color='default'
-                    onClick={() => {
-                      this.time_clicked()
-                    }}
-                  >
-                    {detail['isOpenNow'] === true ? '營業中 ⌵' : '非營業時間 ⌵'}
-                  </Typography>
+                <Grid item xs={11} >
+                  <div style={{ display:'flex' }}>
+                    <Typography
+                      align='left'
+                      style={{ 
+                        lineHeight: '35px',
+                        color:'rgba(0, 0, 0, 0.87)',
+                        fontSize: '12.33px'
+                      }}
+                      onClick={() => {
+                        this.time_clicked()
+                      }}
+                    >
+                      {detail['isOpenNow'] === true ? '營業中 ' : '非營業時間 '}
+                    </Typography>
+                    <Typography
+                      align='left'
+                      style={{ 
+                        lineHeight: '35px', 
+                        color:'rgba(0, 0, 0, 0.6)',
+                        marginLeft:'10px',
+                        fontSize: '12.33px'
+                      }}
+                      onClick={() => {
+                        this.time_clicked()
+                      }}
+                    >
+                      {'查看營業時間'}
+                    </Typography>  
+                  </div>
                   <Typography
                     id='openhour'
                     align='left'
@@ -246,50 +267,35 @@ class RestaurantDetail extends Component {
                 >
                   <LocationOn
                     className={classes.icon}
-                    style={{ paddingTop: '5px', paddingLeft: '2px' }}
+                    style={{ paddingTop: '7px', paddingLeft: '2px',color:'rgba(0, 0, 0, 0.6)' }}
                   />
                 </Grid>
                 <Grid item xs={11}>
-                  <Typography align='left' style={{ lineHeight: '35px' }}>
+                  <Typography align='left' style={{ lineHeight: '35px',color:'rgba(0, 0, 0, 0.87)',fontSize: '12.33px' }}>
                     {detail['location']['address']}
                   </Typography>
                 </Grid>
-                <Grid
-                  item
-                  xs={1}
-                  style={{ textAlign: 'left', paddingTop: '2px' }}
-                >
-                  <Phone
-                    className={classes.icon}
-                    style={{ paddingTop: '5px', paddingLeft: '2px' }}
-                  />
-                </Grid>
-                <Grid item xs={11}>
-                  <Typography align='left' style={{ lineHeight: '35px' }}>
-                    {detail['phoneNumber']}
-                  </Typography>
-                </Grid>
               </Grid>
-              <div style={{ marginTop: '40px' }}>
-                <Typography>
-                  <a
-                    href={
-                      'https://www.google.com/maps/search/?api=1&query=' +
-                      detail['location']['lat'] +
-                      ',' +
-                      detail['location']['lng'] +
-                      '&query_place_id=' +
-                      detail['placeId']
-                    }
+              <div>
+                <a href={
+                        'https://www.google.com/maps/search/?api=1&query=' +
+                        detail['location']['coordinates'][0] +
+                        ',' +
+                        detail['location']['coordinates'][1] +
+                        '&query_place_id=' +
+                        detail['placeId']}
+                >
+                  <IconButton 
+                    className={classes.button} 
+                    aria-label="Delete" 
+                    style={{padding:'24px 12px 0 12px'}}
                   >
-                    <img
-                      src={NearMe}
-                      style={{ height: '38px' }}
-                      alt={'NearMe'}
-                    />
-                  </a>
+                    <NearMe style={{color:'#37474f'}}/>
+                  </IconButton>
+                </a>
+                <Typography align='center' style={{fontSize: '12.33px'}}>
+                  {'導航'}
                 </Typography>
-                <Typography align='center'>{'導航'}</Typography>
               </div>
             </div>
           </div>
