@@ -8,10 +8,15 @@ import {
   Marker,
   google,
 } from 'react-google-maps'
+import fetch from "isomorphic-fetch"
+import { compose, withProps, withHandlers } from "recompose"
+import { MarkerClusterer } from "react-google-maps/lib/components/addons/MarkerClusterer"
 
-import unSelect from '../../../../image/place_grey.png'
-import Select from '../../../../image/place_red.png'
+import unSelect from '../../../../image/unselect.png'
+import Select from '../../../../image/select.png'
 import MyLocation from '../../../../image/mylocation.png' 
+import cluster from '../../../../image/marker_clustering.png' 
+
 
 const defaultMapOptions = {
   fullscreenControl: false,
@@ -20,7 +25,7 @@ const defaultMapOptions = {
   zoomControl: false
 }
 
-class Map extends Component {
+class Map extends React.PureComponent {
   static defaultProps = {
     googleMapURL:
       'https://maps.googleapis.com/maps/api/js?key=AIzaSyAGQwS8HQIBVmsK1LLwx0Hu3w1MeG0P_YE&v=3.exp&libraries=geometry,drawing,places'
@@ -28,9 +33,13 @@ class Map extends Component {
   CMap = withScriptjs(
     withGoogleMap(props => (
       <GoogleMap
-        defaultZoom={13}
+        defaultZoom={16}
         defaultCenter={{ lat: this.props.position[0], lng: this.props.position[1] }}
         defaultOptions={defaultMapOptions}
+        center={{ 
+          lat: this.props.data[this.props.scrollrecord]['location']['coordinates'][1], 
+          lng: this.props.data[this.props.scrollrecord]['location']['coordinates'][0] 
+        }}
       >
         {props.children}
       </GoogleMap>
@@ -38,17 +47,15 @@ class Map extends Component {
   )
   render() {
     const { position, data, scrollrecord } = this.props
-    //console.log(data[scrollrecord].location.lat)
     return (
       <Fragment>
         <this.CMap
           googleMapURL={this.props.googleMapURL}
           loadingElement={<div style={{ height: `80%` }} />}
           containerElement={
-            <div style={{ height: `calc(100vh - 106px)`, width: `100vw` }} />
+            <div style={{ height: `calc(100vh - 156px)`, width: `100vw` }} />
           }
           mapElement={<div style={{ height: `100%` }} />}
-          center={{lat: data[scrollrecord].location.lat, lng:  data[scrollrecord].location.lng }}
         >
           <Marker 
             position={{ lat: this.props.position[0], lng: this.props.position[1] }} 
@@ -58,23 +65,69 @@ class Map extends Component {
               scaledSize: new window.google.maps.Size(18, 18)
             }}
           />
-          {data.map(d => {
-            return (
+          <MarkerClusterer
+            averageCenter
+            enableRetinaIcons
+            gridSize={15}
+            styles={[
+              {
+                url: cluster,
+                height: 30,
+                lineHeight: 30,
+                width: 42,
+                textColor:'white',
+                'font-size':'14px'
+              },
+              {
+                url: cluster,
+                height: 30,
+                lineHeight: 30,
+                width: 42,
+                textColor:'white',
+                'font-size':'14px'
+              },
+              {
+                url: cluster,
+                height: 30,
+                lineHeight: 30,
+                width: 42,
+                textColor:'white',
+                'font-size':'14px'
+              },
+              {
+                url: cluster,
+                height: 30,
+                lineHeight: 30,
+                width: 42,
+                textColor:'white',
+                'font-size':'14px'
+              },
+              {
+                url: cluster,
+                height: 30,
+                lineHeight: 30,
+                width: 42,
+                textColor:'white',
+                'font-size':'14px'
+              },
+              ]}
+            >
+            {data.map(d => (
               <Marker
                 key={data.indexOf(d)}
-                position={{ lat: d.location.lat, lng: d.location.lng }} 
+                position={{ lat: d['location']['coordinates'][1], lng: d['location']['coordinates'][0] }} 
                 defaultOpacity={0.9} 
                 visible={
                   Math.floor(scrollrecord/20)==Math.floor(data.indexOf(d)/20)?(true):(false)
                 }
                 icon={{
                   url: data.indexOf(d)==scrollrecord?(Select):(unSelect),
-                  scaledSize: new window.google.maps.Size(50, 50)
+                  scaledSize: new window.google.maps.Size(40, 40)
                 }}
                 
               />
-            )
-          })}
+            ))}
+          </MarkerClusterer>
         </this.CMap>
       </Fragment>
     )
@@ -82,3 +135,67 @@ class Map extends Component {
 }
 
 export default Map
+
+/*<MarkerClusterer
+averageCenter
+enableRetinaIcons
+gridSize={15}
+styles={[
+  {
+    url: cluster,
+    height: 30,
+    lineHeight: 30,
+    width: 42,
+    textColor:'white',
+    'font-size':'14px'
+  },
+  {
+    url: cluster,
+    height: 30,
+    lineHeight: 30,
+    width: 42,
+    textColor:'white',
+    'font-size':'14px'
+  },
+  {
+    url: cluster,
+    height: 30,
+    lineHeight: 30,
+    width: 42,
+    textColor:'white',
+    'font-size':'14px'
+  },
+  {
+    url: cluster,
+    height: 30,
+    lineHeight: 30,
+    width: 42,
+    textColor:'white',
+    'font-size':'14px'
+  },
+  {
+    url: cluster,
+    height: 30,
+    lineHeight: 30,
+    width: 42,
+    textColor:'white',
+    'font-size':'14px'
+  },
+  ]}
+>
+{data.map(d => (
+  <Marker
+    key={data.indexOf(d)}
+    position={{ lat: d.location.coordinates[0], lng: d.location.coordinates[1] }} 
+    defaultOpacity={0.9} 
+    visible={
+      Math.floor(scrollrecord/20)==Math.floor(data.indexOf(d)/20)?(true):(false)
+    }
+    icon={{
+      url: data.indexOf(d)==scrollrecord?(Select):(unSelect),
+      scaledSize: new window.google.maps.Size(40, 40)
+    }}
+    
+  />
+))}
+</MarkerClusterer>*/
