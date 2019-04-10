@@ -1,5 +1,7 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import gql from 'graphql-tag'
+import { Query } from 'react-apollo'
 
 import FoodType from './FoodType/FoodType.js'
 import TagSelectButton from './TagSelectButton/TagSelectButton.js'
@@ -8,8 +10,16 @@ import RestaurantMap from './RestaurantMap/RestaurantMap.js'
 import RestaurantDetail from './RestaurantDetail/RestaurantDetail.js'
 import Appbar from './AppBar/AppBar.js'
 import geolocation from './Common/geolocation.js'
+import QueryUserId from './QueryUserId.js'
 // import ListCard from './ListCard.js'
 
+const GET_USERID = gql`
+    {
+      appEntry{
+        id
+      }
+    }
+`
 const styles = theme => ({
   appbar: {
     top: 0,
@@ -37,6 +47,7 @@ class SearchPages extends React.Component {
         lng: d.coords.longitude
       })
     )
+    
   }
   handleNext = appendtag => {
     this.setState(state => ({
@@ -130,6 +141,7 @@ class SearchPages extends React.Component {
     const handleMode = this.handleMode
     return (
       <div>
+        <QueryUserId />
         <Appbar
           className={classes.appbar}
           firstpage={this.state.step}
@@ -138,6 +150,7 @@ class SearchPages extends React.Component {
           handleBack={handleBack.bind(this)}
           handleMode={handleMode.bind(this)}
         />
+        
         {this.getSearchStepContent(this.state.step, this.state.listmode)}
       </div>
     )
