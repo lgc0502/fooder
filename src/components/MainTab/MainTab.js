@@ -52,8 +52,15 @@ const theme = createMuiTheme({
   }
 })
 class FullWidthTabs extends React.Component {
-  state = {
-    value: 0
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: 0,
+      vehicle: 0
+    }
+    const prevData = localStorage.getItem('id')
+    if (!prevData)
+      localStorage.setItem('id', '')
   }
 
   handleChange = (event, value) => {
