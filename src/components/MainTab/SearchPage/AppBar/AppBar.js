@@ -62,7 +62,7 @@ class Appbar extends Component {
                     color: 'rgba(0,0,0,0.87)',
                     fontSize: '1.06rem',
                     fontWeight: 'bold',
-                    textAlign: this.props.text < 3 ? 'left' : 'center'
+                    textAlign: isNaN(this.props.text) ? 'center' : 'left'
                   }}
                 >
                   {this.bartext(this.props.text)}
