@@ -14,14 +14,14 @@ import TagsMapping from '../Common/TagsMapping.js'
 
 const styles = {
   card: {
-    backgroundColor: 'rgba(255,243,80,0.3)',
-    width: '240px',
-    height: '92px',
+    backgroundColor: 'white',
+    height: '110px',
     display: 'inline-block',
-    margin: '0 0 15px 20px'
+    margin: '0 0 15px 20px',
+    'border-radius':'15px'
   },
   content: {
-    padding: '8px',
+    padding: '12px',
     'white-space': 'initial'
   },
   chip: {
@@ -34,7 +34,6 @@ const styles = {
     color: '#263238'
   }
 }
-
 class ListCard extends Component {
   next = (handleNext, props, restaurantInfo) => {
     handleNext('')
@@ -47,26 +46,33 @@ class ListCard extends Component {
       handleNext,
       restaurantInfoFunc: restaurantInfo
     } = this.props
-
+    
     return (
       <Card
         className={classes.card}
         onClick={() => this.next(handleNext, info, restaurantInfo)}
+        style={{
+          width: '198px',
+        }}
       >
         <div className={classes.content}>
           <Grid container>
-            <Grid item xs={8} style={{ height: '35px' }}>
-              <Typography align='left' style={{ fontWeight: '700' }}>
+            <Grid item xs={10} style={{ height: '21px' }}>
+              <Typography align='left' style={{ fontWeight: '700', overflow:'hidden',height: '21px' }}>
                 {info['name']}
               </Typography>
             </Grid>
-            <Grid item xs={4}>
-              <Typography align='right' style={{ overflow: 'hidden' }}>
-                {DistanceFormat.DistanceFormat(info['distance'])}
-              </Typography>
+            <Grid item xs={2}>
+              {/*收藏按鈕*/}
             </Grid>
           </Grid>
           <div align='left'>
+            <div
+              align='left'
+              style={{ width: '87px', display: 'inline-block' }}
+            >
+              <RatingStar rating={info['rating']} theme={0}/>
+            </div>
             <Typography
               align='left'
               style={{
@@ -77,27 +83,26 @@ class ListCard extends Component {
             >
               {info['rating'].toFixed(1)}
             </Typography>
-            <div
-              align='left'
-              style={{ width: '87px', display: 'inline-block' }}
-            >
-              <RatingStar rating={info['rating']} />
-            </div>
-            <Typography
-              align='left'
-              style={{ display: 'inline-block', fontSize: '12px' }}
-            >
-              {'$ ' + info['priceLevel']}
-            </Typography>
           </div>
+          <Typography
+              align='left'
+              style={{ fontSize: '12.33px',marginTop:'2px' }}
+          >
+              {'$ ' + info['priceLevel']}
+          </Typography>
           <div style={{ justifyContent: 'flex-start', textAlign: 'left' }}>
             {TagsMapping.sametags(this.props.tag, info['tags']).map((tag, index) => (
-              <Chip
-                className={classes.chip}
-                key={index}
-                label={tag}
-                color='primary'
-              />
+              <nobr
+                align='left'
+                style={{ 
+                  fontSize: '12.33px',
+                  //lineHeight:'22px',
+                  color:'rgba(0,0,0,0.6)',
+                  whiteSpace: 'nowrap',
+                }}
+              >
+                {tag+', '}
+              </nobr>
             ))}
           </div>
         </div>

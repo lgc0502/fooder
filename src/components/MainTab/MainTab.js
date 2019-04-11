@@ -39,7 +39,7 @@ const styles = theme => ({
     bottom: 56,
     top: 'auto',
     height: '100vh',
-    'line-height': 'calc(100vh - 56px)'
+    lineHeight: 'calc(100vh - 56px)'
   }
 })
 const theme = createMuiTheme({
@@ -59,8 +59,7 @@ class FullWidthTabs extends React.Component {
       vehicle: 0
     }
     const prevData = localStorage.getItem('id')
-    if (!prevData)
-      localStorage.setItem('id', '')
+    if (!prevData) localStorage.setItem('id', '')
   }
 
   handleChange = (event, value) => {
@@ -88,12 +87,11 @@ class FullWidthTabs extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
               indicatorColor='primary'
-              textColor='#263238'
               fullWidth
             >
-              <Tab className={classes.tab} icon={<Search />} />
-              <Tab className={classes.tab} icon={<Bookmark />} />
-              <Tab className={classes.tab} icon={<Person />} />
+              <Tab className={classes.tab} icon={<Search color="primary" />} />
+              <Tab className={classes.tab} icon={<Bookmark color="primary" />} />
+              <Tab className={classes.tab} icon={<Person color="primary" />} />
             </Tabs>
           </AppBar>
           {this.state.value === 0 && <SearchPages />}

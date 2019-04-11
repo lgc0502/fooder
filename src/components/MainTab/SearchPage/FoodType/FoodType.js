@@ -14,28 +14,13 @@ const styles = theme => ({
     alignItems: 'center'
   },
   img: {
-    width: '153px',
-    margin: '10px'
+    width: '100%',
+    height: '100%',
+    overflow: 'hidden'
   },
-  buttontop: {
-    height: '202px',
-    width: '160px',
-    marginTop: 'calc(50vh - 258px)'
-  },
-  buttonright: {
-    height: '202px',
-    width: '160px',
-    marginRight: 'calc(50vw - 170px)'
-  },
-  buttonbottom: {
-    height: '202px',
-    width: '160px',
-    marginBottom: 'calc(50vh - 258px)'
-  },
-  buttonleft: {
-    height: '202px',
-    width: '160px',
-    marginLeft: 'calc(50vw - 170px)'
+  button: {
+    height: '50%',
+    width: '50%'
   }
 })
 
@@ -43,9 +28,21 @@ const FoodType = props => {
   const { classes, handleNext } = props
   return (
     <div className={classes.root}>
+      <p
+        style={{
+          color: 'rgba(0,0,0,0.6)',
+          fontSize: '18px',
+          fontWeight: 'bold',
+          marginTop: '28px',
+          marginBottom: '31px',
+          textAlign: 'center'
+        }}
+      >
+        想找哪一類型的餐廳？
+      </p>
       <ButtonBase
         variant='contained'
-        className={classes.buttontop + ' ' + classes.buttonleft}
+        className={classes.button}
         onClick={() => handleNext(['5c7ecdc8ede547650ddb1b40'])}
       >
         {' '}
@@ -53,7 +50,7 @@ const FoodType = props => {
       </ButtonBase>
       <ButtonBase
         variant='contained'
-        className={classes.buttontop + ' ' + classes.buttonright}
+        className={classes.button}
         onClick={() => handleNext(['5c7ecdc8ede547650ddb1b41'])}
       >
         {' '}
@@ -61,7 +58,7 @@ const FoodType = props => {
       </ButtonBase>
       <ButtonBase
         variant='contained'
-        className={classes.buttonbottom + ' ' + classes.buttonleft}
+        className={classes.button}
         onClick={() => handleNext(['5c7ecdc8ede547650ddb1b42'])}
       >
         {' '}
@@ -69,7 +66,7 @@ const FoodType = props => {
       </ButtonBase>
       <ButtonBase
         variant='contained'
-        className={classes.buttonbottom + ' ' + classes.buttonright}
+        className={classes.button}
         onClick={() => handleNext(['5c7ecdc8ede547650ddb1b43'])}
       >
         {' '}

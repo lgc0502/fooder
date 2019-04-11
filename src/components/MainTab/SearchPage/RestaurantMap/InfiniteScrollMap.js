@@ -14,13 +14,13 @@ const styles = theme => ({
     overflowX: 'scroll',
     textAlign: 'left',
     position: 'relative',
-    bottom: '105px'
+    bottom: '133px'
   },
   list: {
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    height: 'calc(100vh - 106px)',
+    height: 'calc(100vh - 156px)',
     overflowX: 'hidden',
     overflowY: 'hidden',
     alignItems: 'flex-end',
@@ -34,7 +34,7 @@ class InfiniteScrollList extends Component {
       Math.abs(
         e.target.scrollWidth - e.target.scrollLeft - e.target.clientWidth
       ) <= 1
-    this.props.handleScrollRecord(Math.floor((e.target.scrollLeft+100)/260))
+    this.props.handleScrollRecord(Math.floor((e.target.scrollLeft+100)/218))
     if (bottom) {
       this.props.onLoadMore()
     }

@@ -122,7 +122,7 @@ class ListItem extends Component {
                 align='left'
                 style={{ width: '87px', display: 'inline-block' }}
               >
-                <RatingStar rating={restaurantinfo['rating']} />
+                <RatingStar rating={restaurantinfo['rating']} theme={0} />
               </div>
               <Typography
                 align='left'

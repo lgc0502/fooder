@@ -38,7 +38,7 @@ const DetailQuery = props => {
     <Query query={GET_RESTAURANT} variables={{ placeIds: [placeIds] }}>
       {({ loading, error, data }) => {
         if (loading) {
-          return <img src={Loading} alt={'Loading'}/>
+          return <img src={Loading} alt={'Loading'} />
         }
         if (error) return '沒有符合的結果，請返回上一頁'
         return (

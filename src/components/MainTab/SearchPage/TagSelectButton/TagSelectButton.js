@@ -17,7 +17,7 @@ const styles = theme => ({
     paddingLeft: '0',
     height: 'calc(100vh - 116px)',
     overflow: 'auto',
-    paddingBottom: '150px',
+    paddingBottom: '150px'
   },
   shadow: {
     bottom: '56px',
@@ -25,7 +25,8 @@ const styles = theme => ({
     height: '80px',
     zIndex: '1',
     position: 'fixed',
-    background: 'linear-gradient(180deg, rgba(255, 255, 255, 0)0%, rgba(255, 255, 255, 1)100%)'
+    background:
+      'linear-gradient(180deg, rgba(255, 255, 255, 0)0%, rgba(255, 255, 255, 1)100%)'
   },
   subtitle: {
     display: 'flex',
@@ -119,7 +120,8 @@ class TagSelectButton extends Component {
       const Data = {
         atmosphere: [...state.atmosphere]
       }
-      Data.atmosphere[data.key].choose = Data.atmosphere[data.key].choose === 1 ? 0 : 1
+      Data.atmosphere[data.key].choose =
+        Data.atmosphere[data.key].choose === 1 ? 0 : 1
       if (Data.atmosphere[data.key].choose === 1) {
         state.Selected.push(data.id)
       } else {
@@ -134,7 +136,8 @@ class TagSelectButton extends Component {
       const Data = {
         foodType: [...state.foodType]
       }
-      Data.foodType[data.key].choose = Data.foodType[data.key].choose === 1 ? 0 : 1
+      Data.foodType[data.key].choose =
+        Data.foodType[data.key].choose === 1 ? 0 : 1
       if (Data.foodType[data.key].choose === 1) {
         state.Selected.push(data.id)
       } else {
@@ -151,9 +154,7 @@ class TagSelectButton extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
-          <div className={classes.subtitle}>
-            {'菜系'}
-          </div>
+          <div className={classes.subtitle}>{'菜系'}</div>
           <div className={classes.chips}>
             {this.state.arrayFoodType.map((data, index) => {
               const transform =
@@ -198,9 +199,7 @@ class TagSelectButton extends Component {
               )
             })}
           </div>
-          <div className={classes.subtitle}>
-            {'氛圍'}
-          </div>
+          <div className={classes.subtitle}>{'氛圍'}</div>
           <div className={classes.chips}>
             {this.state.arrayAtmosphere.map((data, index) => {
               const transform =

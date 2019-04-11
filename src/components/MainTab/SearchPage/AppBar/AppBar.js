@@ -5,7 +5,7 @@ import Grid from '@material-ui/core/Grid'
 import ChevronLeft from '@material-ui/icons/ChevronLeft'
 import ButtonBase from '@material-ui/core/ButtonBase'
 
-import ViewList from '@material-ui/icons/ViewList'
+import ViewList from '@material-ui/icons/ViewDay'
 import LocationOn from '@material-ui/icons/LocationOn'
 
 class Appbar extends Component {
@@ -37,7 +37,8 @@ class Appbar extends Component {
             text: this.props.text,
             backgroundColor: '#FFFFFF',
             height: '56px',
-            'box-shadow': '0 1px 0 0 #DFDFDF'
+            boxShadow:
+              this.props.text < 2 ? '0 1px 0 0 #DFDFDF' : '0 1px 0 0 #FFFFFF'
           }}
         >
           <Toolbar>
@@ -56,7 +57,14 @@ class Appbar extends Component {
                 )}
               </Grid>
               <Grid item xs={8}>
-                <p style={{ color: '#000000', fontSize: '1.06rem', fontWeight: 'bold', textAlign: 'left'}}>
+                <p
+                  style={{
+                    color: 'rgba(0,0,0,0.87)',
+                    fontSize: '1.06rem',
+                    fontWeight: 'bold',
+                    textAlign: this.props.text < 3 ? 'left' : 'center'
+                  }}
+                >
                   {this.bartext(this.props.text)}
                 </p>
               </Grid>
@@ -64,12 +72,12 @@ class Appbar extends Component {
                 {this.props.text === 2 ? (
                   this.props.mode === 0 ? (
                     <LocationOn
-                      style={{ color: '#263238', 'margin-top':'7px' }}
+                      style={{ color: '#263238', marginTop: '7px' }}
                       onClick={() => handleMode()}
                     />
                   ) : (
                     <ViewList
-                      style={{ color: '#263238', 'margin-top':'7px' }}
+                      style={{ color: '#263238', marginTop: '7px' }}
                       onClick={() => handleMode()}
                     />
                   )
