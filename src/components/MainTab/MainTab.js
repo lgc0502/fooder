@@ -60,6 +60,21 @@ class FullWidthTabs extends React.Component {
     }
     const prevData = localStorage.getItem('id')
     if (!prevData) localStorage.setItem('id', '')
+
+    const prevVehicle = localStorage.getItem('vehicle')
+    if (!prevVehicle) {
+      localStorage.setItem('vehicle', '')
+    } else {
+      this.state.vehicle = prevVehicle
+    }
+    console.log(prevVehicle)
+  }
+
+  handleVehicle = vehicle => {
+    localStorage.setItem('vehicle', vehicle)
+    this.setState({
+      vehicle
+    })
   }
 
   handleChange = (event, value) => {
@@ -93,9 +108,9 @@ class FullWidthTabs extends React.Component {
               <Tab className={classes.tab} icon={<Person color="primary" />} />
             </Tabs>
           </AppBar>
-          {this.state.value === 0 && <SearchPages />}
+          {this.state.value === 0 && <SearchPages vehicle={this.state.vehicle}/>}
           {this.state.value === 1 && <BookmarkPage />}
-          {this.state.value === 2 && <Account />}
+          {this.state.value === 2 && <Account value={this.state.vehicle} handleVehicle={this.handleVehicle}/>}
         </MuiThemeProvider>
       </div>
     )

@@ -38,6 +38,7 @@ class RestaurantSearch extends Component {
     const {
       classes,
       tags: tag,
+      vehicle,
       handleNext,
       restaurantInfo,
       position,
@@ -52,6 +53,7 @@ class RestaurantSearch extends Component {
             className={classes.content}
             tags={tag}
             type={this.state.value}
+            vehicle={vehicle}
             restaurantInfo={restaurantInfo}
             handleNext={handleNext}
             position={position}

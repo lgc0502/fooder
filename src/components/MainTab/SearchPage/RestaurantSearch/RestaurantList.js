@@ -80,6 +80,7 @@ class RestaurantList extends Component {
       classes,
       tags: tagIds,
       position,
+      vehicle,
       handleNext,
       restaurantInfo,
       type,
@@ -119,6 +120,7 @@ class RestaurantList extends Component {
                 loading={loading}
                 listdata={data['searchRestaurants']}
                 handleNext={handleNext}
+                vehicle={vehicle}
                 restaurantInfo={restaurantInfo}
                 tag={tagIds}
                 handleScrollRecord={handleScrollRecord}

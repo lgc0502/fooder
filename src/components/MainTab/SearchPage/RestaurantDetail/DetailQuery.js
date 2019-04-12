@@ -32,7 +32,7 @@ const GET_RESTAURANT = gql`
 `
 
 const DetailQuery = props => {
-  const { tag, info } = props
+  const { tag, info, vehicle } = props
   const placeIds = info['placeId']
   return (
     <Query query={GET_RESTAURANT} variables={{ placeIds: [placeIds] }}>
@@ -47,6 +47,7 @@ const DetailQuery = props => {
             tag={tag}
             info={info}
             detail={data['getRestaurantsByPlaceId'][0]}
+            vehicle={vehicle}
           />
         )
       }}

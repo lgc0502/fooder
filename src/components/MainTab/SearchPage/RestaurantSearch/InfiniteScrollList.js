@@ -53,7 +53,7 @@ class InfiniteScrollList extends Component {
     }
     const data = this.props.listdata['restaurants'] || []
     const hasMore = this.props.listdata['hasMore']
-    const { classes } = this.props
+    const { classes, vehicle } = this.props
     return (
       <div className={classes.list} ref={'list'} onScroll={this.handleScroll}>
         {data.map(d => {
@@ -62,6 +62,7 @@ class InfiniteScrollList extends Component {
             <ListItem
               key={d.id}
               tag={this.props.tag}
+              vehicle={vehicle}
               handleScrollRecord={this.props.handleScrollRecord}
               handleNext={this.props.handleNext}
               restaurantinfo={d}

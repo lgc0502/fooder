@@ -89,7 +89,7 @@ class SearchPages extends React.Component {
     this.setState({ Info: d })
   }
   getSearchStepContent(step, mode) {
-    const { classes } = this.props
+    const { classes, vehicle } = this.props
     const handleNext = this.handleNext
     const handleScrollRecord = this.handleScrollRecord
 
@@ -108,6 +108,7 @@ class SearchPages extends React.Component {
           <RestaurantSearch
             className={classes.content}
             tags={this.state.Tags}
+            vehicle={vehicle}
             restaurantInfo={this.restaurantInfo}
             handleNext={handleNext}
             position={[this.state.lat, this.state.lng]}
@@ -132,6 +133,7 @@ class SearchPages extends React.Component {
             className={classes.content}
             tags={this.state.Tags}
             info={this.state.Info}
+            vehicle={vehicle}
           />
         )
       default:

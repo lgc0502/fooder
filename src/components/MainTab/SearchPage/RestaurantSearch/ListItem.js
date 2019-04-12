@@ -77,7 +77,8 @@ class ListItem extends Component {
       restaurantinfo: info,
       handleNext,
       restaurantInfoFunc: restaurantInfo,
-      height
+      height,
+      vehicle
     } = this.props
     return (
       <div
@@ -121,7 +122,7 @@ class ListItem extends Component {
                     marginTop: '3px'
                   }}
                 >
-                  {DistanceFormat.DistanceFormat(info['distance'])}
+                  {DistanceFormat.DistanceFormat(info['distance'], vehicle)}
                 </Typography>
               </Grid>
             </Grid>

@@ -31,18 +31,12 @@ class Account extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: 0
+      value: Number(props.value)
     }
   }
 
-  handleChange = value => {
-    this.setState({
-      value
-    })
-  }
-
   render() {
-    const { classes } = this.props
+    const { classes, handleVehicle } = this.props
     return (
       <div className={classes.root}>
         <Appbar className={classes.appbar} firstpage={0} text={3} />
@@ -59,7 +53,12 @@ class Account extends React.Component {
             交通偏好
           </Typography>
           <div
-            style={{ display: 'flex', marginTop: '20px', marginLeft: '50px', position: 'relative' }}
+            style={{
+              display: 'flex',
+              marginTop: '20px',
+              marginLeft: '50px',
+              position: 'relative'
+            }}
           >
             <Typography style={{ alignSelf: 'center', fontSize: '1rem' }}>
               步行
@@ -68,50 +67,75 @@ class Account extends React.Component {
               type='radio'
               value={0}
               style={{
-                '-ms-transform': 'scale(1.5)',
-                '-webkit-transform': 'scale(1.5)' /* Chrome, Safari, Opera */,
+                msTransform: 'scale(1.5)',
+                WebkitTransform: 'scale(1.5)' /* Chrome, Safari, Opera */,
                 transform: 'scale(1.5)',
                 position: 'absolute',
                 right: '40px'
               }}
               checked={this.state.value === 0}
-              onChange={() => {this.handleChange(0)}}
+              onChange={() => {
+                handleVehicle(0)
+                this.setState({
+                  value: 0
+                })
+              }}
             />
           </div>
           <div
-            style={{ display: 'flex', marginTop: '20px', marginLeft: '50px', position: 'relative' }}
+            style={{
+              display: 'flex',
+              marginTop: '20px',
+              marginLeft: '50px',
+              position: 'relative'
+            }}
           >
             <Typography style={{ fontSize: '1rem' }}>腳踏車</Typography>
             <input
               type='radio'
               value={1}
               style={{
-                '-ms-transform': 'scale(1.5)',
-                '-webkit-transform': 'scale(1.5)' /* Chrome, Safari, Opera */,
+                msTransform: 'scale(1.5)',
+                WebkitTransform: 'scale(1.5)' /* Chrome, Safari, Opera */,
                 transform: 'scale(1.5)',
                 position: 'absolute',
                 right: '40px'
               }}
               checked={this.state.value === 1}
-              onChange={() => {this.handleChange(1)}}
+              onChange={() => {
+                handleVehicle(1)
+                this.setState({
+                  value: 1
+                })
+              }}
             />
           </div>
           <div
-            style={{ display: 'flex', marginTop: '20px', marginLeft: '50px', position: 'relative' }}
+            style={{
+              display: 'flex',
+              marginTop: '20px',
+              marginLeft: '50px',
+              position: 'relative'
+            }}
           >
             <Typography style={{ fontSize: '1rem' }}>汽機車</Typography>
             <input
               type='radio'
               value={2}
               style={{
-                '-ms-transform': 'scale(1.5)',
-                '-webkit-transform': 'scale(1.5)' /* Chrome, Safari, Opera */,
+                msTransform: 'scale(1.5)',
+                WebkitTransform: 'scale(1.5)' /* Chrome, Safari, Opera */,
                 transform: 'scale(1.5)',
                 position: 'absolute',
                 right: '40px'
               }}
               checked={this.state.value === 2}
-              onChange={() => {this.handleChange(2)}}
+              onChange={() => {
+                handleVehicle(2)
+                this.setState({
+                  value: 2
+                })
+              }}
             />
           </div>
         </div>
