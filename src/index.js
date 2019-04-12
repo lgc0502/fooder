@@ -11,16 +11,16 @@ ReactDOM.render(<App />, document.getElementById('root'))
 // Learn more about service workers: http://bit.ly/CRA-PWA
 serviceWorker.register()
 
-const installButton = document.getElementById('test');
-installButton.style.display = 'none';
-window.addEventListener('beforeinstallprompt', (e) => {
-  e.preventDefault();
-  let deferredPrompt = e;
+const installButton = document.getElementById('test')
+installButton.style.display = 'none'
+window.addEventListener('beforeinstallprompt', e => {
+  e.preventDefault()
+  let deferredPrompt = e
   //Add 'Install PWA' button to the page if the browser supports it.
-  if(deferredPrompt != undefined){
-    installButton.style.display = 'block';
-    installButton.addEventListener('click', (e) => {
-      deferredPrompt.prompt();
-    });
+  if (deferredPrompt != undefined) {
+    installButton.style.display = 'block'
+    installButton.addEventListener('click', e => {
+      deferredPrompt.prompt()
+    })
   }
-});
+})
