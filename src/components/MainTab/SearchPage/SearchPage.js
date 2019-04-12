@@ -31,16 +31,20 @@ const styles = theme => ({
 })
 
 class SearchPages extends React.Component {
-  state = {
-    step: 0,
-    listmode: 0,
-    Tags: [],
-    Info: {},
-    lat: 23.000403,
-    lng: 120.21954,
-    scrollrecord: 0,
-    sortType: 0,
-    pricelevel: 0
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      step: 0,
+      listmode: 0,
+      Tags: [],
+      Info: {},
+      lat: 23.000403,
+      lng: 120.21954,
+      scrollrecord: 0,
+      sortType: 0,
+      pricelevel: 0
+    }
   }
   componentDidMount() {
     geolocation.getLocation().then(d =>

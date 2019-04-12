@@ -2,8 +2,8 @@ import React from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { withStyles } from '@material-ui/core/styles'
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import BottomNavigation from '@material-ui/core/BottomNavigation'
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 
 import InfiniteScrollMap from './InfiniteScrollMap.js'
 import SortOptionBtn from '../SortOptionBtn.js'
@@ -213,7 +213,9 @@ const RestaurantMap = props => {
                             hasMore,
                             restaurants: [
                               ...prevResult['searchRestaurants']['restaurants'],
-                              ...fetchMoreResult['searchRestaurants']['restaurants']
+                              ...fetchMoreResult['searchRestaurants'][
+                                'restaurants'
+                              ]
                             ]
                           }
                         }
@@ -231,14 +233,3 @@ const RestaurantMap = props => {
 
 export default withStyles(styles)(RestaurantMap)
 
-
-/*<BottomNavigation
-        showLabels
-        className={classes.sortbtn}
-      >
-        <BottomNavigationAction label="熱門程度" style={{fontWeight: '700'}}/> 
-        <nobr style={{paddingTop: '8px'}}>|</nobr>
-        <BottomNavigationAction label="價格範圍" style={{fontWeight: '700'}}/> 
-        <nobr style={{paddingTop: '8px'}}>|</nobr>
-        <BottomNavigationAction label="距離範圍" style={{fontWeight: '700'}}/>
-      </BottomNavigation>*/

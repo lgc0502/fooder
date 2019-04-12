@@ -9,4 +9,18 @@ ReactDOM.render(<App />, document.getElementById('root'))
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: http://bit.ly/CRA-PWA
-serviceWorker.unregister()
+serviceWorker.register()
+
+const installButton = document.getElementById('test');
+installButton.style.display = 'none';
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  let deferredPrompt = e;
+  //Add 'Install PWA' button to the page if the browser supports it.
+  if(deferredPrompt != undefined){
+    installButton.style.display = 'block';
+    installButton.addEventListener('click', (e) => {
+      deferredPrompt.prompt();
+    });
+  }
+});

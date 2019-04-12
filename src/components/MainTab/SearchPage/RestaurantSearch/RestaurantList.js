@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
 import { withStyles } from '@material-ui/core/styles'
-import BottomNavigation from '@material-ui/core/BottomNavigation';
-import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
+import BottomNavigation from '@material-ui/core/BottomNavigation'
+import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 
 import InfiniteScrollList from './InfiniteScrollList.js'
 import SortOptionBtn from '../SortOptionBtn.js'

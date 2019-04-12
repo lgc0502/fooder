@@ -14,9 +14,13 @@ class Appbar extends Component {
       case 0:
         return '搜尋'
       case 1:
-        return '偏好選擇'
+        return '搜尋'
       case 2:
         return '搜尋結果'
+      case 3:
+        return '個人頁面'
+      case 4:
+        return '我的收藏'
       default:
         return state
     }
@@ -33,7 +37,8 @@ class Appbar extends Component {
             text: this.props.text,
             backgroundColor: '#FFFFFF',
             height: '56px',
-            'box-shadow': this.props.text<2?'0 1px 0 0 #DFDFDF':'0 1px 0 0 #FFFFFF'
+            boxShadow:
+              this.props.text < 2 ? '0 1px 0 0 #DFDFDF' : '0 1px 0 0 #FFFFFF'
           }}
         >
           <Toolbar>
@@ -52,11 +57,14 @@ class Appbar extends Component {
                 )}
               </Grid>
               <Grid item xs={8}>
-                <p style={{ 
-                  color: 'rgba(0,0,0,0.87)', 
-                  fontSize: '1.06rem', 
-                  fontWeight: 'bold',
-                  textAlign: this.props.text<3?'left':'center'}}>
+                <p
+                  style={{
+                    color: 'rgba(0,0,0,0.87)',
+                    fontSize: '1.06rem',
+                    fontWeight: 'bold',
+                    textAlign: this.props.text < 3 ? 'left' : 'center'
+                  }}
+                >
                   {this.bartext(this.props.text)}
                 </p>
               </Grid>
@@ -64,12 +72,12 @@ class Appbar extends Component {
                 {this.props.text === 2 ? (
                   this.props.mode === 0 ? (
                     <LocationOn
-                      style={{ color: '#263238', 'margin-top':'7px' }}
+                      style={{ color: '#263238', marginTop: '7px' }}
                       onClick={() => handleMode()}
                     />
                   ) : (
                     <ViewList
-                      style={{ color: '#263238', 'margin-top':'7px' }}
+                      style={{ color: '#263238', marginTop: '7px' }}
                       onClick={() => handleMode()}
                     />
                   )

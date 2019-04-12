@@ -14,13 +14,13 @@ const styles = theme => ({
     maxWidth: 400,
     borderRadius: '15px',
     boxShadow: '#CFCFCF 0px 1px 0px 1px',
-    color:'rgba(0,0,0,0.6)'
+    color: 'rgba(0,0,0,0.6)'
   },
   header: {
     justifyContent: 'flex-start',
     display: 'flex',
     alignItems: 'center',
-    fontSize:'12.33px',
+    fontSize: '12.33px'
   },
   avatar: {
     backgroundColor: red[500],
@@ -48,30 +48,28 @@ class Comment extends Component {
               src={info['authorPhotoUrl']}
             />
             <div>
-              <nobr style={{ fontWeight: 'bold', padding: '0 0 0 1px'}}>
+              <nobr style={{ fontWeight: 'bold', padding: '0 0 0 1px' }}>
                 {info['authorName']}
               </nobr>
               <nobr style={{ padding: '0 0 0 29px' }}>
                 {' '}
                 {info['relativeTime']}
               </nobr>
-              <div  style={{ display:'flex' }}>
-                <div  style={{ textAlign:'left' }}>
-                  <RatingStar rating={info['rating']} theme={0}/>
+              <div style={{ display: 'flex' }}>
+                <div style={{ textAlign: 'left' }}>
+                  <RatingStar rating={info['rating']} theme={0} />
                 </div>
-                <nobr style={{ padding: '1px 0 0 5px' }}>
-                  {info['rating']}
-                </nobr>
+                <nobr style={{ padding: '1px 0 0 5px' }}>{info['rating']}</nobr>
               </div>
             </div>
           </div>
-          
+
           <Typography
             component='p'
-            style={{ 
-              textAlign: 'left', 
-              padding: '10px 0 0 0', 
-              fontSize:'12.33px',
+            style={{
+              textAlign: 'left',
+              padding: '10px 0 0 0',
+              fontSize: '12.33px',
               color: 'rgba(0,0,0,0.6)'
             }}
           >

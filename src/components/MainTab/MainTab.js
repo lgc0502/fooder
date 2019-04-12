@@ -14,6 +14,8 @@ import Search from '@material-ui/icons/Search'
 import Bookmark from '@material-ui/icons/Bookmark'
 
 import SearchPages from './SearchPage/SearchPage.js'
+import BookmarkPage from './BookmarkPage/BookmarkPage.js'
+import Account from './Account/Account.js'
 
 const styles = theme => ({
   root: {
@@ -37,7 +39,7 @@ const styles = theme => ({
     bottom: 56,
     top: 'auto',
     height: '100vh',
-    'line-height': 'calc(100vh - 56px)'
+    lineHeight: 'calc(100vh - 56px)'
   }
 })
 const theme = createMuiTheme({
@@ -50,8 +52,14 @@ const theme = createMuiTheme({
   }
 })
 class FullWidthTabs extends React.Component {
-  state = {
-    value: 2
+  constructor(props) {
+    super(props)
+    this.state = {
+      value: 0,
+      vehicle: 0
+    }
+    const prevData = localStorage.getItem('id')
+    if (!prevData) localStorage.setItem('id', '')
   }
 
   handleChange = (event, value) => {
@@ -67,6 +75,7 @@ class FullWidthTabs extends React.Component {
 
     return (
       <div className={classes.root}>
+        <button id='test'>test</button>
         <MuiThemeProvider theme={theme}>
           <AppBar
             position='static'
@@ -78,37 +87,16 @@ class FullWidthTabs extends React.Component {
               value={this.state.value}
               onChange={this.handleChange}
               indicatorColor='primary'
-              textColor='#263238'
               fullWidth
             >
-              <Tab className={classes.tab} icon={<ViewList />} />
-              <Tab className={classes.tab} icon={<Group />} />
-              <Tab className={classes.tab} icon={<Search />} />
-              <Tab className={classes.tab} icon={<Bookmark />} />
-              <Tab className={classes.tab} icon={<Person />} />
+              <Tab className={classes.tab} icon={<Search color="primary" />} />
+              <Tab className={classes.tab} icon={<Bookmark color="primary" />} />
+              <Tab className={classes.tab} icon={<Person color="primary" />} />
             </Tabs>
           </AppBar>
-          {this.state.value === 0 && (
-            <Typography className={classes.tabcontainer} dir={theme.direction}>
-              噢噢...本功能目前開發中
-            </Typography>
-          )}
-          {this.state.value === 1 && (
-            <Typography className={classes.tabcontainer} dir={theme.direction}>
-              噢噢...本功能目前開發中
-            </Typography>
-          )}
-          {this.state.value === 2 && <SearchPages />}
-          {this.state.value === 3 && (
-            <Typography className={classes.tabcontainer} dir={theme.direction}>
-              {localStorage.getItem('id')}
-            </Typography>
-          )}
-          {this.state.value === 4 && (
-            <Typography className={classes.tabcontainer} dir={theme.direction}>
-              噢噢...本功能目前開發中
-            </Typography>
-          )}
+          {this.state.value === 0 && <SearchPages />}
+          {this.state.value === 1 && <BookmarkPage />}
+          {this.state.value === 2 && <Account />}
         </MuiThemeProvider>
       </div>
     )

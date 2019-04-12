@@ -15,12 +15,12 @@ const styles = theme => ({
   },
   img: {
     width: '100%',
-    height:'100%',
-    overflow:'hidden'
+    height: '100%',
+    overflow: 'hidden'
   },
   button: {
     height: '50%',
-    width: '50%',
+    width: '50%'
   }
 })
 
@@ -28,13 +28,16 @@ const FoodType = props => {
   const { classes, handleNext } = props
   return (
     <div className={classes.root}>
-       <p style={{ 
-        color: 'rgba(0,0,0,0.6)', 
-        fontSize: '18px', 
-        fontWeight: 'bold',
-        marginTop:'28px',
-        marginBottom:'31px',
-        textAlign: 'center'}}>
+      <p
+        style={{
+          color: 'rgba(0,0,0,0.6)',
+          fontSize: '18px',
+          fontWeight: 'bold',
+          marginTop: '28px',
+          marginBottom: '31px',
+          textAlign: 'center'
+        }}
+      >
         想找哪一類型的餐廳？
       </p>
       <ButtonBase

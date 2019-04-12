@@ -14,24 +14,28 @@ const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing.unit / 2,
-    width: '100vw'
+    width: '100vw',
+    position: 'relative'
   },
   gridList: {
-    'white-space': 'nowrap',
-    'overflow-x': 'scroll',
-    'text-align': 'left'
+    whiteSpace: 'nowrap',
+    textAlign: 'left',
+    overflow: 'auto',
+    '-webkit-overflow-scrolling': 'touch',
+    cursor: 'pointer'
   },
   detail: {
     padding: '0 5px',
     width: 'calc(100vw - 10px)',
-    'margin-bottom': '15px'
+    marginBottom: '10px'
   },
   content: {
     padding: '0px 6px 6px 13px'
   },
   img: {
-    //'border-radius': '4px',
+    borderRadius: '4px',
     display: 'inline-block',
+    position: 'relative',
     height: '104px',
     width: 'auto',
     margin: '0 2px'
@@ -40,7 +44,7 @@ const styles = theme => ({
     justifyContent: 'center',
     width: '56px',
     height: '17px',
-    'font-size': '10px',
+    fontSize: '10px',
     margin: '5px 10px 5px 0px',
     backgroundColor: '#FFF350',
     color: '#263238'
@@ -61,7 +65,8 @@ const theme = createMuiTheme({
 })
 
 class ListItem extends Component {
-  next = (handleNext, props, restaurantInfo) => {
+  next = (handleNext, props, restaurantInfo, height) => {
+    this.props.handleScrollRecord(Math.floor((height - 177 + 200) / 200))
     handleNext('')
     restaurantInfo(props)
   }
@@ -71,51 +76,51 @@ class ListItem extends Component {
       classes,
       restaurantinfo: info,
       handleNext,
-      restaurantInfoFunc: restaurantInfo
+      restaurantInfoFunc: restaurantInfo,
+      height
     } = this.props
     return (
-      <div>
-        <div
-          className={classes.root}
-          onClick={() => this.next(handleNext, info, restaurantInfo)}
-        >
-          <div className={classes.gridList}>
-            {this.props.restaurantinfo['smallphotoUrls'].map(tile => (
-              <img
-                className={classes.img}
-                src={tile}
-                key={this.props.restaurantinfo['smallphotoUrls'].indexOf(tile)}
-                alt={'title'}
-              />
-            ))}
-          </div>
+      <div
+        className={classes.root}
+        onClick={e => this.next(handleNext, info, restaurantInfo, height)}
+      >
+        <div className={classes.gridList}>
+          {this.props.restaurantinfo['smallphotoUrls'].map(tile => (
+            <img
+              className={classes.img}
+              src={tile}
+              key={this.props.restaurantinfo['smallphotoUrls'].indexOf(tile)}
+              alt={'title'}
+            />
+          ))}
         </div>
-        <div
-          onClick={() => this.next(handleNext, info, restaurantInfo)}
-          className={classes.detail}
-        >
+        <div className={classes.detail}>
           <div className={classes.content}>
             <Grid container>
               <Grid item xs={9} style={{ height: '20px' }}>
-                <Typography 
+                <Typography
                   color='rgba(0,0,0,0.87)'
                   align='left'
-                  style={{ 
-                    fontWeight: '700', 
-                    lineHeight:'22px',
-                    marginTop: '3px' }}>
+                  style={{
+                    fontWeight: '700',
+                    lineHeight: '22px',
+                    marginTop: '3px'
+                  }}
+                >
                   {info['name']}
                 </Typography>
               </Grid>
               <Grid item xs={3}>
                 <Typography
-                  align='right' 
+                  align='right'
                   style={{
-                    color:'rgba(0,0,0,0.6)', 
-                    lineHeight:'22px',
-                    fontSize:'12.33px',
+                    color: 'rgba(0,0,0,0.6)',
+                    lineHeight: '22px',
+                    fontSize: '12.33px',
                     overflow: 'hidden',
-                    marginTop: '3px' }}>
+                    marginTop: '3px'
+                  }}
+                >
                   {DistanceFormat.DistanceFormat(info['distance'])}
                 </Typography>
               </Grid>
@@ -125,7 +130,7 @@ class ListItem extends Component {
                 align='left'
                 style={{ width: '98px', display: 'inline-block' }}
               >
-                <RatingStar rating={info['rating']} theme={0}/>
+                <RatingStar rating={info['rating']} theme={0} />
               </div>
               <Typography
                 align='left'
@@ -133,37 +138,39 @@ class ListItem extends Component {
                   display: 'inline-block',
                   paddingRight: '4px',
                   fontSize: '12px',
-                  marginBottom:'2px',
-                  color:'rgba(0,0,0,0.6)'
+                  marginBottom: '2px',
+                  color: 'rgba(0,0,0,0.6)'
                 }}
               >
                 {info['rating'].toFixed(1)}
               </Typography>
             </div>
             <Typography
-                align='left'
-                style={{ 
-                  fontSize: '12.33px',
-                  lineHeight:'22px',
-                  color:'rgba(0,0,0,0.6)'
-                }}
-              >
-                {'$ ' + info['priceLevel']}
+              align='left'
+              style={{
+                fontSize: '12.33px',
+                lineHeight: '22px',
+                color: 'rgba(0,0,0,0.6)'
+              }}
+            >
+              {'$ ' + info['priceLevel']}
             </Typography>
             <div style={{ justifyContent: 'flex-start', textAlign: 'left' }}>
-              {TagsMapping.sametags(this.props.tag, info['tags']).map((tag, index) => (
-                <nobr
-                  align='left'
-                  style={{ 
-                    fontSize: '12.33px',
-                    lineHeight:'22px',
-                    color:'rgba(0,0,0,0.6)',
-                    whiteSpace: 'nowrap',
-                  }}
-                >
-                  {tag+', '}
-                </nobr>
-              ))}
+              {TagsMapping.sametags(this.props.tag, info['tags']).map(
+                (tag, index) => (
+                  <nobr
+                    align='left'
+                    style={{
+                      fontSize: '12.33px',
+                      lineHeight: '22px',
+                      color: 'rgba(0,0,0,0.6)',
+                      whiteSpace: 'nowrap'
+                    }}
+                  >
+                    {tag + ', '}
+                  </nobr>
+                )
+              )}
             </div>
           </div>
         </div>
