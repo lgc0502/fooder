@@ -75,7 +75,6 @@ class FullWidthTabs extends React.Component {
 
     return (
       <div className={classes.root}>
-        <button id='test'>test</button>
         <MuiThemeProvider theme={theme}>
           <AppBar
             position='static'
