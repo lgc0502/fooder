@@ -46,14 +46,18 @@ class Map extends React.PureComponent {
     ))
   )
   render() {
-    const { position, data, scrollrecord } = this.props
+    const { position, data, scrollrecord, sortType } = this.props
     return (
       <Fragment>
         <this.CMap
           googleMapURL={this.props.googleMapURL}
           loadingElement={<div style={{ height: `80%` }} />}
           containerElement={
-            <div style={{ height: `calc(100vh - 156px)`, width: `100vw` }} />
+            <div style={{ 
+                height: sortType===1?"calc(100vh - 186px)":"calc(100vh - 146px)", 
+                width: `100vw`
+              }} 
+            />
           }
           mapElement={<div style={{ height: `100%` }} />}
         >
@@ -135,67 +139,3 @@ class Map extends React.PureComponent {
 }
 
 export default Map
-
-/*<MarkerClusterer
-averageCenter
-enableRetinaIcons
-gridSize={15}
-styles={[
-  {
-    url: cluster,
-    height: 30,
-    lineHeight: 30,
-    width: 42,
-    textColor:'white',
-    'font-size':'14px'
-  },
-  {
-    url: cluster,
-    height: 30,
-    lineHeight: 30,
-    width: 42,
-    textColor:'white',
-    'font-size':'14px'
-  },
-  {
-    url: cluster,
-    height: 30,
-    lineHeight: 30,
-    width: 42,
-    textColor:'white',
-    'font-size':'14px'
-  },
-  {
-    url: cluster,
-    height: 30,
-    lineHeight: 30,
-    width: 42,
-    textColor:'white',
-    'font-size':'14px'
-  },
-  {
-    url: cluster,
-    height: 30,
-    lineHeight: 30,
-    width: 42,
-    textColor:'white',
-    'font-size':'14px'
-  },
-  ]}
->
-{data.map(d => (
-  <Marker
-    key={data.indexOf(d)}
-    position={{ lat: d.location.coordinates[0], lng: d.location.coordinates[1] }} 
-    defaultOpacity={0.9} 
-    visible={
-      Math.floor(scrollrecord/20)==Math.floor(data.indexOf(d)/20)?(true):(false)
-    }
-    icon={{
-      url: data.indexOf(d)==scrollrecord?(Select):(unSelect),
-      scaledSize: new window.google.maps.Size(40, 40)
-    }}
-    
-  />
-))}
-</MarkerClusterer>*/

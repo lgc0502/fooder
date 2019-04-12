@@ -6,7 +6,8 @@ import BottomNavigation from '@material-ui/core/BottomNavigation';
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction';
 
 import InfiniteScrollList from './InfiniteScrollList.js'
-// import moment from 'moment'
+import SortOptionBtn from '../SortOptionBtn.js'
+
 const styles = theme => ({
   list: {
     display: 'flex',
@@ -20,19 +21,19 @@ const styles = theme => ({
   },
   sortbtn:{
     width:'100%',
-    height:'40px',
-    //marginTop:'6px',
-    marginBottom:'5px',
-    backgroundColor:'#f5f5f5'
+    height:'36px',
+    backgroundColor:'#f5f5f5',
+    color:'#b5b5b5'
   }
 })
 
-const GET_RESTAURANT = gql`
+const GET_RESTAURANT_DEFAULT = gql`
   query searchRestaurants(
     $tagIds: [ID!]!
     $lat: Float!
     $lng: Float!
     $userId:ID
+    $priceLevel: Int
     $cursor: String
   ) {
     searchRestaurants(
@@ -40,6 +41,8 @@ const GET_RESTAURANT = gql`
       lat: $lat
       lng: $lng
       user: $userId
+      priceLevel: $priceLevel
+      orderBy: default
       pageSize: 20
       after: $cursor
     ) {
@@ -57,22 +60,102 @@ const GET_RESTAURANT = gql`
         }
         distance
         photoUrls
+        location {
+          coordinates
+        }
       }
     }
   }
 `
-
+const GET_RESTAURANT_DISTANCE = gql`
+  query searchRestaurants(
+    $tagIds: [ID!]!
+    $lat: Float!
+    $lng: Float!
+    $userId:ID
+    $priceLevel: Int
+    $cursor: String
+  ) {
+    searchRestaurants(
+      tagIds: $tagIds
+      lat: $lat
+      lng: $lng
+      user: $userId
+      priceLevel: $priceLevel
+      orderBy: distance
+      pageSize: 20
+      after: $cursor
+    ) {
+      hasMore
+      cursor
+      restaurants {
+        id
+        name
+        placeId
+        rating
+        priceLevel
+        tags {
+          id
+          text
+        }
+        distance
+        photoUrls
+        location {
+          coordinates
+        }
+      }
+    }
+  }
+`
+const GET_RESTAURANT_PRICE = gql`
+  query searchRestaurants(
+    $tagIds: [ID!]!
+    $lat: Float!
+    $lng: Float!
+    $userId:ID
+    $priceLevel: Int
+    $cursor: String
+  ) {
+    searchRestaurants(
+      tagIds: $tagIds
+      lat: $lat
+      lng: $lng
+      user: $userId
+      priceLevel: $priceLevel
+      pageSize: 20
+      after: $cursor
+    ) {
+      hasMore
+      cursor
+      restaurants {
+        id
+        name
+        placeId
+        rating
+        priceLevel
+        tags {
+          id
+          text
+        }
+        distance
+        photoUrls
+        location {
+          coordinates
+        }
+      }
+    }
+  }
+`
 class RestaurantList extends Component {
-  SortType = type => {
-    switch (type) {
+
+  sort = (s) => {
+    switch(s){
       case 0:
-        return GET_RESTAURANT
+        return GET_RESTAURANT_DEFAULT
       case 1:
-        return GET_RESTAURANT
+        return GET_RESTAURANT_PRICE
       case 2:
-        return GET_RESTAURANT
-      default:
-        return GET_RESTAURANT
+        return GET_RESTAURANT_DISTANCE
     }
   }
   render() {
@@ -84,24 +167,24 @@ class RestaurantList extends Component {
       restaurantInfo,
       type,
       handleScrollRecord,
-      scrollrecord
+      scrollrecord,
+      handleSortType,
+      sortType,
+      pricelevel
     } = this.props
     const lat = position[0]
     const lng = position[1]
     const userId = localStorage.getItem('FooderUserID')
+    var priceLevel = pricelevel
+
     return (
       <div className={classes.list}>
-        <BottomNavigation
-          showLabels
-          className={classes.sortbtn}
-        >
-        <BottomNavigationAction label="熱門程度" style={{fontWeight: '700'}}/> 
-        <nobr style={{paddingTop: '8px'}}>|</nobr>
-        <BottomNavigationAction label="價格範圍" style={{fontWeight: '700'}}/> 
-        <nobr style={{paddingTop: '8px'}}>|</nobr>
-        <BottomNavigationAction label="距離範圍" style={{fontWeight: '700'}}/>
-      </BottomNavigation>
-        <Query query={this.SortType(type)} variables={{ tagIds, lat, lng, userId }}>
+        <SortOptionBtn 
+          handleSortType={handleSortType}
+          sortType={sortType}
+          pricelevel={pricelevel}
+        />
+        <Query query={this.sort(sortType)} variables={{ tagIds, lat, lng, userId, priceLevel }}>
           {({ data, loading, error, fetchMore }) => {
             if (error) return <p>{'出現錯誤，請嘗試重新整理頁面'}</p>
 
@@ -112,6 +195,7 @@ class RestaurantList extends Component {
                 handleNext={handleNext}
                 restaurantInfo={restaurantInfo}
                 tag={tagIds}
+                sorttype={sortType}
                 handleScrollRecord={handleScrollRecord}
                 scrollrecord={scrollrecord}
                 onLoadMore={() =>

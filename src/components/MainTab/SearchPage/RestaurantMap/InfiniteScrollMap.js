@@ -20,7 +20,6 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    height: 'calc(100vh - 156px)',
     overflowX: 'hidden',
     overflowY: 'hidden',
     alignItems: 'flex-end',
@@ -41,7 +40,7 @@ class InfiniteScrollList extends Component {
   }
   componentDidMount(){
     if(ReactDOM.findDOMNode(this.refs.list) != null) {
-      ReactDOM.findDOMNode(this.refs.list).scrollTo(this.props.scrollrecord*260, 0)
+      ReactDOM.findDOMNode(this.refs.list).scrollTo(this.props.scrollrecord*218, 0)
     }
   }  
   render() {
@@ -54,17 +53,22 @@ class InfiniteScrollList extends Component {
       tag,
       handleNext, 
       scrollrecord, 
-      position 
+      position,
+      sortType
     } = this.props
     const data = listdata['restaurants'] || []
     const hasMore = listdata['hasMore']
     return (
-      <div className={classes.list}>
+      <div 
+        className={classes.list} 
+        style={{height: sortType===1?"calc(100vh - 186px)":"calc(100vh - 146px)"}}
+      >
       <Map 
         isMarkerShown
         scrollrecord={scrollrecord}
         data={data}
         position={position}
+        sortType={sortType}
       />
       <div
         className={classes.gridList}

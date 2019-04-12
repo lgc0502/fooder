@@ -38,7 +38,9 @@ class SearchPages extends React.Component {
     Info: {},
     lat: 23.000403,
     lng: 120.21954,
-    scrollrecord: 0
+    scrollrecord: 0,
+    sortType: 0,
+    pricelevel: 0
   }
   componentDidMount() {
     geolocation.getLocation().then(d =>
@@ -82,6 +84,12 @@ class SearchPages extends React.Component {
       scrollrecord: scrollitem
     })
   }
+  handleSortType = (s,p) => {
+    this.setState({
+      sortType: s,
+      pricelevel: p
+    })
+  }
   restaurantInfo = d => {
     this.setState({ Info: d })
   }
@@ -89,7 +97,7 @@ class SearchPages extends React.Component {
     const { classes } = this.props
     const handleNext = this.handleNext
     const handleScrollRecord = this.handleScrollRecord
-
+    const handleSortType = this.handleSortType
     switch (step) {
       case 0:
         return <FoodType className={classes.content} handleNext={handleNext} />
@@ -110,6 +118,9 @@ class SearchPages extends React.Component {
             position={[this.state.lat, this.state.lng]}
             handleScrollRecord={handleScrollRecord}
             scrollrecord={this.state.scrollrecord}
+            handleSortType={handleSortType}
+            sortType={this.state.sortType}
+            pricelevel={this.state.pricelevel}
           />
         ) : (
           <RestaurantMap
@@ -120,6 +131,9 @@ class SearchPages extends React.Component {
             position={[this.state.lat, this.state.lng]}
             handleScrollRecord={handleScrollRecord}
             scrollrecord={this.state.scrollrecord}
+            handleSortType={handleSortType}
+            sortType={this.state.sortType}
+            pricelevel={this.state.pricelevel}
           />
         )
 
