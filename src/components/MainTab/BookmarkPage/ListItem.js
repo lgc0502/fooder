@@ -71,13 +71,16 @@ class ListItem extends Component {
       classes,
       restaurantinfo,
       handleNext,
-      handleRestaurant
+      handleRestaurant,
+      vehicle
     } = this.props
     return (
       <div>
         <div
           className={classes.root}
-          onClick={() => this.next(handleNext, restaurantinfo, handleRestaurant)}
+          onClick={() =>
+            this.next(handleNext, restaurantinfo, handleRestaurant)
+          }
         >
           <div className={classes.gridList}>
             {restaurantinfo['smallphotoUrls'].map(tile => (
@@ -91,55 +94,79 @@ class ListItem extends Component {
           </div>
         </div>
         <div
-          onClick={() => this.next(handleNext, restaurantinfo, handleRestaurant)}
+          onClick={() =>
+            this.next(handleNext, restaurantinfo, handleRestaurant)
+          }
           className={classes.detail}
         >
           <div className={classes.content}>
             <Grid container>
-              <Grid item xs={9} style={{ height: '20px' }}>
+              <Grid item xs={8} style={{ height: '20px' }}>
                 <Typography align='left' style={{ fontWeight: '700' }}>
                   {restaurantinfo['name']}
                 </Typography>
               </Grid>
-              <Grid item xs={3}>
-                <Typography align='right' style={{ overflow: 'hidden' }}>
-                  {DistanceFormat.DistanceFormat(restaurantinfo['distance'])}
+              <Grid item xs={4}>
+                <Typography
+                  align='right'
+                  style={{
+                    color: 'rgba(0,0,0,0.6)',
+                    lineHeight: '22px',
+                    fontSize: '12.33px',
+                    overflow: 'hidden',
+                    marginTop: '3px'
+                  }}
+                >
+                  {DistanceFormat.DistanceFormat(
+                    restaurantinfo['distance'],
+                    vehicle
+                  )}
                 </Typography>
               </Grid>
             </Grid>
             <div align='left' style={{ paddingLeft: '4px' }}>
-              <Typography
-                align='left'
-                style={{
-                  display: 'inline-block',
-                  paddingRight: '4px',
-                  fontSize: '12px'
-                }}
-              >
-                {restaurantinfo['rating'].toFixed(1)}
-              </Typography>
-              <div
-                align='left'
-                style={{ width: '87px', display: 'inline-block' }}
-              >
-                <RatingStar rating={restaurantinfo['rating']} theme={0} />
+              <div align='left'>
+                <div
+                  align='left'
+                  style={{ width: '98px', display: 'inline-block' }}
+                >
+                  <RatingStar rating={restaurantinfo['rating']} theme={0} />
+                </div>
+                <Typography
+                  align='left'
+                  style={{
+                    display: 'inline-block',
+                    paddingRight: '4px',
+                    fontSize: '12px',
+                    marginBottom: '2px',
+                    color: 'rgba(0,0,0,0.6)'
+                  }}
+                >
+                  {restaurantinfo['rating'].toFixed(1)}
+                </Typography>
               </div>
               <Typography
                 align='left'
-                style={{ display: 'inline-block', fontSize: '12px' }}
+                style={{
+                  fontSize: '12.33px',
+                  lineHeight: '22px',
+                  color: 'rgba(0,0,0,0.6)'
+                }}
               >
                 {'$ ' + restaurantinfo['priceLevel']}
               </Typography>
             </div>
             <div style={{ justifyContent: 'flex-start', textAlign: 'left' }}>
-              {TagsMapping.sametags(this.props.tag, restaurantinfo['tags']).map((tag, index) => (
-                <Chip
-                  className={classes.chip}
-                  key={index}
-                  label={tag}
-                  color='primary'
-                />
-              ))}
+              {TagsMapping.sametags(this.props.tag, restaurantinfo['tags']).map(
+                (tag, index) => (
+                  <Chip
+                    className={classes.chip}
+                    key={index}
+                    label={tag}
+                    color='primary'
+                  />
+                )
+              )}
             </div>
           </div>
         </div>

@@ -8,6 +8,7 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import RestaurantDetail from './RestaurantDetail'
 import RestaurantList from './RestaurantList.js'
 import Appbar from '../SearchPage/AppBar/AppBar.js'
+import geolocation from '../SearchPage/Common/geolocation.js'
 // import moment from 'moment'
 const styles = theme => ({
   content: {
@@ -30,8 +31,18 @@ class RestaurantSearch extends Component {
     super(props)
     this.state = {
       step: 4,
-      Info: {}
+      Info: {},
+      lat: 23.000403,
+      lng: 120.21954,
     }
+  }
+  componentDidMount() {
+    geolocation.getLocation().then(d =>
+      this.setState({
+        lat: d.coords.latitude,
+        lng: d.coords.longitude
+      })
+    )
   }
   handleNext = () => {
     this.setState({ step: this.state.step + 1 })
@@ -43,7 +54,7 @@ class RestaurantSearch extends Component {
     this.setState({ Info: d })
   }
   getStepContent = step => {
-    const { classes } = this.props
+    const { classes, vehicle } = this.props
     const handleNext = this.handleNext
     switch (step) {
       case 4:
@@ -52,6 +63,8 @@ class RestaurantSearch extends Component {
             <RestaurantList
               className={classes.content}
               handleNext={this.handleNext}
+              vehicle={vehicle}
+              position={[this.state.lat, this.state.lng]}
               handleRestaurant={this.handleRestaurant}
             />
           </MuiThemeProvider>
@@ -61,6 +74,8 @@ class RestaurantSearch extends Component {
           <RestaurantDetail
             className={classes.content}
             tags={this.state.Info.tags}
+            vehicle={vehicle}
+            position={[this.state.lat, this.state.lng]}
             info={this.state.Info}
           />
         )

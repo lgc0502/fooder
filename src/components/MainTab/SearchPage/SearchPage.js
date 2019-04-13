@@ -50,7 +50,6 @@ class SearchPages extends React.Component {
         lng: d.coords.longitude
       })
     )
-    
   }
   handleNext = appendtag => {
     this.setState(state => ({
@@ -132,6 +131,7 @@ class SearchPages extends React.Component {
           <RestaurantDetail
             className={classes.content}
             tags={this.state.Tags}
+            position={[this.state.lat, this.state.lng]}
             info={this.state.Info}
             vehicle={vehicle}
           />

@@ -146,7 +146,7 @@ class RestaurantDetail extends Component {
   }
 
   render() {
-    const { classes, tag, info, detail } = this.props
+    const { classes, tag, info, detail, vehicle } = this.props
     return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.page}>
@@ -164,7 +164,7 @@ class RestaurantDetail extends Component {
           </div>
           <div className={classes.detail}>
             <Grid container>
-              <Grid item xs={9}>
+              <Grid item xs={8}>
                 <Typography
                   align='left'
                   style={{ fontWeight: '700', fontSize: '16px' }}
@@ -172,9 +172,9 @@ class RestaurantDetail extends Component {
                   {detail['name']}
                 </Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={4}>
                 <Typography align='right' style={{ overflow: 'hidden' }}>
-                  {DistanceFormat.DistanceFormat(info['distance'])}
+                  {DistanceFormat.DistanceFormat(info['distance'], vehicle)}
                 </Typography>
               </Grid>
             </Grid>

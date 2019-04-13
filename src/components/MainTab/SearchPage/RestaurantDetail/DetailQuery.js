@@ -7,8 +7,12 @@ import Loading from '../../../../image/Spin-1s-63px.gif'
 import DetailInfo from '../DetailInfo.js'
 
 const GET_RESTAURANT = gql`
-  query getRestaurantsByPlaceId($placeIds: [String]!) {
-    getRestaurantsByPlaceId(placeIds: $placeIds) {
+  query getRestaurantsByPlaceId(
+    $placeIds: [String]!
+    $lat: Float!
+    $lng: Float!
+  ) {
+    getRestaurantsByPlaceId(placeIds: $placeIds, lat: $lat, lng: $lng) {
       id
       name
       placeId
@@ -32,10 +36,15 @@ const GET_RESTAURANT = gql`
 `
 
 const DetailQuery = props => {
-  const { tag, info, vehicle } = props
+  const { tag, info, vehicle, position } = props
+  const lat = position[0]
+  const lng = position[1]
   const placeIds = info['placeId']
   return (
-    <Query query={GET_RESTAURANT} variables={{ placeIds: [placeIds] }}>
+    <Query
+      query={GET_RESTAURANT}
+      variables={{ placeIds: [placeIds], lat, lng }}
+    >
       {({ loading, error, data }) => {
         if (loading) {
           return <img src={Loading} alt={'Loading'} />

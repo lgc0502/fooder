@@ -22,9 +22,13 @@ const styles = theme => ({
 const GET_RESTAURANT = gql`
 query getRestaurantsByPlaceId(
     $placeIds: [String]!
+    $lat: Float!
+    $lng: Float!
   ){
   getRestaurantsByPlaceId(
     placeIds: $placeIds
+    lat: $lat
+    lng: $lng
   ) {
     id
     name
@@ -58,20 +62,25 @@ class RestaurantList extends Component {
     const {
       classes,
       handleNext,
+      position,
       handleRestaurant,
       type,
+      vehicle
     } = this.props
 
+    const lat = position[0]
+    const lng = position[1]
     const placeIds = localStorage.getItem('id').split(' ')
     return (
       <div className={classes.list}>
-        <Query query={this.SortType(type)} variables={{ placeIds }}>
+        <Query query={this.SortType(type)} variables={{ placeIds, lat, lng }}>
           {({ data, loading, error, fetchMore }) => {
             if (error) return <p>{'出現錯誤，請嘗試重新整理頁面'}</p>
             return (
               <InfiniteScrollList
                 loading={loading}
                 listdata={data.getRestaurantsByPlaceId}
+                vehicle={vehicle}
                 handleNext={handleNext}
                 handleRestaurant={handleRestaurant}
               />

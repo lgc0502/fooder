@@ -24,10 +24,15 @@ const styles = theme => ({
 })
 
 const RestaurantDetail = props => {
-  const { classes, tags, info, vehicle } = props
+  const { classes, tags, info, vehicle, position } = props
   return (
     <div className={classes.content}>
-      <DetailQuery tag={tags} info={info} vehicle={vehicle} />
+      <DetailQuery
+        tag={tags}
+        info={info}
+        vehicle={vehicle}
+        position={position}
+      />
     </div>
   )
 }

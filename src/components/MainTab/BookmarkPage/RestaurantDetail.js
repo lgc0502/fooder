@@ -23,11 +23,16 @@ const styles = theme => ({
   }
 })
 
-const RestaurantDetail = (props) => {
-  const { classes, tags, info } = props
+const RestaurantDetail = props => {
+  const { classes, tags, info, position, vehicle } = props
   return (
     <div className={classes.content}>
-      <DetailQuery tag={tags} info={info} />
+      <DetailQuery
+        tag={tags}
+        info={info}
+        position={position}
+        vehicle={vehicle}
+      />
     </div>
   )
 }

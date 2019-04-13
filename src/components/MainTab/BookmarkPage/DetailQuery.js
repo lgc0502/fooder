@@ -7,8 +7,12 @@ import Loading from '../../../image/Spin-1s-63px.gif'
 import DetailInfo from './DetailInfo.js'
 
 const GET_RESTAURANT = gql`
-  query getRestaurantsByPlaceId($placeIds: [String]!) {
-    getRestaurantsByPlaceId(placeIds: $placeIds) {
+  query getRestaurantsByPlaceId(
+    $placeIds: [String]!
+    $lat: Float!
+    $lng: Float!
+  ) {
+    getRestaurantsByPlaceId(placeIds: $placeIds, lat: $lat, lng: $lng) {
       id
       name
       placeId
@@ -32,14 +36,15 @@ const GET_RESTAURANT = gql`
 `
 
 const DetailQuery = props => {
-  const { tag, info } = props
+  const { tag, info, position, vehicle } = props
+  const lat = position[0]
+  const lng = position[1]
   const placeId = info['placeId']
   return (
-    <Query query={GET_RESTAURANT} variables={{ placeIds: [placeId] }}>
+    <Query query={GET_RESTAURANT} variables={{ placeIds: [placeId], lat, lng }}>
       {({ loading, error, data }) => {
-        console.log(data)
         if (loading) {
-          return <img src={Loading} alt={'Loading'}/>
+          return <img src={Loading} alt={'Loading'} />
         }
         if (error) return '沒有符合的結果，請返回上一頁'
         return (
@@ -48,6 +53,7 @@ const DetailQuery = props => {
             tag={tag}
             info={info}
             detail={data['getRestaurantsByPlaceId'][0]}
+            vehicle={vehicle}
           />
         )
       }}
