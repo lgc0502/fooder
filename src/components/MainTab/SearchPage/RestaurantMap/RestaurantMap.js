@@ -1,13 +1,12 @@
 import React from 'react'
 import gql from 'graphql-tag'
 import { Query } from 'react-apollo'
-// import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles'
 import BottomNavigation from '@material-ui/core/BottomNavigation'
 import BottomNavigationAction from '@material-ui/core/BottomNavigationAction'
 
 import InfiniteScrollMap from './InfiniteScrollMap.js'
-// import moment from "moment";
+import SortOptionBtn from '../SortOptionBtn.js'
 
 const styles = theme => ({
   list: {
@@ -20,21 +19,21 @@ const styles = theme => ({
     alignItems: 'flex-end',
     marginBottom: '56px'
   },
-  sortbtn: {
-    width: '100%',
-    height: '40px',
-    //marginTop:'6px',
-    marginBottom: '5px',
-    backgroundColor: '#f5f5f5'
+  sortbtn:{
+    width:'100%',
+    height:'40px',
+    marginBottom:'5px',
+    backgroundColor:'#f5f5f5'
   }
 })
 
-const GET_RESTAURANT = gql`
+const GET_RESTAURANT_DEFAULT = gql`
   query searchRestaurants(
     $tagIds: [ID!]!
     $lat: Float!
     $lng: Float!
-    $userId: ID
+    $userId:ID
+    $priceLevel: Int
     $cursor: String
   ) {
     searchRestaurants(
@@ -42,6 +41,8 @@ const GET_RESTAURANT = gql`
       lat: $lat
       lng: $lng
       user: $userId
+      priceLevel: $priceLevel
+      orderBy: default
       pageSize: 20
       after: $cursor
     ) {
@@ -60,45 +61,122 @@ const GET_RESTAURANT = gql`
         location {
           coordinates
         }
-        distance
-        photoUrls
+      }
+    }
+  }
+`
+const GET_RESTAURANT_DISTANCE = gql`
+  query searchRestaurants(
+    $tagIds: [ID!]!
+    $lat: Float!
+    $lng: Float!
+    $userId:ID
+    $priceLevel: Int
+    $cursor: String
+  ) {
+    searchRestaurants(
+      tagIds: $tagIds
+      lat: $lat
+      lng: $lng
+      user: $userId
+      priceLevel: $priceLevel
+      orderBy: distance
+      pageSize: 20
+      after: $cursor
+    ) {
+      hasMore
+      cursor
+      restaurants {
+        id
+        name
+        placeId
+        rating
+        priceLevel
+        tags {
+          id
+          text
+        }
+        location {
+          coordinates
+        }
+      }
+    }
+  }
+`
+const GET_RESTAURANT_PRICE = gql`
+  query searchRestaurants(
+    $tagIds: [ID!]!
+    $lat: Float!
+    $lng: Float!
+    $userId:ID
+    $priceLevel: Int
+    $cursor: String
+  ) {
+    searchRestaurants(
+      tagIds: $tagIds
+      lat: $lat
+      lng: $lng
+      user: $userId
+      priceLevel: $priceLevel
+      pageSize: 20
+      after: $cursor
+    ) {
+      hasMore
+      cursor
+      restaurants {
+        id
+        name
+        placeId
+        rating
+        priceLevel
+        tags {
+          id
+          text
+        }
+        location {
+          coordinates
+        }
       }
     }
   }
 `
 
 const RestaurantMap = props => {
-  const {
-    classes,
-    tags: tagIds,
-    position,
-    handleNext,
+  const { 
+    classes, 
+    tags: tagIds, 
+    position, 
+    handleNext, 
     restaurantInfo,
-    handleScrollRecord,
-    scrollrecord
+    handleScrollRecord, 
+    scrollrecord,
+    handleSortType,
+    sortType,
+    pricelevel, 
   } = props
+  const sort = (s) => {
+    switch(s){
+      case 0:
+        return GET_RESTAURANT_DEFAULT
+      case 1:
+        return GET_RESTAURANT_PRICE
+      case 2:
+        return GET_RESTAURANT_DISTANCE
+    }
+  }
   const lat = position[0]
   const lng = position[1]
   const userId = localStorage.getItem('FooderUserID')
+  var priceLevel = pricelevel
+
   return (
     <div>
-      <BottomNavigation showLabels className={classes.sortbtn}>
-        <BottomNavigationAction
-          label='熱門程度'
-          style={{ fontWeight: '700' }}
-        />
-        <nobr style={{ paddingTop: '8px' }}>|</nobr>
-        <BottomNavigationAction
-          label='價格範圍'
-          style={{ fontWeight: '700' }}
-        />
-        <nobr style={{ paddingTop: '8px' }}>|</nobr>
-        <BottomNavigationAction
-          label='距離範圍'
-          style={{ fontWeight: '700' }}
-        />
-      </BottomNavigation>
-      <Query query={GET_RESTAURANT} variables={{ tagIds, lat, lng, userId }}>
+      <SortOptionBtn 
+        handleSortType={handleSortType}
+        sortType={sortType}
+        pricelevel={pricelevel}
+      />
+      <Query query={sort(sortType)} variables={{ tagIds, lat, lng, userId, priceLevel }}>
         {({ data, loading, error, fetchMore }) => {
           return (
             <InfiniteScrollMap
@@ -110,6 +188,7 @@ const RestaurantMap = props => {
               handleScrollRecord={handleScrollRecord}
               scrollrecord={scrollrecord}
               position={position}
+              sortType={sortType}
               onLoadMore={() =>
                 fetchMore({
                   variables: {
@@ -153,3 +232,4 @@ const RestaurantMap = props => {
 }
 
 export default withStyles(styles)(RestaurantMap)
+

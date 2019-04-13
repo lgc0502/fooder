@@ -6,7 +6,6 @@ import ReactDOM from 'react-dom'
 
 import ListCard from './ListCard.js'
 import Map from './Map.js'
-// import ModifyUrl from './RestaurantSearch/ModifyUrl.js';
 
 const styles = theme => ({
   gridList: {
@@ -20,7 +19,6 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    height: 'calc(100vh - 156px)',
     overflowX: 'hidden',
     overflowY: 'hidden',
     alignItems: 'flex-end',
@@ -34,84 +32,94 @@ class InfiniteScrollList extends Component {
       Math.abs(
         e.target.scrollWidth - e.target.scrollLeft - e.target.clientWidth
       ) <= 1
-    this.props.handleScrollRecord(Math.floor((e.target.scrollLeft+100)/218))
+    this.props.handleScrollRecord(Math.floor((e.target.scrollLeft + 100) / 218))
     if (bottom) {
       this.props.onLoadMore()
     }
   }
-  componentDidMount(){
-    if(ReactDOM.findDOMNode(this.refs.list) != null) {
-      ReactDOM.findDOMNode(this.refs.list).scrollTo(this.props.scrollrecord*260, 0)
+  componentDidMount() {
+    if (ReactDOM.findDOMNode(this.refs.list) != null) {
+      ReactDOM.findDOMNode(this.refs.list).scrollTo(
+        this.props.scrollrecord * 218,
+        0
+      )
     }
-  }  
+  }
   render() {
     if (!this.props.listdata && this.props.loading) {
       return <p>Loading....</p>
     }
-    const { 
-      classes, 
-      listdata, 
+    const {
+      classes,
+      listdata,
       tag,
-      handleNext, 
-      scrollrecord, 
-      position 
+      handleNext,
+      scrollrecord,
+      position,
+      sortType
     } = this.props
     const data = listdata['restaurants'] || []
     const hasMore = listdata['hasMore']
     return (
-      <div className={classes.list}>
-      <Map 
-        isMarkerShown
-        scrollrecord={scrollrecord}
-        data={data}
-        position={position}
-      />
       <div
-        className={classes.gridList}
-        ref={"list"}
-        onScroll={this.handleScroll}
-        onTouchStart={e => {
-          //console.log(e.changedTouches[0].pageX)
-        }}
-        onTouchEnd={e => {
-          //console.log(e.changedTouches[0].pageX)
+        className={classes.list}
+        style={{
+          height: sortType === 1 ? 'calc(100vh - 186px)' : 'calc(100vh - 146px)'
         }}
       >
-        {data.map(d => {
-          return (
-            <ListCard
-              key={data.indexOf(d)}
-              tag={tag}
-              handleNext={handleNext}
-              restaurantinfo={d}
-              restaurantInfoFunc={this.props.restaurantInfo}
-            />
-          )
-        })}
-        {hasMore === true ? (
-          <p
-            style={{
-              display: 'inline-block',
-              position: 'relative',
-              top: '-60px',
-              padding: '24px'
-            }}
-          >
-            loading
-          </p>
-        ) : (
-          <p
-            style={{
-              display: 'inline-block',
-              position: 'relative',
-              top: '-60px',
-              padding: '24px'
-            }}
-          >
-            噢噢...沒有更多店家了
-          </p>
-        )}
-      </div>
+        <Map
+          isMarkerShown
+          scrollrecord={scrollrecord}
+          data={data}
+          position={position}
+          sortType={sortType}
+        />
+        <div
+          className={classes.gridList}
+          ref={'list'}
+          onScroll={this.handleScroll}
+          onTouchStart={e => {
+            //console.log(e.changedTouches[0].pageX)
+          }}
+          onTouchEnd={e => {
+            //console.log(e.changedTouches[0].pageX)
+          }}
+        >
+          {data.map(d => {
+            return (
+              <ListCard
+                key={data.indexOf(d)}
+                tag={tag}
+                handleNext={handleNext}
+                restaurantinfo={d}
+                restaurantInfoFunc={this.props.restaurantInfo}
+              />
+            )
+          })}
+          {hasMore === true ? (
+            <p
+              style={{
+                display: 'inline-block',
+                position: 'relative',
+                top: '-60px',
+                padding: '24px'
+              }}
+            >
+              loading
+            </p>
+          ) : (
+            <p
+              style={{
+                display: 'inline-block',
+                position: 'relative',
+                top: '-60px',
+                padding: '24px'
+              }}
+            >
+              噢噢...沒有更多店家了
+            </p>
+          )}
+        </div>
       </div>
     )
   }

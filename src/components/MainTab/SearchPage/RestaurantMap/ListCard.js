@@ -18,7 +18,7 @@ const styles = {
     height: '110px',
     display: 'inline-block',
     margin: '0 0 15px 20px',
-    'border-radius':'15px'
+    'border-radius': '15px'
   },
   content: {
     padding: '12px',
@@ -46,19 +46,26 @@ class ListCard extends Component {
       handleNext,
       restaurantInfoFunc: restaurantInfo
     } = this.props
-    
+
     return (
       <Card
         className={classes.card}
         onClick={() => this.next(handleNext, info, restaurantInfo)}
         style={{
-          width: '198px',
+          width: '198px'
         }}
       >
         <div className={classes.content}>
           <Grid container>
             <Grid item xs={10} style={{ height: '21px' }}>
-              <Typography align='left' style={{ fontWeight: '700', overflow:'hidden',height: '21px' }}>
+              <Typography
+                align='left'
+                style={{
+                  fontWeight: '700',
+                  overflow: 'hidden',
+                  height: '21px'
+                }}
+              >
                 {info['name']}
               </Typography>
             </Grid>
@@ -71,7 +78,7 @@ class ListCard extends Component {
               align='left'
               style={{ width: '87px', display: 'inline-block' }}
             >
-              <RatingStar rating={info['rating']} theme={0}/>
+              <RatingStar rating={info['rating']} theme={0} />
             </div>
             <Typography
               align='left'
@@ -85,25 +92,27 @@ class ListCard extends Component {
             </Typography>
           </div>
           <Typography
-              align='left'
-              style={{ fontSize: '12.33px',marginTop:'2px' }}
+            align='left'
+            style={{ fontSize: '12.33px', marginTop: '2px' }}
           >
-              {'$ ' + info['priceLevel']}
+            {'$ ' + info['priceLevel']}
           </Typography>
           <div style={{ justifyContent: 'flex-start', textAlign: 'left' }}>
-            {TagsMapping.sametags(this.props.tag, info['tags']).map((tag, index) => (
-              <nobr
-                align='left'
-                style={{ 
-                  fontSize: '12.33px',
-                  //lineHeight:'22px',
-                  color:'rgba(0,0,0,0.6)',
-                  whiteSpace: 'nowrap',
-                }}
-              >
-                {tag+', '}
-              </nobr>
-            ))}
+            {TagsMapping.sametags(this.props.tag, info['tags']).map(
+              (tag, index) => (
+                <nobr
+                  align='left'
+                  style={{
+                    fontSize: '12.33px',
+                    //lineHeight:'22px',
+                    color: 'rgba(0,0,0,0.6)',
+                    whiteSpace: 'nowrap'
+                  }}
+                >
+                  {tag + ', '}
+                </nobr>
+              )
+            )}
           </div>
         </div>
       </Card>

@@ -14,28 +14,24 @@ const styles = theme => ({
   root: {
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing.unit / 2,
-    width: '100vw',
-    position: 'relative'
+    width: '100vw'
   },
   gridList: {
-    whiteSpace: 'nowrap',
-    textAlign: 'left',
-    overflow: 'auto',
-    '-webkit-overflow-scrolling': 'touch',
-    cursor: 'pointer'
+    'white-space': 'nowrap',
+    'overflow-x': 'scroll',
+    'text-align': 'left'
   },
   detail: {
     padding: '0 5px',
     width: 'calc(100vw - 10px)',
-    marginBottom: '10px'
+    'margin-bottom': '15px'
   },
   content: {
     padding: '0px 6px 6px 13px'
   },
   img: {
-    borderRadius: '4px',
+    //'border-radius': '4px',
     display: 'inline-block',
-    position: 'relative',
     height: '104px',
     width: 'auto',
     margin: '0 2px'
@@ -44,7 +40,7 @@ const styles = theme => ({
     justifyContent: 'center',
     width: '56px',
     height: '17px',
-    fontSize: '10px',
+    'font-size': '10px',
     margin: '5px 10px 5px 0px',
     backgroundColor: '#FFF350',
     color: '#263238'
@@ -65,8 +61,7 @@ const theme = createMuiTheme({
 })
 
 class ListItem extends Component {
-  next = (handleNext, props, restaurantInfo, height) => {
-    this.props.handleScrollRecord(Math.floor((height - 177 + 200) / 200))
+  next = (handleNext, props, restaurantInfo) => {
     handleNext('')
     restaurantInfo(props)
   }
@@ -81,21 +76,26 @@ class ListItem extends Component {
       vehicle
     } = this.props
     return (
-      <div
-        className={classes.root}
-        onClick={e => this.next(handleNext, info, restaurantInfo, height)}
-      >
-        <div className={classes.gridList}>
-          {this.props.restaurantinfo['smallphotoUrls'].map(tile => (
-            <img
-              className={classes.img}
-              src={tile}
-              key={this.props.restaurantinfo['smallphotoUrls'].indexOf(tile)}
-              alt={'title'}
-            />
-          ))}
+      <div>
+        <div
+          className={classes.root}
+          onClick={() => this.next(handleNext, info, restaurantInfo)}
+        >
+          <div className={classes.gridList}>
+            {this.props.restaurantinfo['smallphotoUrls'].map(tile => (
+              <img
+                className={classes.img}
+                src={tile}
+                key={this.props.restaurantinfo['smallphotoUrls'].indexOf(tile)}
+                alt={'title'}
+              />
+            ))}
+          </div>
         </div>
-        <div className={classes.detail}>
+        <div
+          onClick={() => this.next(handleNext, info, restaurantInfo)}
+          className={classes.detail}
+        >
           <div className={classes.content}>
             <Grid container>
               <Grid item xs={9} style={{ height: '20px' }}>
