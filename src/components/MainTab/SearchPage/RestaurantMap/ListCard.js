@@ -46,7 +46,7 @@ class ListCard extends Component {
       handleNext,
       restaurantInfoFunc: restaurantInfo
     } = this.props
-
+    console.log(info)
     return (
       <Card
         className={classes.card}

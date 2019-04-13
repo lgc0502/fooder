@@ -19,11 +19,11 @@ const styles = theme => ({
     alignItems: 'flex-end',
     marginBottom: '56px'
   },
-  sortbtn:{
-    width:'100%',
-    height:'40px',
-    marginBottom:'5px',
-    backgroundColor:'#f5f5f5'
+  sortbtn: {
+    width: '100%',
+    height: '40px',
+    marginBottom: '5px',
+    backgroundColor: '#f5f5f5'
   }
 })
 
@@ -32,7 +32,7 @@ const GET_RESTAURANT_DEFAULT = gql`
     $tagIds: [ID!]!
     $lat: Float!
     $lng: Float!
-    $userId:ID
+    $userId: ID
     $priceLevel: Int
     $cursor: String
   ) {
@@ -58,6 +58,8 @@ const GET_RESTAURANT_DEFAULT = gql`
           id
           text
         }
+        photoUrls
+        distance
         location {
           coordinates
         }
@@ -70,7 +72,7 @@ const GET_RESTAURANT_DISTANCE = gql`
     $tagIds: [ID!]!
     $lat: Float!
     $lng: Float!
-    $userId:ID
+    $userId: ID
     $priceLevel: Int
     $cursor: String
   ) {
@@ -96,6 +98,8 @@ const GET_RESTAURANT_DISTANCE = gql`
           id
           text
         }
+        photoUrls
+        distance
         location {
           coordinates
         }
@@ -108,7 +112,7 @@ const GET_RESTAURANT_PRICE = gql`
     $tagIds: [ID!]!
     $lat: Float!
     $lng: Float!
-    $userId:ID
+    $userId: ID
     $priceLevel: Int
     $cursor: String
   ) {
@@ -133,6 +137,8 @@ const GET_RESTAURANT_PRICE = gql`
           id
           text
         }
+        photoUrls
+        distance
         location {
           coordinates
         }
@@ -142,20 +148,20 @@ const GET_RESTAURANT_PRICE = gql`
 `
 
 const RestaurantMap = props => {
-  const { 
-    classes, 
-    tags: tagIds, 
-    position, 
-    handleNext, 
+  const {
+    classes,
+    tags: tagIds,
+    position,
+    handleNext,
     restaurantInfo,
-    handleScrollRecord, 
+    handleScrollRecord,
     scrollrecord,
     handleSortType,
     sortType,
-    pricelevel, 
+    pricelevel
   } = props
-  const sort = (s) => {
-    switch(s){
+  const sort = s => {
+    switch (s) {
       case 0:
         return GET_RESTAURANT_DEFAULT
       case 1:
@@ -171,12 +177,15 @@ const RestaurantMap = props => {
 
   return (
     <div>
-      <SortOptionBtn 
+      <SortOptionBtn
         handleSortType={handleSortType}
         sortType={sortType}
         pricelevel={pricelevel}
       />
-      <Query query={sort(sortType)} variables={{ tagIds, lat, lng, userId, priceLevel }}>
+      <Query
+        query={sort(sortType)}
+        variables={{ tagIds, lat, lng, userId, priceLevel }}
+      >
         {({ data, loading, error, fetchMore }) => {
           return (
             <InfiniteScrollMap
@@ -232,4 +241,3 @@ const RestaurantMap = props => {
 }
 
 export default withStyles(styles)(RestaurantMap)
-

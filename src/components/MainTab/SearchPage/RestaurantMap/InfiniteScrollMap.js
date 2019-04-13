@@ -6,6 +6,7 @@ import ReactDOM from 'react-dom'
 
 import ListCard from './ListCard.js'
 import Map from './Map.js'
+import ModifyUrl from '../Common/ModifyUrl.js'
 
 const styles = theme => ({
   gridList: {
@@ -86,6 +87,7 @@ class InfiniteScrollList extends Component {
           }}
         >
           {data.map(d => {
+            d['smallphotoUrls'] = ModifyUrl.ModifyUrl(d['photoUrls'])
             return (
               <ListCard
                 key={data.indexOf(d)}
