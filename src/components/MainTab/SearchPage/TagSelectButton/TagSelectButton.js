@@ -10,6 +10,7 @@ import Add from '@material-ui/icons/Add'
 import Check from '@material-ui/icons/Check'
 
 import TagSetting from './TagSetting'
+import { Select } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -51,7 +52,9 @@ const styles = theme => ({
     padding: '20px 5px 20px 5px',
     width: '120px',
     border: '1px rgba(0, 0, 0, 0.12) solid',
-    borderRadius: '25px'
+    borderRadius: '25px',
+    '&:hover': {},
+    '&:active':{}
   },
   chipEven: {
     transform: 'translateX(-30px)'
@@ -116,36 +119,28 @@ class TagSelectButton extends Component {
   }
 
   handleClickAtmosphere = data => {
-    this.setState(state => {
-      const Data = {
-        atmosphere: [...state.atmosphere]
-      }
-      Data.atmosphere[data.key].choose =
-        Data.atmosphere[data.key].choose === 1 ? 0 : 1
-      if (Data.atmosphere[data.key].choose === 1) {
-        state.Selected.push(data.id)
-      } else {
-        const chipToDelete = state.Selected.indexOf(data.id)
-        state.Selected.splice(chipToDelete, 1)
-      }
-      return { Data }
-    })
+    if (this.state.Selected.indexOf(data.id) === -1) {
+      this.setState({
+        Selected: [...this.state.Selected, data.id]
+      })
+    } else {
+      const chipToDelete = this.state.Selected.indexOf(data.id)
+      this.setState({
+        Select: this.state.Selected.splice(chipToDelete, 1)
+      })
+    }
   }
   handleClick = data => {
-    this.setState(state => {
-      const Data = {
-        foodType: [...state.foodType]
-      }
-      Data.foodType[data.key].choose =
-        Data.foodType[data.key].choose === 1 ? 0 : 1
-      if (Data.foodType[data.key].choose === 1) {
-        state.Selected.push(data.id)
-      } else {
-        const chipToDelete = state.Selected.indexOf(data.id)
-        state.Selected.splice(chipToDelete, 1)
-      }
-      return { Data }
-    })
+    if (this.state.Selected.indexOf(data.id) === -1) {
+      this.setState({
+        Selected: [...this.state.Selected, data.id]
+      })
+    } else {
+      const chipToDelete = this.state.Selected.indexOf(data.id)
+      this.setState({
+        Select: this.state.Selected.splice(chipToDelete, 1)
+      })
+    }
   }
 
   render() {
@@ -166,7 +161,7 @@ class TagSelectButton extends Component {
                       className={`${classes.chip} ${transform}`}
                       key={data[1].key}
                       icon={
-                        data[1].choose === 0 ? (
+                        this.state.Selected.indexOf(data[1].id) === -1 ? (
                           <Add className={classes.chipaddicon} />
                         ) : (
                           <Check className={classes.chipaddicon} />
@@ -174,7 +169,7 @@ class TagSelectButton extends Component {
                       }
                       label={data[1].label}
                       onClick={() => this.handleClick(data[1])}
-                      color={data[1].choose === 0 ? 'primary' : 'secondary'}
+                      color={this.state.Selected.indexOf(data[1].id) === -1 ? 'primary' : 'secondary'}
                     />
                   )
               }
@@ -184,7 +179,7 @@ class TagSelectButton extends Component {
                     className={`${classes.chip} ${transform}`}
                     key={data[0].key}
                     icon={
-                      data[0].choose === 0 ? (
+                      this.state.Selected.indexOf(data[0].id) === -1 ? (
                         <Add className={classes.chipaddicon} />
                       ) : (
                         <Check className={classes.chipaddicon} />
@@ -192,7 +187,7 @@ class TagSelectButton extends Component {
                     }
                     label={data[0].label}
                     onClick={() => this.handleClick(data[0])}
-                    color={data[0].choose === 0 ? 'primary' : 'secondary'}
+                    color={this.state.Selected.indexOf(data[0].id) === -1 ? 'primary' : 'secondary'}
                   />
                   {chip()}
                 </div>
@@ -211,7 +206,7 @@ class TagSelectButton extends Component {
                       className={`${classes.chip} ${transform}`}
                       key={data[1].key}
                       icon={
-                        data[1].choose === 0 ? (
+                        this.state.Selected.indexOf(data[1].id) === -1 ? (
                           <Add className={classes.chipaddicon} />
                         ) : (
                           <Check className={classes.chipaddicon} />
@@ -219,7 +214,7 @@ class TagSelectButton extends Component {
                       }
                       label={data[1].label}
                       onClick={() => this.handleClickAtmosphere(data[1])}
-                      color={data[1].choose === 0 ? 'primary' : 'secondary'}
+                      color={this.state.Selected.indexOf(data[1].id) === -1 ? 'primary' : 'secondary'}
                     />
                   )
               }
@@ -229,7 +224,7 @@ class TagSelectButton extends Component {
                     className={`${classes.chip} ${transform}`}
                     key={data[0].key}
                     icon={
-                      data[0].choose === 0 ? (
+                      this.state.Selected.indexOf(data[0].id) === -1 ? (
                         <Add className={classes.chipaddicon} />
                       ) : (
                         <Check className={classes.chipaddicon} />
@@ -237,7 +232,7 @@ class TagSelectButton extends Component {
                     }
                     label={data[0].label}
                     onClick={() => this.handleClickAtmosphere(data[0])}
-                    color={data[0].choose === 0 ? 'primary' : 'secondary'}
+                    color={this.state.Selected.indexOf(data[0].id) === -1 ? 'primary' : 'secondary'}
                   />
                   {chip()}
                 </div>

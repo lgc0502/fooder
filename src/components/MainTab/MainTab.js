@@ -67,7 +67,6 @@ class FullWidthTabs extends React.Component {
     } else {
       this.state.vehicle = prevVehicle
     }
-    console.log(prevVehicle)
   }
 
   handleVehicle = vehicle => {
@@ -83,6 +82,14 @@ class FullWidthTabs extends React.Component {
 
   handleChangeIndex = index => {
     this.setState({ value: index })
+  }
+
+  onRef = ref => {
+    this.child = ref
+  }
+
+  homePage = () => {
+    this.child.homePage()
   }
 
   render() {
@@ -103,14 +110,33 @@ class FullWidthTabs extends React.Component {
               indicatorColor='primary'
               fullWidth
             >
-              <Tab className={classes.tab} icon={<Search color="primary" />} />
-              <Tab className={classes.tab} icon={<Bookmark color="primary" />} />
-              <Tab className={classes.tab} icon={<Person color="primary" />} />
+              <Tab
+                className={classes.tab}
+                icon={<Search color='primary' />}
+                onClick={this.homePage}
+              />
+              <Tab
+                className={classes.tab}
+                icon={<Bookmark color='primary' />}
+              />
+              <Tab className={classes.tab} icon={<Person color='primary' />} />
             </Tabs>
           </AppBar>
-          {this.state.value === 0 && <SearchPages vehicle={this.state.vehicle}/>}
-          {this.state.value === 1 && <BookmarkPage vehicle={this.state.vehicle}/>}
-          {this.state.value === 2 && <Account value={this.state.vehicle} handleVehicle={this.handleVehicle}/>}
+          {this.state.value === 0 && (
+            <SearchPages
+              vehicle={this.state.vehicle}
+              onRef={this.onRef}
+            />
+          )}
+          {this.state.value === 1 && (
+            <BookmarkPage vehicle={this.state.vehicle} />
+          )}
+          {this.state.value === 2 && (
+            <Account
+              value={this.state.vehicle}
+              handleVehicle={this.handleVehicle}
+            />
+          )}
         </MuiThemeProvider>
       </div>
     )

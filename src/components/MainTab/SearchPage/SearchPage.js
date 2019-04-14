@@ -47,6 +47,7 @@ class SearchPages extends React.Component {
     }
   }
   componentDidMount() {
+    this.props.onRef(this)
     geolocation.getLocation().then(d =>
       this.setState({
         lat: d.coords.latitude,
@@ -54,6 +55,15 @@ class SearchPages extends React.Component {
       })
     )
   }
+
+  homePage = () => {
+    this.setState({
+      step: 0,
+      Tags: [],
+      Info: {},
+    })
+  }
+
   handleNext = appendtag => {
     this.setState(state => ({
       step: state.step + 1,

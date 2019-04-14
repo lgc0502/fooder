@@ -101,12 +101,12 @@ class ListItem extends Component {
         >
           <div className={classes.content}>
             <Grid container>
-              <Grid item xs={8} style={{ height: '20px' }}>
+              <Grid item xs={7} style={{ height: '20px' }}>
                 <Typography align='left' style={{ fontWeight: '700' }}>
                   {restaurantinfo['name']}
                 </Typography>
               </Grid>
-              <Grid item xs={4}>
+              <Grid item xs={5}>
                 <Typography
                   align='right'
                   style={{

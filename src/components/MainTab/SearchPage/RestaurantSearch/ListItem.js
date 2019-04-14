@@ -98,7 +98,7 @@ class ListItem extends Component {
         >
           <div className={classes.content}>
             <Grid container>
-              <Grid item xs={9} style={{ height: '20px' }}>
+              <Grid item xs={7} style={{ height: '20px' }}>
                 <Typography
                   color='rgba(0,0,0,0.87)'
                   align='left'
@@ -111,7 +111,7 @@ class ListItem extends Component {
                   {info['name']}
                 </Typography>
               </Grid>
-              <Grid item xs={3}>
+              <Grid item xs={5}>
                 <Typography
                   align='right'
                   style={{

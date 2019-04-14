@@ -13,14 +13,14 @@ const styles = theme => ({
   },
   subRoot: {
     margin: 'auto',
-    marginTop: '40px',
+    marginTop: '10%',
     width: '80%',
     height: '80%',
     borderRadius: '20px',
     backgroundColor: '#ffffff'
   },
   img: {
-    marginTop: '60px',
+    marginTop: '10%',
     width: '80px',
     height: '80px',
     borderRadius: '100px'
@@ -55,7 +55,7 @@ class Account extends React.Component {
           <div
             style={{
               display: 'flex',
-              marginTop: '20px',
+              marginTop: '5%',
               marginLeft: '50px',
               position: 'relative'
             }}
@@ -85,7 +85,7 @@ class Account extends React.Component {
           <div
             style={{
               display: 'flex',
-              marginTop: '20px',
+              marginTop: '5%',
               marginLeft: '50px',
               position: 'relative'
             }}
@@ -113,7 +113,7 @@ class Account extends React.Component {
           <div
             style={{
               display: 'flex',
-              marginTop: '20px',
+              marginTop: '5%',
               marginLeft: '50px',
               position: 'relative'
             }}
