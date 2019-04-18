@@ -43,7 +43,8 @@ class SearchPages extends React.Component {
       lng: 120.21954,
       scrollrecord: 0,
       sortType: 0,
-      pricelevel: 0
+      pricelevel: 0,
+      foodtype: 'whatever'
     }
   }
   componentDidMount() {
@@ -61,6 +62,12 @@ class SearchPages extends React.Component {
       step: 0,
       Tags: [],
       Info: {},
+    })
+  }
+
+  handleFoodType = value => {
+    this.setState({
+      foodtype: value
     })
   }
 
@@ -113,12 +120,13 @@ class SearchPages extends React.Component {
     const handleSortType = this.handleSortType
     switch (step) {
       case 0:
-        return <FoodType className={classes.content} handleNext={handleNext} />
+        return <FoodType className={classes.content} handleNext={handleNext} handleFoodType={this.handleFoodType} />
       case 1:
         return (
           <TagSelectButton
             className={classes.content}
             handleNext={handleNext}
+            foodtype={this.state.foodtype}
           />
         )
       case 2:

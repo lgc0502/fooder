@@ -10,7 +10,6 @@ import Add from '@material-ui/icons/Add'
 import Check from '@material-ui/icons/Check'
 
 import TagSetting from './TagSetting'
-import { Select } from '@material-ui/core';
 
 const styles = theme => ({
   root: {
@@ -54,7 +53,7 @@ const styles = theme => ({
     border: '1px rgba(0, 0, 0, 0.12) solid',
     borderRadius: '25px',
     '&:hover': {},
-    '&:active':{}
+    '&:active': {}
   },
   chipEven: {
     transform: 'translateX(-30px)'
@@ -96,40 +95,70 @@ const theme = createMuiTheme({
 class TagSelectButton extends Component {
   constructor(props) {
     super(props)
-    /** TODO: 把tag模組化 */
     this.state = {
       foodType: TagSetting.foodType,
       atmosphere: TagSetting.atmosphere,
       Selected: [],
-      arrayFoodType: [],
-      arrayAtmosphere: []
+      arrayTime: [],
+      arrayFood: [],
+      arrayAtmosphere: [],
+      foodtype: props.foodtype
     }
-    let i = 0
-    while (this.state.foodType[i]) {
-      const temp = [this.state.foodType[i], this.state.foodType[i + 1]]
-      this.state.arrayFoodType.push(temp)
-      i += 2
+    for (let i = 0; i < TagSetting[this.state.foodtype].time.length; i += 2) {
+      let tempArray = []
+      tempArray.push(
+        ...this.state.foodType.filter(
+          element => element.key === TagSetting[this.state.foodtype].time[i]
+        )
+      )
+      if (TagSetting[this.state.foodtype].time[i + 1])
+        tempArray.push(
+          ...this.state.foodType.filter(
+            element =>
+              element.key === TagSetting[this.state.foodtype].time[i + 1]
+          )
+        )
+      this.state.arrayTime.push(tempArray)
     }
-    i = 0
-    while (this.state.atmosphere[i]) {
-      const temp = [this.state.atmosphere[i], this.state.atmosphere[i + 1]]
-      this.state.arrayAtmosphere.push(temp)
+    for (let i = 0; i < TagSetting[this.state.foodtype].food.length; i += 2) {
+      let tempArray = []
+      tempArray.push(
+        ...this.state.foodType.filter(
+          element => element.key === TagSetting[this.state.foodtype].food[i]
+        )
+      )
+      if (TagSetting[this.state.foodtype].food[i + 1])
+        tempArray.push(
+          ...this.state.foodType.filter(
+            element =>
+              element.key === TagSetting[this.state.foodtype].food[i + 1]
+          )
+        )
+      this.state.arrayFood.push(tempArray)
+    }
+    for (
+      let i = 0;
+      i < TagSetting[this.state.foodtype].atmosphere.length;
       i += 2
+    ) {
+      let tempArray = []
+      tempArray.push(
+        ...this.state.atmosphere.filter(
+          element =>
+            element.key === TagSetting[this.state.foodtype].atmosphere[i]
+        )
+      )
+      if (TagSetting[this.state.foodtype].atmosphere[i + 1])
+        tempArray.push(
+          ...this.state.atmosphere.filter(
+            element =>
+              element.key === TagSetting[this.state.foodtype].atmosphere[i + 1]
+          )
+        )
+      this.state.arrayAtmosphere.push(tempArray)
     }
   }
 
-  handleClickAtmosphere = data => {
-    if (this.state.Selected.indexOf(data.id) === -1) {
-      this.setState({
-        Selected: [...this.state.Selected, data.id]
-      })
-    } else {
-      const chipToDelete = this.state.Selected.indexOf(data.id)
-      this.setState({
-        Select: this.state.Selected.splice(chipToDelete, 1)
-      })
-    }
-  }
   handleClick = data => {
     if (this.state.Selected.indexOf(data.id) === -1) {
       this.setState({
@@ -149,9 +178,11 @@ class TagSelectButton extends Component {
     return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.root}>
-          <div className={classes.subtitle}>{'菜系'}</div>
+          {this.state.arrayTime.length > 0 ? (
+            <div className={classes.subtitle}>{'時段'}</div>
+          ) : null}
           <div className={classes.chips}>
-            {this.state.arrayFoodType.map((data, index) => {
+            {this.state.arrayTime.map((data, index) => {
               const transform =
                 index % 2 === 0 ? classes.chipEven : classes.chipOdd
               const chip = () => {
@@ -169,7 +200,18 @@ class TagSelectButton extends Component {
                       }
                       label={data[1].label}
                       onClick={() => this.handleClick(data[1])}
-                      color={this.state.Selected.indexOf(data[1].id) === -1 ? 'primary' : 'secondary'}
+                      color={
+                        this.state.Selected.indexOf(data[1].id) === -1
+                          ? 'primary'
+                          : 'secondary'
+                      }
+                    />
+                  )
+                else
+                  return (
+                    <Chip
+                      className={`${classes.chip} ${transform}`}
+                      style={{visibility: 'hidden'}}
                     />
                   )
               }
@@ -187,14 +229,82 @@ class TagSelectButton extends Component {
                     }
                     label={data[0].label}
                     onClick={() => this.handleClick(data[0])}
-                    color={this.state.Selected.indexOf(data[0].id) === -1 ? 'primary' : 'secondary'}
+                    color={
+                      this.state.Selected.indexOf(data[0].id) === -1
+                        ? 'primary'
+                        : 'secondary'
+                    }
                   />
                   {chip()}
                 </div>
               )
             })}
           </div>
-          <div className={classes.subtitle}>{'氛圍'}</div>
+          {this.state.arrayFood.length > 0 ? (
+            <div className={classes.subtitle}>{'菜系'}</div>
+          ) : null}
+          <div className={classes.chips}>
+            {this.state.arrayFood.map((data, index) => {
+              const transform =
+                index % 2 === 0 ? classes.chipEven : classes.chipOdd
+              const chip = () => {
+                if (data[1])
+                  return (
+                    <Chip
+                      className={`${classes.chip} ${transform}`}
+                      key={data[1].key}
+                      icon={
+                        this.state.Selected.indexOf(data[1].id) === -1 ? (
+                          <Add className={classes.chipaddicon} />
+                        ) : (
+                          <Check className={classes.chipaddicon} />
+                        )
+                      }
+                      label={data[1].label}
+                      onClick={() => this.handleClick(data[1])}
+                      color={
+                        this.state.Selected.indexOf(data[1].id) === -1
+                          ? 'primary'
+                          : 'secondary'
+                      }
+                    />
+                  )
+                else
+                  return (
+                    <Chip
+                      className={`${classes.chip} ${transform}`}
+                      style={{visibility: 'hidden'}}
+                    />
+                  )
+              }
+              return (
+                <div key={index} className={classes.chipContainer}>
+                  <Chip
+                    className={`${classes.chip} ${transform}`}
+                    key={data[0].key}
+                    icon={
+                      this.state.Selected.indexOf(data[0].id) === -1 ? (
+                        <Add className={classes.chipaddicon} />
+                      ) : (
+                        <Check className={classes.chipaddicon} />
+                      )
+                    }
+                    label={data[0].label}
+                    onClick={() => this.handleClick(data[0])}
+                    color={
+                      this.state.Selected.indexOf(data[0].id) === -1
+                        ? 'primary'
+                        : 'secondary'
+                    }
+                  />
+                  {chip()}
+                </div>
+              )
+            })}
+          </div>
+          {this.state.arrayAtmosphere.length > 0 ? (
+            <div className={classes.subtitle}>{'氛圍'}</div>
+          ) : null}
           <div className={classes.chips}>
             {this.state.arrayAtmosphere.map((data, index) => {
               const transform =
@@ -213,8 +323,19 @@ class TagSelectButton extends Component {
                         )
                       }
                       label={data[1].label}
-                      onClick={() => this.handleClickAtmosphere(data[1])}
-                      color={this.state.Selected.indexOf(data[1].id) === -1 ? 'primary' : 'secondary'}
+                      onClick={() => this.handleClick(data[1])}
+                      color={
+                        this.state.Selected.indexOf(data[1].id) === -1
+                          ? 'primary'
+                          : 'secondary'
+                      }
+                    />
+                  )
+                else
+                  return (
+                    <Chip
+                      className={`${classes.chip} ${transform}`}
+                      style={{visibility: 'hidden'}}
                     />
                   )
               }
@@ -231,8 +352,12 @@ class TagSelectButton extends Component {
                       )
                     }
                     label={data[0].label}
-                    onClick={() => this.handleClickAtmosphere(data[0])}
-                    color={this.state.Selected.indexOf(data[0].id) === -1 ? 'primary' : 'secondary'}
+                    onClick={() => this.handleClick(data[0])}
+                    color={
+                      this.state.Selected.indexOf(data[0].id) === -1
+                        ? 'primary'
+                        : 'secondary'
+                    }
                   />
                   {chip()}
                 </div>

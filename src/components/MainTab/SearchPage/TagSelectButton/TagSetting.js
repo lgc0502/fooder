@@ -76,11 +76,6 @@ export default {
       id: '5c7ecdc8ede547650ddb1b56'
     },
     {
-      key: 15,
-      label: '蔬菜多多',
-      id: '5c7ecdc8ede547650ddb1b62'
-    },
-    {
       key: 16,
       label: '速食',
       id: '5c7ecdc8ede547650ddb1b4c'
@@ -97,9 +92,9 @@ export default {
     },
     {
       key: 19,
-      label: '酒精萬歲',
-      id: '5c7ecdc8ede547650ddb1b57'
-    },
+      label: '東南亞',
+      id: '5c7ecdc8ede547650ddb1b44'
+    }
   ],
   atmosphere: [
     {
@@ -182,5 +177,35 @@ export default {
       label: '預約外帶',
       id: '5c7ecdc8ede547650ddb1b66'
     },
-  ]
+    {
+      key: 16,
+      label: '酒精萬歲',
+      id: '5c7ecdc8ede547650ddb1b57'
+    },
+    {
+      key: 17,
+      label: '蔬菜多多',
+      id: '5c7ecdc8ede547650ddb1b62'
+    }
+  ],
+  whatever: {
+    time: [0, 1, 2, 3, 4, 5],
+    food: [6, 7, 8, 14],
+    atmosphere: [0, 1, 2, 3, 4, 5, 7, 12, 16, 17]
+  },
+  trip: {
+    time: [0, 1, 2, 3, 4, 5],
+    food: [6, 7, 8, 9, 10, 11, 13, 14],
+    atmosphere: [0, 1, 2, 3, 5, 6, 7, 12, 16, 17]
+  },
+  meeting: {
+    time: [0, 1, 2, 3, 4, 5],
+    food: [6, 7, 8, 9, 10, 11, 12, 14, 19],
+    atmosphere: [0, 1, 2, 3, 5, 6, 7, 13, 16, 17]
+  },
+  work: {
+    time: [1, 2, 3, 4, 5],
+    food: [],
+    atmosphere: [0, 1, 2, 3, 7, 12, 14, 15]
+  }
 }
