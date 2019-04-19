@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import PropTypes from 'prop-types'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
-import Chip from '@material-ui/core/Chip'
+import Chip from '../Common/Chip/index'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import Button from '@material-ui/core/Button'
 

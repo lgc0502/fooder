@@ -4,7 +4,6 @@ import { withStyles } from '@material-ui/core/styles'
 import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { createMuiTheme } from '@material-ui/core/styles'
-import Chip from '@material-ui/core/Chip'
 
 import DistanceFormat from '../Common/DistanceFormat.js'
 import RatingStar from '../Common/RatingStar.js'
@@ -72,7 +71,6 @@ class ListItem extends Component {
       restaurantinfo: info,
       handleNext,
       restaurantInfoFunc: restaurantInfo,
-      height,
       vehicle
     } = this.props
     return (
@@ -100,7 +98,6 @@ class ListItem extends Component {
             <Grid container>
               <Grid item xs={7} style={{ height: '20px' }}>
                 <Typography
-                  color='rgba(0,0,0,0.87)'
                   align='left'
                   style={{
                     fontWeight: '700',

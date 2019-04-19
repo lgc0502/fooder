@@ -146,7 +146,7 @@ class RestaurantDetail extends Component {
   }
 
   render() {
-    const { classes, tag, info, detail, vehicle } = this.props
+    const { classes, info, detail, vehicle } = this.props
     return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.page}>

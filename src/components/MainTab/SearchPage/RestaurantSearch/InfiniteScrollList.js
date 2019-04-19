@@ -66,7 +66,7 @@ class InfiniteScrollList extends Component {
           d['smallphotoUrls'] = ModifyUrl.ModifyUrl(d['photoUrls'])
           return (
             <ListItem
-              key={d.id}
+              key={d.placeId}
               tag={this.props.tag}
               vehicle={vehicle}
               handleScrollRecord={this.props.handleScrollRecord}

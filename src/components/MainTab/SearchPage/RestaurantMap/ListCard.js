@@ -6,9 +6,7 @@ import Grid from '@material-ui/core/Grid'
 // import CardContent from '@material-ui/core/CardContent'
 // import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
-import Chip from '@material-ui/core/Chip'
 
-import DistanceFormat from '../Common/DistanceFormat.js'
 import RatingStar from '../Common/RatingStar.js'
 import TagsMapping from '../Common/TagsMapping.js'
 

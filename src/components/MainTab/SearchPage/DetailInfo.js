@@ -10,7 +10,6 @@ import IconButton from '@material-ui/core/IconButton'
 
 import LocationOn from '@material-ui/icons/LocationOn'
 import AccessTime from '@material-ui/icons/AccessTime'
-import Phone from '@material-ui/icons/Phone'
 import Bookmark from '@material-ui/icons/Bookmark'
 import NearMe from '@material-ui/icons/Navigation'
 
@@ -145,7 +144,7 @@ class RestaurantDetail extends Component {
   }
 
   render() {
-    const { classes, tag, info, detail, vehicle } = this.props
+    const { classes, info, detail, vehicle } = this.props
     return (
       <MuiThemeProvider theme={theme}>
         <div className={classes.page}>

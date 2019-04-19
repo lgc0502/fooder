@@ -1,7 +1,6 @@
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import gql from 'graphql-tag'
-import { Query } from 'react-apollo'
 
 import FoodType from './FoodType/FoodType.js'
 import TagSelectButton from './TagSelectButton/TagSelectButton.js'

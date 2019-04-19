@@ -1,5 +1,3 @@
-import { number } from "prop-types"
-
 export default {
   DistanceFormat: (distance, vehicle) => {
     /* if (distance < 1) {
