@@ -55,7 +55,7 @@ class FullWidthTabs extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      value: 0,
+      value: 1,
       vehicle: 0
     }
     const prevData = localStorage.getItem('id')
@@ -110,6 +110,7 @@ class FullWidthTabs extends React.Component {
               indicatorColor='primary'
               fullWidth
             >
+              <Tab className={classes.tab} icon={<Person color='primary' />} />
               <Tab
                 className={classes.tab}
                 icon={<Search color='primary' />}
@@ -119,23 +120,19 @@ class FullWidthTabs extends React.Component {
                 className={classes.tab}
                 icon={<Bookmark color='primary' />}
               />
-              <Tab className={classes.tab} icon={<Person color='primary' />} />
             </Tabs>
           </AppBar>
           {this.state.value === 0 && (
-            <SearchPages
-              vehicle={this.state.vehicle}
-              onRef={this.onRef}
-            />
-          )}
-          {this.state.value === 1 && (
-            <BookmarkPage vehicle={this.state.vehicle} />
-          )}
-          {this.state.value === 2 && (
             <Account
               value={this.state.vehicle}
               handleVehicle={this.handleVehicle}
             />
+          )}
+          {this.state.value === 1 && (
+            <SearchPages vehicle={this.state.vehicle} onRef={this.onRef} />
+          )}
+          {this.state.value === 2 && (
+            <BookmarkPage vehicle={this.state.vehicle} />
           )}
         </MuiThemeProvider>
       </div>

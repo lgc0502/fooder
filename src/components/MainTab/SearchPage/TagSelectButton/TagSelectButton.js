@@ -51,9 +51,7 @@ const styles = theme => ({
     padding: '20px 5px 20px 5px',
     width: '120px',
     border: '1px rgba(0, 0, 0, 0.12) solid',
-    borderRadius: '25px',
-    '&:hover': {},
-    '&:active': {}
+    borderRadius: '25px'
   },
   chipEven: {
     transform: 'translateX(-30px)'
