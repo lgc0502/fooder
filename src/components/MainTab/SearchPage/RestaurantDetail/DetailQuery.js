@@ -7,12 +7,14 @@ import Loading from '../../../../image/Spin-1s-63px.gif'
 import DetailInfo from '../DetailInfo.js'
 
 const GET_RESTAURANT = gql`
-  query getRestaurantsByPlaceId(
-    $placeIds: [String]!
-    $lat: Float!
-    $lng: Float!
+  query getRestaurantByPlaceId(
+    $placeId: String!
+    $userId:ID
   ) {
-    getRestaurantsByPlaceId(placeIds: $placeIds, lat: $lat, lng: $lng) {
+    getRestaurantByPlaceId(
+      placeId: $placeId
+      user: $userId
+    ) {
       id
       name
       placeId
@@ -37,13 +39,12 @@ const GET_RESTAURANT = gql`
 
 const DetailQuery = props => {
   const { tag, info, vehicle, position } = props
-  const lat = position[0]
-  const lng = position[1]
-  const placeIds = info['placeId']
+  const userId = localStorage.getItem('FooderUserID')
+  const placeId = info['placeId']
   return (
     <Query
       query={GET_RESTAURANT}
-      variables={{ placeIds: [placeIds], lat, lng }}
+      variables={{ placeId: placeId, userId }}
     >
       {({ loading, error, data }) => {
         if (loading) {
@@ -55,7 +56,7 @@ const DetailQuery = props => {
           <DetailInfo
             tag={tag}
             info={info}
-            detail={data['getRestaurantsByPlaceId'][0]}
+            detail={data['getRestaurantByPlaceId']}
             vehicle={vehicle}
           />
         )

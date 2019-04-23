@@ -5,6 +5,8 @@ import Grid from '@material-ui/core/Grid'
 import Typography from '@material-ui/core/Typography'
 import { createMuiTheme } from '@material-ui/core/styles'
 
+import Bookmark from '@material-ui/icons/Bookmark'
+
 import DistanceFormat from '../Common/DistanceFormat.js'
 import RatingStar from '../Common/RatingStar.js'
 import TagsMapping from '../Common/TagsMapping.js'
@@ -60,11 +62,44 @@ const theme = createMuiTheme({
 })
 
 class ListItem extends Component {
+  constructor(props) {
+    super(props)
+    const temp = localStorage.getItem('id')
+    let bool
+    if (temp === null) bool = false
+    else if (temp.indexOf(props.restaurantinfo.placeId) === -1) bool = false
+    else bool = true
+    this.state = {
+      bookmarkClick: bool
+    }
+  }
   next = (handleNext, props, restaurantInfo) => {
     handleNext('')
     restaurantInfo(props)
   }
-
+  handleBookmarkClick = (id, event) => {
+    
+    const prevData = localStorage.getItem('id')
+    if (this.state.bookmarkClick) {
+      if (prevData.indexOf(id) !== -1) {
+        let tempArray = prevData.split(' ')
+        tempArray = tempArray.filter(element => element !== id)
+        localStorage.setItem('id', tempArray.join(' '))
+      }
+    } else {
+      if (prevData === null) {
+        localStorage.setItem('id', id)
+      } else if (prevData.indexOf(id) === -1) {
+        const tempArray = prevData.split(' ')
+        tempArray.push(id)
+        localStorage.setItem('id', tempArray.join(' '))
+      }
+    }
+    this.setState({
+      bookmarkClick: !this.state.bookmarkClick
+    })
+    event.stopPropagation()
+  }
   render() {
     const {
       classes,
@@ -142,6 +177,18 @@ class ListItem extends Component {
               >
                 {info['rating'].toFixed(1)}
               </Typography>
+              <Bookmark
+                style={{ 
+                  paddingTop: '4px', 
+                  paddingLeft: '2px', 
+                  width: '18px', 
+                  height: '18px',
+                  float:'right',
+                  color: this.state.bookmarkClick ? '#ffeb3b' : '#0000008a' 
+                }}
+                onClick={(event) => this.handleBookmarkClick(info.placeId, event)}
+               
+              />
             </div>
             <Typography
               align='left'
@@ -155,7 +202,7 @@ class ListItem extends Component {
             </Typography>
             <div style={{ justifyContent: 'flex-start', textAlign: 'left' }}>
               {TagsMapping.sametags(this.props.tag, info['tags']).map(
-                (tag, index) => (
+                (tag, index, arr) => (
                   <nobr
                     align='left'
                     style={{
@@ -165,7 +212,7 @@ class ListItem extends Component {
                       whiteSpace: 'nowrap'
                     }}
                   >
-                    {tag + ', '}
+                    {arr.length - 1 === index?tag:tag+','}
                   </nobr>
                 )
               )}

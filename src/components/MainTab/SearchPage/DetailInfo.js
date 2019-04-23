@@ -75,7 +75,7 @@ const theme = createMuiTheme({
       main: '#FFF350'
     },
     secondary: { main: '#ffeb3b' },
-    Inherit: '#263238'
+    Inherit: '#0000008a'
   },
   typography: {
     useNextVariants: true
@@ -219,7 +219,12 @@ class RestaurantDetail extends Component {
               <Grid item xs={1}>
                 <Bookmark
                   className={classes.icon}
-                  style={{ paddingTop: '5px', paddingLeft: '2px' }}
+                  style={{ 
+                    paddingTop: '5px', 
+                    paddingLeft: '2px',
+                    width:'18px',
+                    height:'18px' 
+                  }}
                   onClick={() => this.handleBookmarkClick(info.placeId)}
                   color={this.state.bookmarkClick ? 'secondary' : 'inherit'}
                 />
