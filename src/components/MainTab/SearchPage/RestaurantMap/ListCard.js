@@ -6,6 +6,7 @@ import Grid from '@material-ui/core/Grid'
 // import CardContent from '@material-ui/core/CardContent'
 // import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
+import Bookmark from '@material-ui/icons/Bookmark'
 
 import RatingStar from '../Common/RatingStar.js'
 import TagsMapping from '../Common/TagsMapping.js'
@@ -33,9 +34,43 @@ const styles = {
   }
 }
 class ListCard extends Component {
+  constructor(props) {
+    super(props)
+    const temp = localStorage.getItem('id')
+    let bool
+    if (temp === null) bool = false
+    else if (temp.indexOf(props.restaurantinfo.placeId) === -1) bool = false
+    else bool = true
+    this.state = {
+      bookmarkClick: bool
+    }
+  }
   next = (handleNext, props, restaurantInfo) => {
     handleNext('')
     restaurantInfo(props)
+  }
+  handleBookmarkClick = (id, event) => {
+    
+    const prevData = localStorage.getItem('id')
+    if (this.state.bookmarkClick) {
+      if (prevData.indexOf(id) !== -1) {
+        let tempArray = prevData.split(' ')
+        tempArray = tempArray.filter(element => element !== id)
+        localStorage.setItem('id', tempArray.join(' '))
+      }
+    } else {
+      if (prevData === null) {
+        localStorage.setItem('id', id)
+      } else if (prevData.indexOf(id) === -1) {
+        const tempArray = prevData.split(' ')
+        tempArray.push(id)
+        localStorage.setItem('id', tempArray.join(' '))
+      }
+    }
+    this.setState({
+      bookmarkClick: !this.state.bookmarkClick
+    })
+    event.stopPropagation()
   }
   render() {
     const {
@@ -67,7 +102,18 @@ class ListCard extends Component {
               </Typography>
             </Grid>
             <Grid item xs={2}>
-              {/*收藏按鈕*/}
+              <Bookmark
+                style={{ 
+                  paddingTop: '4px', 
+                  paddingLeft: '2px', 
+                  width: '18px', 
+                  height: '18px',
+                  float:'right',
+                  color: this.state.bookmarkClick ? '#ffeb3b' : '#0000008a' 
+                }}
+                onClick={(event) => this.handleBookmarkClick(info.placeId, event)}
+               
+              />
             </Grid>
           </Grid>
           <div align='left'>
@@ -96,7 +142,7 @@ class ListCard extends Component {
           </Typography>
           <div style={{ justifyContent: 'flex-start', textAlign: 'left' }}>
             {TagsMapping.sametags(this.props.tag, info['tags']).map(
-              (tag, index) => (
+              (tag, index, arr) => (
                 <nobr
                   align='left'
                   style={{
@@ -106,7 +152,7 @@ class ListCard extends Component {
                     whiteSpace: 'nowrap'
                   }}
                 >
-                  {tag + ', '}
+                  {arr.length - 1 === index?tag:tag+','}
                 </nobr>
               )
             )}

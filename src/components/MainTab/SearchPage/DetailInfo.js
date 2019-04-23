@@ -75,7 +75,7 @@ const theme = createMuiTheme({
       main: '#FFF350'
     },
     secondary: { main: '#ffeb3b' },
-    Inherit: '#263238'
+    Inherit: '#0000008a'
   },
   typography: {
     useNextVariants: true

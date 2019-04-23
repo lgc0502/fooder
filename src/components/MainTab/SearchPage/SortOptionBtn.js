@@ -45,7 +45,7 @@ class SortOptionBtn extends Component {
           />
           <nobr style={{ paddingTop: '8px' }}>|</nobr>
           <BottomNavigationAction
-            label='距離範圍'
+            label='由近至遠'
             style={{
               fontWeight: '700',
               color: sortType == 2 ? '#ffc107' : 'rgba(0,0,0,0.54)'
