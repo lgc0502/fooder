@@ -14,7 +14,7 @@ const styles = theme => ({
     overflowX: 'scroll',
     textAlign: 'left',
     position: 'relative',
-    bottom: '133px'
+    bottom: '123px'
   },
   list: {
     display: 'flex',
@@ -65,7 +65,7 @@ class InfiniteScrollList extends Component {
       <div
         className={classes.list}
         style={{
-          height: sortType === 1 ? 'calc(100vh - 186px)' : 'calc(100vh - 146px)'
+          height: sortType === 1 ? 'calc(100vh - 170px)' : 'calc(100vh - 130px)'
         }}
       >
         <Map

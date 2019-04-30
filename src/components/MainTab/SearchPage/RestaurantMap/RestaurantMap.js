@@ -13,7 +13,7 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center',
     flexWrap: 'wrap',
-    height: 'calc(100vh - 156px)',
+    height: 'calc(100vh - 140px)',
     overflowX: 'hidden',
     overflowY: 'hidden',
     alignItems: 'flex-end',

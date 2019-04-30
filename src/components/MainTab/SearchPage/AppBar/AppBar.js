@@ -36,12 +36,11 @@ class Appbar extends Component {
           style={{
             text: this.props.text,
             backgroundColor: '#FFFFFF',
-            height: '56px',
-            boxShadow:
-              this.props.text < 2 ? '0 1px 0 0 #DFDFDF' : '0 1px 0 0 #FFFFFF'
+            height: '44px',
+            boxShadow:'0 1px 0 0 #DFDFDF'
           }}
         >
-          <Toolbar>
+          <Toolbar style={{ minHeight: '44px' }}>
             <Grid container style={{ alignItems: 'center' }}>
               <Grid item xs={2} style={{ textAlign: 'left' }}>
                 {this.props.firstpage === 0 ? (

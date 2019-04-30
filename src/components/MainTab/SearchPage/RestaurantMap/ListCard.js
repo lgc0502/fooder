@@ -7,6 +7,7 @@ import Grid from '@material-ui/core/Grid'
 // import Button from '@material-ui/core/Button'
 import Typography from '@material-ui/core/Typography'
 import Bookmark from '@material-ui/icons/Bookmark'
+import BookmarkBorder from '@material-ui/icons/BookmarkBorder'
 
 import RatingStar from '../Common/RatingStar.js'
 import TagsMapping from '../Common/TagsMapping.js'
@@ -102,18 +103,32 @@ class ListCard extends Component {
               </Typography>
             </Grid>
             <Grid item xs={2}>
-              <Bookmark
-                style={{ 
-                  paddingTop: '4px', 
-                  paddingLeft: '2px', 
-                  width: '18px', 
-                  height: '18px',
-                  float:'right',
-                  color: this.state.bookmarkClick ? '#ffeb3b' : '#0000008a' 
-                }}
-                onClick={(event) => this.handleBookmarkClick(info.placeId, event)}
-               
-              />
+              {
+                this.state.bookmarkClick ?
+                  <Bookmark
+                    style={{ 
+                      paddingTop: '4px', 
+                      paddingLeft: '2px', 
+                      width: '18px', 
+                      height: '18px',
+                      float:'right',
+                      color:'#ffeb3b'
+                    }}
+                    onClick={(event) => this.handleBookmarkClick(info.placeId, event)}
+                  />
+                  :
+                  <BookmarkBorder
+                    style={{ 
+                      paddingTop: '4px', 
+                      paddingLeft: '2px', 
+                      width: '18px', 
+                      height: '18px',
+                      float:'right',
+                      color:'#0000008a' 
+                    }}
+                    onClick={(event) => this.handleBookmarkClick(info.placeId, event)}
+                  />
+              }
             </Grid>
           </Grid>
           <div align='left'>

@@ -54,7 +54,7 @@ class Map extends React.PureComponent {
           loadingElement={<div style={{ height: `80%` }} />}
           containerElement={
             <div style={{ 
-                height: sortType===1?"calc(100vh - 186px)":"calc(100vh - 146px)", 
+                height: sortType===1?"calc(100vh - 170px)":"calc(100vh - 130px)", 
                 width: `100vw`
               }} 
             />

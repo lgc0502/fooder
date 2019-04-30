@@ -20,22 +20,22 @@ const styles = theme => ({
     height: '100vh'
   },
   appBar: {
-    height: 56,
+    height: 46,
     position: 'fixed',
     top: 'auto',
     bottom: 0
   },
   tabs: {
-    height: 56
+    height: 46
   },
   tab: {
-    height: 56
+    height: 46
   },
   tabcontainer: {
-    bottom: 56,
+    bottom: 46,
     top: 'auto',
     height: '100vh',
-    lineHeight: 'calc(100vh - 56px)'
+    lineHeight: 'calc(100vh - 46px)'
   }
 })
 const theme = createMuiTheme({
