@@ -24,7 +24,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
     overflow: 'auto',
     padding: '2px',
-    height: 'calc(100vh - 116px)'
+    height: 'calc(100vh - 90px)'
   },
   root: {
     backgroundColor: theme.palette.background.paper,
@@ -202,7 +202,7 @@ class RestaurantDetail extends Component {
                       '_blank' // <- This is what makes it open in a new window.
                     )}
                   >
-                    {' - Google'}
+                  - <u>Google</u>
                   </Typography>
                 </div>
                 <Typography align='left'>

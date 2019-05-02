@@ -11,6 +11,7 @@ import IconButton from '@material-ui/core/IconButton'
 import LocationOn from '@material-ui/icons/LocationOn'
 import AccessTime from '@material-ui/icons/AccessTime'
 import Bookmark from '@material-ui/icons/Bookmark'
+import BookmarkBorder from '@material-ui/icons/BookmarkBorder'
 import NearMe from '@material-ui/icons/Navigation'
 
 import Comment from './Comment.js'
@@ -23,7 +24,7 @@ const styles = theme => ({
     flexWrap: 'wrap',
     overflow: 'auto',
     padding: '2px',
-    height: 'calc(100vh - 116px)'
+    height: 'calc(100vh - 90px)'
   },
   root: {
     backgroundColor: theme.palette.background.paper,
@@ -206,7 +207,7 @@ class RestaurantDetail extends Component {
                       )
                     }
                   >
-                    {' - Google'}
+                   - <u>Google</u>
                   </Typography>
                 </div>
                 <Typography
@@ -217,17 +218,32 @@ class RestaurantDetail extends Component {
                 </Typography>
               </Grid>
               <Grid item xs={1}>
-                <Bookmark
-                  className={classes.icon}
-                  style={{ 
-                    paddingTop: '5px', 
-                    paddingLeft: '2px',
-                    width:'18px',
-                    height:'18px' 
-                  }}
-                  onClick={() => this.handleBookmarkClick(info.placeId)}
-                  color={this.state.bookmarkClick ? 'secondary' : 'inherit'}
-                />
+                {
+                  this.state.bookmarkClick ?
+                    <Bookmark
+                      style={{ 
+                        paddingTop: '4px', 
+                        paddingLeft: '2px', 
+                        width: '18px', 
+                        height: '18px',
+                        float:'right',
+                        color:'#ffeb3b'
+                      }}
+                      onClick={(event) => this.handleBookmarkClick(info.placeId, event)}
+                    />
+                    :
+                    <BookmarkBorder
+                      style={{ 
+                        paddingTop: '4px', 
+                        paddingLeft: '2px', 
+                        width: '18px', 
+                        height: '18px',
+                        float:'right',
+                        color:'#0000008a' 
+                      }}
+                      onClick={(event) => this.handleBookmarkClick(info.placeId, event)}
+                    />
+                }
               </Grid>
             </Grid>
             <div style={{ display: 'flex' }}>

@@ -6,6 +6,7 @@ import Typography from '@material-ui/core/Typography'
 import { createMuiTheme } from '@material-ui/core/styles'
 
 import Bookmark from '@material-ui/icons/Bookmark'
+import BookmarkBorder from '@material-ui/icons/BookmarkBorder'
 
 import DistanceFormat from '../Common/DistanceFormat.js'
 import RatingStar from '../Common/RatingStar.js'
@@ -131,7 +132,12 @@ class ListItem extends Component {
         >
           <div className={classes.content}>
             <Grid container>
-              <Grid item xs={7} style={{ height: '20px' }}>
+              <Grid item xs={7} 
+                 style={{
+                  height: 'auto',
+                  'min-height': '20px'
+                }}
+              >
                 <Typography
                   align='left'
                   style={{
@@ -177,18 +183,33 @@ class ListItem extends Component {
               >
                 {info['rating'].toFixed(1)}
               </Typography>
-              <Bookmark
-                style={{ 
-                  paddingTop: '4px', 
-                  paddingLeft: '2px', 
-                  width: '18px', 
-                  height: '18px',
-                  float:'right',
-                  color: this.state.bookmarkClick ? '#ffeb3b' : '#0000008a' 
-                }}
-                onClick={(event) => this.handleBookmarkClick(info.placeId, event)}
-               
-              />
+              {
+                this.state.bookmarkClick ?
+                  <Bookmark
+                    style={{ 
+                      paddingTop: '4px', 
+                      paddingLeft: '2px', 
+                      width: '18px', 
+                      height: '18px',
+                      float:'right',
+                      color:'#ffeb3b'
+                    }}
+                    onClick={(event) => this.handleBookmarkClick(info.placeId, event)}
+                  />
+                  :
+                  <BookmarkBorder
+                    style={{ 
+                      paddingTop: '4px', 
+                      paddingLeft: '2px', 
+                      width: '18px', 
+                      height: '18px',
+                      float:'right',
+                      color:'#0000008a' 
+                    }}
+                    onClick={(event) => this.handleBookmarkClick(info.placeId, event)}
+                  />
+              }
+              
             </div>
             <Typography
               align='left'

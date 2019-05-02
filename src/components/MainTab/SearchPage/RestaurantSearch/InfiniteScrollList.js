@@ -59,7 +59,7 @@ class InfiniteScrollList extends Component {
         ref={'list'}
         onScroll={this.handleScroll}
         style={{
-          height: sorttype === 1 ? 'calc(100vh - 186px)' : 'calc(100vh - 146px)'
+          height: sorttype === 1 ? 'calc(100vh - 170px)' : 'calc(100vh - 130px)'
         }}
       >
         {data.map(d => {
