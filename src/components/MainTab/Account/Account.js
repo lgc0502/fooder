@@ -2,7 +2,7 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import Typography from '@material-ui/core/Typography'
 
-import button1 from '../../../image/headshot.png'
+import button1 from '../../../image/headshot.jpg'
 import Appbar from '../SearchPage/AppBar/AppBar.js'
 import { auto } from 'async'
 const styles = (theme) => ({
