@@ -12,6 +12,7 @@ import LocationOn from '@material-ui/icons/LocationOn'
 import AccessTime from '@material-ui/icons/AccessTime'
 import Phone from '@material-ui/icons/Phone'
 import Bookmark from '@material-ui/icons/Bookmark'
+import BookmarkBorder from '@material-ui/icons/BookmarkBorder'
 
 import NearMe from '../../../image/icons8-near-me-filled-100.png'
 import Comment from '../SearchPage/Comment'
@@ -210,12 +211,32 @@ class RestaurantDetail extends Component {
                 </Typography>
               </Grid>
               <Grid item xs={1}>
-                <Bookmark
-                  className={classes.icon}
-                  style={{ paddingTop: '5px', paddingLeft: '2px'}}
-                  onClick={() => this.handleBookmarkClick(info.placeId)}
-                  color={this.state.bookmarkClick ? 'secondary' : 'inherit'}
-                />
+              {
+                  this.state.bookmarkClick ?
+                    <Bookmark
+                      style={{ 
+                        paddingTop: '4px', 
+                        paddingLeft: '2px', 
+                        width: '18px', 
+                        height: '18px',
+                        float:'right',
+                        color:'#ffeb3b'
+                      }}
+                      onClick={(event) => this.handleBookmarkClick(info.placeId, event)}
+                    />
+                    :
+                    <BookmarkBorder
+                      style={{ 
+                        paddingTop: '4px', 
+                        paddingLeft: '2px', 
+                        width: '18px', 
+                        height: '18px',
+                        float:'right',
+                        color:'#0000008a' 
+                      }}
+                      onClick={(event) => this.handleBookmarkClick(info.placeId, event)}
+                    />
+                }
               </Grid>
             </Grid>
             <div style={{ display: 'flex' }}>
